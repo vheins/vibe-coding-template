@@ -60,7 +60,7 @@ Daftar kebutuhan berbasis role.
 ## 5. Business Flow & Rules
 
 ### 5.1 Business Flow
-- Diagram alur utama
+- **Wajib:** Sertakan diagram alur menggunakan Mermaid (Sequence/Flowchart).
 - Lifecycle proses
 
 ### 5.2 Business Rules & Functional Requirements
