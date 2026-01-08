@@ -1,49 +1,43 @@
-Implementation Tasks — <PROJECT NAME> (GitHub Project Format)
+# Implementation Tasks — <PROJECT NAME> (GitHub Project Format)
 
-Overview
+## Overview
 
-Project: <Project Name> Duration: <X Bulan / Minggu> Timeline: <Start Date> — <End Date> Team: <Backend / Frontend / Mobile / Others>
+- **Project:** <Project Name>
+- **Duration:** <X Bulan / Minggu>
+- **Timeline:** <Start Date> — <End Date>
+- **Team:** <Backend / Frontend / Mobile / Others>
 
-Working Principles:
+### Working Principles
 
-Jam kerja efektif per hari
-
-Parallel work strategy
-
-API / contract-first approach
-
-Buffer time (%)
-
-
+- Jam kerja efektif per hari
+- Parallel work strategy
+- API / contract-first approach
+- Buffer time (%)
 
 ---
 
-Sprint <N>: <Sprint Name> (<Start Date> — <End Date>)
+## Sprint <N>: <Sprint Name> (<Start Date> — <End Date>)
 
-Backend Tasks
+### Backend Tasks
 
-Task ID	Module	Priority	Difficulty	Sprint	Reference	Estimate (Hours)	Start Date	End Date	Description	DoD
+| Task ID | Module | Priority | Difficulty | Sprint | Reference | Estimate (Hours) | Start Date | End Date | Description | DoD |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| | | | | | | | | | | |
 
-										
+### Frontend Tasks
 
+| Task ID | Module | Priority | Difficulty | Sprint | Reference | Estimate (Hours) | Start Date | End Date | Description | DoD |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| | | | | | | | | | | |
 
-Frontend Tasks
+### Mobile Tasks
 
-Task ID	Module	Priority	Difficulty	Sprint	Reference	Estimate (Hours)	Start Date	End Date	Description	DoD
-
-										
-
-
-Mobile Tasks
-
-Task ID	Module	Priority	Difficulty	Sprint	Reference	Estimate (Hours)	Start Date	End Date	Description	DoD
-
-										
-
-
+| Task ID | Module | Priority | Difficulty | Sprint | Reference | Estimate (Hours) | Start Date | End Date | Description | DoD |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| | | | | | | | | | | |
 
 ---
 
-Sprint <N+1>: <Sprint Name> (<Start Date> — <End Date>)
+## Sprint <N+1>: <Sprint Name> (<Start Date> — <End Date>)
 
 > Ulangi struktur Backend / Frontend / Mobile
