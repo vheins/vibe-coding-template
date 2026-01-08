@@ -1,355 +1,224 @@
-MODULE DOCUMENTATION TEMPLATE
+# MODULE DOCUMENTATION TEMPLATE
 
 > Gunakan template ini sebagai standar dokumentasi untuk setiap modul sistem (Core / Supporting / Optional).
 
+---
 
+## Header & Navigation
 
+- [Back to Module Overview](#)
+- [Link ke All Modules](#)
+- [Link ke Scenario Testing (jika tersedia)](#)
 
 ---
 
-Header & Navigation
+## 1. Module Overview
 
-Back to Module Overview
-
-Link ke All Modules
-
-Link ke Scenario Testing (jika tersedia)
-
-
+- **Deskripsi singkat modul:**
+- **Posisi modul dalam sistem:**
+- **Hubungan dengan domain bisnis utama:**
 
 ---
 
-1. Module Overview
+## 2. Purpose & Business Value
 
-Deskripsi singkat modul
+### 2.1 Tanggung Jawab Utama
+- Fungsi inti modul
+- Peran modul dalam proses bisnis
 
-Posisi modul dalam sistem
-
-Hubungan dengan domain bisnis utama
-
-
-
----
-
-2. Purpose & Business Value
-
-2.1 Tanggung Jawab Utama
-
-Fungsi inti modul
-
-Peran modul dalam proses bisnis
-
-
-2.2 Nilai Bisnis
-
-Compliance
-
-Risk reduction
-
-Operational efficiency
-
-Data accuracy
-
-Strategic enablement
-
-
+### 2.2 Nilai Bisnis
+- **Compliance:**
+- **Risk reduction:**
+- **Operational efficiency:**
+- **Data accuracy:**
+- **Strategic enablement:**
 
 ---
 
-3. Scope
+## 3. Scope
 
-3.1 In-Scope
+### 3.1 In-Scope
+- Fitur dan tanggung jawab yang ditangani modul
 
-Fitur dan tanggung jawab yang ditangani modul
-
-
-3.2 Out-of-Scope
-
-Fitur yang tidak ditangani
-
-Alasan
-
-Modul pemilik
-
-
+### 3.2 Out-of-Scope
+- Fitur yang tidak ditangani
+- Alasan
+- Modul pemilik
 
 ---
 
-4. User Stories
+## 4. User Stories
 
-Daftar kebutuhan berbasis role
+Daftar kebutuhan berbasis role.
 
-Format: ID | Role | Goal | Benefit
-
-
-
----
-
-5. Business Flow & Rules
-
-5.1 Business Flow
-
-Diagram alur utama
-
-Lifecycle proses
-
-
-5.2 Business Rules & Functional Requirements
-
-5.2.1 Domain Rules
-
-Ketentuan bisnis
-
-Validasi penting
-
-
-5.2.2 Financial / Operational Rules
-
-Perhitungan
-
-Effective date
-
-Currency / unit
-
-
+| ID | Role | Goal | Benefit |
+| :--- | :--- | :--- | :--- |
+| | | | |
 
 ---
 
-6. Data Model
+## 5. Business Flow & Rules
 
-6.1 Entity Relationship Diagram (ERD)
+### 5.1 Business Flow
+- Diagram alur utama
+- Lifecycle proses
 
-Diagram relasi entitas utama
+### 5.2 Business Rules & Functional Requirements
 
+#### 5.2.1 Domain Rules
+- Ketentuan bisnis
+- Validasi penting
 
-6.2 Entity Definition (Opsional)
-
-Field penting
-
-Constraint kritikal
-
-
-
----
-
-7. Feature List
-
-7.1 Feature Summary
-
-Ringkasan fitur utama
-
-Prioritas
-
-
-7.2 Feature Details
-
-Detail kemampuan
-
-Edge cases
-
-Automation / bulk support
-
-
+#### 5.2.2 Financial / Operational Rules
+- Perhitungan
+- Effective date
+- Currency / unit
 
 ---
 
-8. Dependencies
+## 6. Data Model
 
-8.1 Required Modules
+### 6.1 Entity Relationship Diagram (ERD)
+- Diagram relasi entitas utama
 
-Hard dependency
-
-Alasan
-
-
-8.2 Optional Modules
-
-Manfaat integrasi
-
-
-8.3 Data Dependencies
-
-Data inbound
-
-Referenced entities
-
-
+### 6.2 Entity Definition (Opsional)
+- Field penting
+- Constraint kritikal
 
 ---
 
-9. Integration Points
+## 7. Feature List
 
-9.1 Inbound Integration
+### 7.1 Feature Summary
+- Ringkasan fitur utama
+- Prioritas
 
-Source module
-
-Data
-
-Integration pattern
-
-
-9.2 Outbound Integration
-
-Target module
-
-Data exposed
-
-
-9.3 Published Events
-
-Event name
-
-Trigger
-
-Payload
-
-Subscribers
-
-
+### 7.2 Feature Details
+- Detail kemampuan
+- Edge cases
+- Automation / bulk support
 
 ---
 
-10. Compliance & Audit
+## 8. Dependencies
 
-10.1 Regulatory Compliance
+### 8.1 Required Modules
+- **Hard dependency:**
+- **Alasan:**
 
-Regulasi relevan
+### 8.2 Optional Modules
+- **Manfaat integrasi:**
 
-Implementasi sistem
-
-
-10.2 Data Retention & Archiving
-
-Retention period
-
-Archiving rules
-
-Deletion / anonymization
-
-
-10.3 Audit Trail Requirements
-
-Audited fields
-
-Actor
-
-Timestamp
-
-Approval chain
-
-
+### 8.3 Data Dependencies
+- **Data inbound:**
+- **Referenced entities:**
 
 ---
 
-11. Data Ownership & Lifecycle
+## 9. Integration Points
 
-11.1 Entity Ownership
+### 9.1 Inbound Integration
+- **Source module:**
+- **Data:**
+- **Integration pattern:**
 
-Owner
+### 9.2 Outbound Integration
+- **Target module:**
+- **Data exposed:**
 
-Read / Write permission
-
-
-11.2 Lifecycle Status
-
-Status list
-
-Transition diagram
-
-
-11.3 Status Transition Rules
-
-Trigger
-
-Validation
-
-Side effects
-
-
-11.4 Data Update Permissions
-
-Role vs Field matrix
-
-
+### 9.3 Published Events
+- **Event name:**
+- **Trigger:**
+- **Payload:**
+- **Subscribers:**
 
 ---
 
-12. Extensibility Notes
+## 10. Compliance & Audit
 
-12.1 Configuration & Customization
+### 10.1 Regulatory Compliance
+- Regulasi relevan
+- Implementasi sistem
 
-Config-based extension
+### 10.2 Data Retention & Archiving
+- Retention period
+- Archiving rules
+- Deletion / anonymization
 
-
-12.2 Future Enhancements
-
-Planned improvements
-
-
-12.3 Integration Extensibility
-
-Webhooks
-
-Custom APIs
-
-
-12.4 Localization & Multi-Region Support
-
-Country-specific rules
-
-Language
-
-
+### 10.3 Audit Trail Requirements
+- Audited fields
+- Actor
+- Timestamp
+- Approval chain
 
 ---
 
-13. Mandatory Invariants
+## 11. Data Ownership & Lifecycle
 
-Rules that must never be violated
+### 11.1 Entity Ownership
+- **Owner:**
+- **Read / Write permission:**
 
+### 11.2 Lifecycle Status
+- **Status list:**
+- **Transition diagram:**
 
+### 11.3 Status Transition Rules
+- **Trigger:**
+- **Validation:**
+- **Side effects:**
 
----
-
-14. UI/UX Requirements
-
-14.1 Web / Admin
-
-Core components
-
-UX rules
-
-
-14.2 Mobile (if applicable)
-
-Approval
-
-Notification
-
-
+### 11.4 Data Update Permissions
+- **Role vs Field matrix:**
 
 ---
 
-15. Implementation Tasks
+## 12. Extensibility Notes
 
-Task ID
+### 12.1 Configuration & Customization
+- Config-based extension
 
-Platform (Backend / Frontend / Mobile)
+### 12.2 Future Enhancements
+- Planned improvements
 
-Status
+### 12.3 Integration Extensibility
+- Webhooks
+- Custom APIs
 
-Description
-
-
+### 12.4 Localization & Multi-Region Support
+- Country-specific rules
+- Language
 
 ---
 
-Appendix (Optional)
+## 13. Mandatory Invariants
+- Rules that must never be violated
 
-Glossary
+---
 
-Open questions
+## 14. UI/UX Requirements
 
-Known limitations
+### 14.1 Web / Admin
+- Core components
+- UX rules
 
-References
+### 14.2 Mobile (if applicable)
+- Approval
+- Notification
+
+---
+
+## 15. Implementation Tasks
+
+| Task ID | Platform | Status | Description |
+| :--- | :--- | :--- | :--- |
+| | Backend / Frontend / Mobile | | |
+
+---
+
+## Appendix (Optional)
+
+- Glossary
+- Open questions
+- Known limitations
+- References
