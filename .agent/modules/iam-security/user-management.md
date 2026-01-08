@@ -4,7 +4,49 @@
 
 ---
 
-## 1. User Stories
+## Header & Navigation
+
+- [Back to IAM Overview](./overview.md)
+- [Link ke All Modules](../../README.md)
+
+---
+
+## 1. Feature Overview
+
+- **Deskripsi singkat:** Fitur administratif untuk mengelola daur hidup dan data pengguna.
+- **Posisi dalam modul:** Komponen inti dari IAM & Security.
+- **Hubungan dengan domain bisnis utama:** Memastikan data pengguna valid dan aman.
+
+---
+
+## 2. Purpose & Business Value
+
+### 2.1 Tanggung Jawab Utama
+- Melihat daftar pengguna.
+- Mengubah status pengguna (Active/Suspended).
+- Mengupdate profil pengguna.
+
+### 2.2 Nilai Bisnis
+- **Control:** Administrator memiliki kendali penuh atas akses pengguna.
+- **Support:** Membantu tim support dalam mengelola masalah akun pengguna.
+
+---
+
+## 3. Scope
+
+### 3.1 In-Scope
+- List Users (Pagination, Filtering).
+- Get User Details.
+- Update User Profile.
+- Suspend/Activate User.
+- Delete User (Soft Delete).
+
+### 3.2 Out-of-Scope
+- Detail profil spesifik domain (e.g., Riwayat Transaksi).
+
+---
+
+## 4. User Stories
 
 | ID | Role | Goal | Benefit |
 | :--- | :--- | :--- | :--- |
@@ -14,10 +56,11 @@
 
 ---
 
-## 2. Business Flow
+## 5. Business Flow & Rules
 
-### 2.1 Admin Manage User Flow
+### 5.1 Business Flow
 
+#### Admin Manage User Flow
 ```mermaid
 sequenceDiagram
     participant Admin
@@ -31,53 +74,151 @@ sequenceDiagram
     alt Authorized
         API->>DB: Query Users (Pagination/Filter)
         DB-->>API: User List
-        API-->>Client: 200 OK (User List)
+        API-->>Client: 200 OK (User Collection)
     else Unauthorized
-        API-->>Client: 403 Forbidden
+        API-->>Client: 403 Forbidden (Error Object)
     end
 
     Admin->>Client: Suspend User
-    Client->>API: PATCH /users/{id}/status
+    Client->>API: PATCH /users/{id}
     API->>API: Check Admin Permission
     API->>DB: Update Status = SUSPENDED
-    API-->>Client: 200 OK
+    API-->>Client: 200 OK (Updated Resource)
 ```
+
+### 5.2 Business Rules
+- **Admin Only:** Hanya user dengan role `ADMIN` yang bisa melihat list user lain.
+- **Self Update:** User biasa hanya bisa update profil sendiri.
+- **Immutable:** Email tidak dapat diubah sembarangan (perlu verifikasi ulang flow - future scope).
 
 ---
 
-## 3. API Schema
+## 6. Data Model
 
-### 3.1 List Users
+Referensi ke entitas: `Users`.
+Lihat [IAM Overview - ERD](./overview.md#6-data-model).
+
+---
+
+## 7. Feature Details (API Specification)
+
+Semua endpoint mengikuti standar **JSON:API**.
+
+### 7.1 List Users
 - **Endpoint:** `GET /api/v1/users`
-- **Query Params:** `page=1`, `limit=10`, `search=John`
+- **Query Params:** `page[number]=1`, `page[size]=10`, `filter[search]=John`
 - **Response:**
   ```json
   {
     "data": [
       {
+        "type": "users",
         "id": "uuid-1",
-        "email": "john@example.com",
-        "full_name": "John Doe",
-        "status": "ACTIVE"
+        "attributes": {
+          "email": "john@example.com",
+          "full_name": "John Doe",
+          "status": "ACTIVE"
+        },
+        "links": {
+          "self": "/api/v1/users/uuid-1"
+        }
       }
     ],
     "meta": {
-      "total": 100,
-      "page": 1
+      "total_pages": 10,
+      "total_items": 100
+    },
+    "links": {
+      "self": "/api/v1/users?page[number]=1&page[size]=10",
+      "next": "/api/v1/users?page[number]=2&page[size]=10",
+      "last": "/api/v1/users?page[number]=10&page[size]=10"
     }
   }
   ```
 
-### 3.2 Update User
-- **Endpoint:** `PUT /api/v1/users/:id`
+### 7.2 Get Single User
+- **Endpoint:** `GET /api/v1/users/:id`
+- **Response:**
+  ```json
+  {
+    "data": {
+      "type": "users",
+      "id": "uuid-1",
+      "attributes": {
+        "email": "john@example.com",
+        "full_name": "John Doe",
+        "status": "ACTIVE"
+      },
+      "links": {
+        "self": "/api/v1/users/uuid-1"
+      }
+    }
+  }
+  ```
+
+### 7.3 Update User
+- **Endpoint:** `PATCH /api/v1/users/:id`
 - **Request:**
   ```json
   {
-    "full_name": "John Updated"
+    "data": {
+      "type": "users",
+      "id": "uuid-1",
+      "attributes": {
+        "full_name": "John Updated",
+        "status": "SUSPENDED"
+      }
+    }
   }
   ```
-- **Response:** `200 OK`
+- **Response:**
+  ```json
+  {
+    "data": {
+      "type": "users",
+      "id": "uuid-1",
+      "attributes": {
+        "email": "john@example.com",
+        "full_name": "John Updated",
+        "status": "SUSPENDED"
+      },
+      "links": {
+        "self": "/api/v1/users/uuid-1"
+      }
+    }
+  }
+  ```
 
-### 3.3 Delete User
+### 7.4 Delete User
 - **Endpoint:** `DELETE /api/v1/users/:id`
 - **Response:** `204 No Content`
+
+---
+
+## 8. Dependencies
+
+### 8.1 Required Modules
+- **Database:** Akses tabel Users.
+
+---
+
+## 9. Integration Points
+
+### 9.1 Inbound
+- **Admin Dashboard:** Mengonsumsi API ini untuk manajemen user.
+
+---
+
+## 10. Compliance & Audit
+
+- **Audit Log:** Mencatat siapa yang mengubah status user (Admin ID).
+
+---
+
+## 11. Implementation Tasks
+
+| Task ID | Platform | Status | Description |
+| :--- | :--- | :--- | :--- |
+| USR-01 | Backend | Todo | Implement `GET /users` with filters |
+| USR-02 | Backend | Todo | Implement `PATCH /users/:id` |
+| USR-03 | Backend | Todo | Implement `DELETE /users/:id` |

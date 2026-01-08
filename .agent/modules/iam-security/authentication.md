@@ -4,7 +4,51 @@
 
 ---
 
-## 1. User Stories
+## Header & Navigation
+
+- [Back to IAM Overview](./overview.md)
+- [Link ke All Modules](../../README.md)
+
+---
+
+## 1. Feature Overview
+
+- **Deskripsi singkat:** Fitur untuk menangani verifikasi identitas pengguna (siapa mereka) dan pengelolaan sesi akses.
+- **Posisi dalam modul:** Komponen inti dari IAM & Security.
+- **Hubungan dengan domain bisnis utama:** Gerbang utama bagi pengguna untuk mengakses layanan.
+
+---
+
+## 2. Purpose & Business Value
+
+### 2.1 Tanggung Jawab Utama
+- Memvalidasi kredensial pengguna (email/password).
+- Menerbitkan dan memvalidasi token akses (JWT).
+- Mengelola pemulihan akun (lupa password).
+
+### 2.2 Nilai Bisnis
+- **Security:** Mencegah akses tidak sah melalui otentikasi yang kuat.
+- **User Experience:** Memberikan akses aman dan persisten (refresh token).
+- **Compliance:** Audit trail untuk setiap aktivitas login/logout.
+
+---
+
+## 3. Scope
+
+### 3.1 In-Scope
+- Registrasi pengguna baru.
+- Login (Generate Token).
+- Logout (Revoke Token).
+- Refresh Token.
+- Forgot & Reset Password.
+
+### 3.2 Out-of-Scope
+- SSO (Single Sign-On).
+- MFA (Multi-Factor Authentication).
+
+---
+
+## 4. User Stories
 
 | ID | Role | Goal | Benefit |
 | :--- | :--- | :--- | :--- |
@@ -16,10 +60,11 @@
 
 ---
 
-## 2. Business Flow
+## 5. Business Flow & Rules
 
-### 2.1 Login Flow
+### 5.1 Business Flow
 
+#### Login Flow
 ```mermaid
 sequenceDiagram
     participant User
@@ -28,23 +73,22 @@ sequenceDiagram
     participant DB as Database
 
     User->>Client: Input Email & Password
-    Client->>API: POST /auth/login
+    Client->>API: POST /tokens (Login)
     API->>DB: Find User by Email
     alt User Not Found
-        API-->>Client: 401 Unauthorized
+        API-->>Client: 401 Unauthorized (Error Object)
     else User Found
         API->>API: Verify Password Hash
         alt Invalid Password
-            API-->>Client: 401 Unauthorized
+            API-->>Client: 401 Unauthorized (Error Object)
         else Valid Password
             API->>API: Generate Access & Refresh Token
-            API-->>Client: 200 OK (Tokens)
+            API-->>Client: 201 Created (Token Resource)
         end
     end
 ```
 
-### 2.2 Register Flow
-
+#### Register Flow
 ```mermaid
 sequenceDiagram
     participant User
@@ -53,20 +97,19 @@ sequenceDiagram
     participant DB as Database
 
     User->>Client: Input Registration Data
-    Client->>API: POST /auth/register
+    Client->>API: POST /users (Register)
     API->>DB: Check if Email exists
     alt Email Exists
-        API-->>Client: 400 Bad Request (Email taken)
+        API-->>Client: 409 Conflict (Error Object)
     else Email Available
         API->>API: Validate Password Strength
         API->>API: Hash Password
         API->>DB: Create User Record
-        API-->>Client: 201 Created
+        API-->>Client: 201 Created (User Resource)
     end
 ```
 
-### 2.3 Forgot Password Flow
-
+#### Forgot Password Flow
 ```mermaid
 sequenceDiagram
     participant User
@@ -76,81 +119,177 @@ sequenceDiagram
     participant Email as Email Service
 
     User->>Client: Request Password Reset (Email)
-    Client->>API: POST /auth/forgot-password
+    Client->>API: POST /password-reset-requests
     API->>DB: Find User by Email
     alt User Found
         API->>API: Generate Reset Token
         API->>DB: Save Token & Expiry
         API->>Email: Send Reset Link
     end
-    API-->>Client: 200 OK (Message sent if email exists)
-
-    Note over User, Client: User clicks link in email
-    User->>Client: Input New Password
-    Client->>API: POST /auth/reset-password
-    API->>DB: Validate Token
-    alt Valid Token
-        API->>DB: Update Password Hash
-        API->>DB: Invalidate Token
-        API-->>Client: 200 OK (Success)
-    else Invalid/Expired
-        API-->>Client: 400 Bad Request
-    end
+    API-->>Client: 202 Accepted (If email exists)
 ```
+
+### 5.2 Business Rules
+- **Password Policy:** Minimal 8 karakter, kombinasi huruf besar, kecil, dan angka.
+- **Session Timeout:** Access Token berlaku 1 jam, Refresh Token berlaku 30 hari.
+- **Lockout:** Akun dikunci sementara setelah 5x percobaan login gagal (opsional/future).
 
 ---
 
-## 3. API Schema
+## 6. Data Model
 
-### 3.1 Register
-- **Endpoint:** `POST /api/v1/auth/register`
+Referensi ke entitas utama yang terlibat:
+- `Users`
+- `Tokens` (Refresh Tokens, Reset Tokens)
+
+Lihat [IAM Overview - ERD](./overview.md#6-data-model) untuk diagram lengkap.
+
+---
+
+## 7. Feature Details (API Specification)
+
+Semua endpoint mengikuti standar **JSON:API**.
+
+### 7.1 Register (Create User)
+- **Endpoint:** `POST /api/v1/users`
 - **Request:**
   ```json
   {
-    "email": "user@example.com",
-    "password": "securePassword123",
-    "full_name": "John Doe"
+    "data": {
+      "type": "users",
+      "attributes": {
+        "email": "user@example.com",
+        "password": "securePassword123",
+        "full_name": "John Doe"
+      }
+    }
   }
   ```
 - **Response (201 Created):**
   ```json
   {
-    "id": "uuid-...",
-    "email": "user@example.com",
-    "message": "Registration successful"
+    "data": {
+      "type": "users",
+      "id": "uuid-1234",
+      "attributes": {
+        "email": "user@example.com",
+        "full_name": "John Doe",
+        "status": "ACTIVE",
+        "created_at": "2023-10-10T10:00:00Z"
+      },
+      "links": {
+        "self": "/api/v1/users/uuid-1234"
+      }
+    }
   }
   ```
 
-### 3.2 Login
-- **Endpoint:** `POST /api/v1/auth/login`
+### 7.2 Login (Create Token)
+- **Endpoint:** `POST /api/v1/tokens`
 - **Request:**
   ```json
   {
-    "email": "user@example.com",
-    "password": "securePassword123"
+    "data": {
+      "type": "tokens",
+      "attributes": {
+        "email": "user@example.com",
+        "password": "securePassword123"
+      }
+    }
+  }
+  ```
+- **Response (201 Created):**
+  ```json
+  {
+    "data": {
+      "type": "tokens",
+      "id": "uuid-token-session",
+      "attributes": {
+        "access_token": "eyJhbG...",
+        "refresh_token": "eyJhbG...",
+        "expires_in": 3600,
+        "token_type": "Bearer"
+      }
+    }
+  }
+  ```
+
+### 7.3 Forgot Password (Request Reset)
+- **Endpoint:** `POST /api/v1/password-reset-requests`
+- **Request:**
+  ```json
+  {
+    "data": {
+      "type": "password-reset-requests",
+      "attributes": {
+        "email": "user@example.com"
+      }
+    }
+  }
+  ```
+- **Response (202 Accepted):**
+  ```json
+  {
+    "meta": {
+      "message": "If the email exists, a reset link has been sent."
+    }
+  }
+  ```
+
+### 7.4 Reset Password (Execute Reset)
+- **Endpoint:** `POST /api/v1/password-resets`
+- **Request:**
+  ```json
+  {
+    "data": {
+      "type": "password-resets",
+      "attributes": {
+        "token": "reset-token-xyz",
+        "new_password": "newSecurePassword1"
+      }
+    }
   }
   ```
 - **Response (200 OK):**
   ```json
   {
-    "access_token": "eyJhbG...",
-    "refresh_token": "eyJhbG...",
-    "expires_in": 3600
+     "meta": {
+        "message": "Password updated successfully."
+     }
   }
   ```
 
-### 3.3 Forgot Password
-- **Endpoint:** `POST /api/v1/auth/forgot-password`
-- **Request:** `{"email": "user@example.com"}`
-- **Response:** `{"message": "If email exists, reset link sent."}`
+---
 
-### 3.4 Reset Password
-- **Endpoint:** `POST /api/v1/auth/reset-password`
-- **Request:**
-  ```json
-  {
-    "token": "reset-token-xyz",
-    "new_password": "newSecurePassword1"
-  }
-  ```
-- **Response:** `{"message": "Password updated successfully."}`
+## 8. Dependencies
+
+### 8.1 Required Modules
+- **Database:** Penyimpanan user dan token.
+- **Email Service:** Pengiriman link reset password.
+
+---
+
+## 9. Integration Points
+
+### 9.1 Inbound
+- **Public API:** Diakses oleh Frontend / Mobile App.
+
+### 9.2 Outbound
+- **Email Service:** `sendEmail(to, subject, body)`
+
+---
+
+## 10. Compliance & Audit
+
+- **Encryption:** Password di-hash menggunakan Bcrypt/Argon2.
+- **Logging:** Login sukses dan gagal dicatat (IP Address, User Agent).
+
+---
+
+## 11. Implementation Tasks
+
+| Task ID | Platform | Status | Description |
+| :--- | :--- | :--- | :--- |
+| AUTH-01 | Backend | Todo | Implement `POST /users` (Register) |
+| AUTH-02 | Backend | Todo | Implement `POST /tokens` (Login) |
+| AUTH-03 | Backend | Todo | Implement Password Reset Logic |
