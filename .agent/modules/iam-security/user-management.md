@@ -217,8 +217,13 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ## 11. Implementation Tasks
 
+**Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
+
 | Task ID | Platform | Status | Description |
 | :--- | :--- | :--- | :--- |
 | USR-01 | Backend | Todo | Implement `GET /users` with filters |
-| USR-02 | Backend | Todo | Implement `PATCH /users/:id` |
-| USR-03 | Backend | Todo | Implement `DELETE /users/:id` |
+| USR-02 | Frontend | Todo | Implement Admin User List Page with search/filter |
+| USR-03 | Backend | Todo | Implement `PATCH /users/:id` |
+| USR-04 | Frontend | Todo | Implement Edit User Modal/Page |
+| USR-05 | Backend | Todo | Implement `DELETE /users/:id` |
+| USR-06 | Frontend | Todo | Implement Delete User Confirmation |

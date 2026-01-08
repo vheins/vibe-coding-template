@@ -292,9 +292,14 @@ Silakan merujuk ke dokumen spesifikasi detail berikut:
 
 ## 15. Implementation Tasks
 
+**Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
+
 | Task ID | Platform | Status | Description |
 | :--- | :--- | :--- | :--- |
 | IAM-01 | Backend | Todo | Setup database schema (Users, Roles, Permissions). |
 | IAM-02 | Backend | Todo | Implement JSON:API compliant Authentication endpoints. |
-| IAM-03 | Backend | Todo | Implement JSON:API compliant User Management endpoints. |
-| IAM-04 | Backend | Todo | Implement JSON:API compliant Role & Permission endpoints. |
+| IAM-03 | Frontend | Todo | Implement Login, Register, Forgot Password Pages. |
+| IAM-04 | Backend | Todo | Implement JSON:API compliant User Management endpoints. |
+| IAM-05 | Frontend | Todo | Implement User Management Dashboard (List, Create, Edit, Delete). |
+| IAM-06 | Backend | Todo | Implement JSON:API compliant Role & Permission endpoints. |
+| IAM-07 | Frontend | Todo | Implement Role & Permission Management UI. |

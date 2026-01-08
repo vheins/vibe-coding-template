@@ -288,8 +288,13 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ## 11. Implementation Tasks
 
+**Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
+
 | Task ID | Platform | Status | Description |
 | :--- | :--- | :--- | :--- |
 | AUTH-01 | Backend | Todo | Implement `POST /users` (Register) |
-| AUTH-02 | Backend | Todo | Implement `POST /tokens` (Login) |
-| AUTH-03 | Backend | Todo | Implement Password Reset Logic |
+| AUTH-02 | Frontend | Todo | Implement Register Page with validation |
+| AUTH-03 | Backend | Todo | Implement `POST /tokens` (Login) |
+| AUTH-04 | Frontend | Todo | Implement Login Page with token storage |
+| AUTH-05 | Backend | Todo | Implement Password Reset Logic |
+| AUTH-06 | Frontend | Todo | Implement Forgot Password & Reset Password Pages |

@@ -210,9 +210,12 @@ Daftar kebutuhan berbasis role.
 
 ## 15. Implementation Tasks
 
+**Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
+
 | Task ID | Platform | Status | Description |
 | :--- | :--- | :--- | :--- |
-| | Backend / Frontend / Mobile | | |
+| | Backend | | |
+| | Frontend | | |
 
 ---
 

@@ -216,8 +216,12 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ## 11. Implementation Tasks
 
+**Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
+
 | Task ID | Platform | Status | Description |
 | :--- | :--- | :--- | :--- |
 | RBAC-01 | Backend | Todo | Implement CRUD Roles |
-| RBAC-02 | Backend | Todo | Implement `PATCH /relationships` endpoints |
-| RBAC-03 | Backend | Todo | Implement Permission Seeder |
+| RBAC-02 | Frontend | Todo | Implement Role Management Page (List, Create, Edit) |
+| RBAC-03 | Backend | Todo | Implement `PATCH /relationships` endpoints |
+| RBAC-04 | Frontend | Todo | Implement Permission Assignment UI (Checkbox list/Transfer component) |
+| RBAC-05 | Backend | Todo | Implement Permission Seeder |
