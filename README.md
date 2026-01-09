@@ -1,33 +1,33 @@
 # Vibe Coding Template
 
-Welcome to the **Vibe Coding Template**. This repository is designed to structure modern software projects with comprehensive documentation and standardized testing practices.
+Selamat datang di **Vibe Coding Template**. Repository ini dirancang untuk menyusun struktur proyek perangkat lunak modern dengan dokumentasi yang komprehensif dan praktik pengujian yang terstandarisasi.
 
-## 📚 Documentation
+## 📚 Dokumentasi
 
-The technical documentation is organized within the `.agent/documents/` directory to keep the root clean while providing deep insight for AI agents and developers.
+Dokumentasi teknis disusun di dalam direktori `.agent/documents/` agar root folder tetap bersih, namun tetap memberikan wawasan mendalam bagi AI agent maupun pengembang.
 
-### Quick Links
+### Tautan Cepat
 
-- **[📖 Documentation Home](.agent/documents/README.md)**: Central hub for all technical docs.
-- **[📦 Modules](.agent/documents/application/modules/README.md)**: Feature specifications, Business Rules, and ERDs.
-- **[🔌 API Specs](.agent/documents/application/api/README.md)**: REST API contracts and endpoint details.
-- **[✅ Testing](.agent/documents/application/testing/README.md)**: Test scenarios (Positive, Negative, Monkey) and strategies.
+- **[📖 Beranda Dokumentasi](.agent/documents/README.md)**: Pusat dari segala dokumentasi teknis.
+- **[📦 Modul Aplikasi](.agent/documents/application/modules/README.md)**: Spesifikasi fitur, Aturan Bisnis, dan ERD.
+- **[🔌 Spesifikasi API](.agent/documents/application/api/README.md)**: Kontrak REST API dan detail endpoint.
+- **[✅ Pengujian (Testing)](.agent/documents/application/testing/README.md)**: Skenario pengujian (Positif, Negatif, Monkey) dan strateginya.
 
-## 🚀 Getting Started
+## 🚀 Memulai
 
-1.  **Explore Modules**: Check `application/modules` to understand the domain business logic.
-2.  **Review API**: Look at `application/api` for integration points.
-3.  **Run Tests**: Follow the strategies in `application/testing`.
+1.  **Jelajahi Modul**: Periksa `application/modules` untuk memahami logika bisnis domain.
+2.  **Tinjau API**: Lihat `application/api` untuk titik integrasi.
+3.  **Jalankan Test**: Ikuti strategi yang ada di `application/testing`.
 
-## 📁 Project Structure
+## 📁 Struktur Proyek
 
 ```bash
 .
 ├── .agent/
-│   └── documents/          # Central Documentation Hub
-│       ├── application/    # App-specific docs (API, Modules, Testing)
-│       ├── templates/      # Standard templates for new docs
-│       └── README.md       # Global Documentation Index
-├── README.md               # You are here
-└── [Source Code]           # Application source code (to be implemented)
+│   └── documents/          # Hub Dokumentasi Terpusat
+│       ├── application/    # Dokumen spesifik aplikasi (API, Modules, Testing)
+│       ├── templates/      # Template standar untuk dokumen baru
+│       └── README.md       # Indeks Dokumentasi Global
+├── README.md               # Anda di sini
+└── [Source Code]           # Kode sumber aplikasi (akan diimplementasikan)
 ```
