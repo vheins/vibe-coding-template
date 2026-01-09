@@ -103,7 +103,7 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model).
 ## 7. API Specification
 
 > Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri.
-> Silakan rujuk ke file [API User Management](./api-user-management.md).
+> Silakan rujuk ke file [API User Management](../../api/iam-security/api-user-management.md).
 
 ---
 
