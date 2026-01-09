@@ -4,15 +4,15 @@
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Ikhtisar Modul](./overview.md)
-- [Link ke Spesifikasi API](../../api/iam-security/api-user-management.md)
-- [Link ke Skenario Pengujian](../../testing/iam-security/test-authentication.md)
+- [Back to Module Overview](./overview.md)
+- [Link to API Specification](../../api/iam-security/api-user-management.md)
+- [Link to Testing Scenario](../../testing/iam-security/test-authentication.md)
 
 ---
 
-## 1. Ikhtisar Fitur (Feature Overview)
+## 1. Feature Overview
 
 - **Deskripsi singkat fitur:** CRUD User, Aktivasi, dan Blokir User.
 - **Peran dalam modul:** Administrasi data pengguna.
@@ -20,7 +20,7 @@
 
 ---
 
-## 2. Cerita Pengguna (User Stories)
+## 2. User Stories
 
 | ID    | Peran (Role) | Tujuan (Goal)                      | Manfaat (Benefit)                            |
 | :---- | :----------- | :--------------------------------- | :------------------------------------------- |
@@ -30,9 +30,9 @@
 
 ---
 
-## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+## 3. Business Flow & Rules
 
-### 3.1 Alur Bisnis
+### 3.1 Business Flow
 
 #### Admin Manage User
 ```mermaid
@@ -51,25 +51,25 @@ sequenceDiagram
     API-->>Admin: 200 OK
 ```
 
-### 3.2 Aturan Bisnis
+### 3.2 Business Rules
 - **Admin Only:** Hanya role Admin yang bisa melihat list user.
 - **Self Update:** User hanya bisa edit profil sendiri.
 
 ---
 
-## 4. Model Data (Data Model)
+## 4. Data Model
 
 - **Users:** Entitas utama.
 
 ---
 
-## 5. Kepatuhan & Audit (Compliance & Audit)
+## 5. Compliance & Audit
 
 - **Audit:** Mencatat Admin ID yang melakukan perubahan status user.
 
 ---
 
-## 6. Tugas Implementasi (Implementation Tasks)
+## 6. Implementation Tasks
 
 | ID     | Platform | Status | Deskripsi                                                         |
 | :----- | :------- | :----- | :---------------------------------------------------------------- |

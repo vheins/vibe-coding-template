@@ -1,28 +1,28 @@
-# Ikhtisar Modul: IAM & Security
+# Module Overview: IAM & Security
 
 > Modul fondasi untuk identitas, otentikasi, dan otorisasi.
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Daftar Modul](../../../README.md)
-- [Link ke Skenario Pengujian](../../testing/iam-security/test-authentication.md)
+- [Back to Module List](../../../README.md)
+- [Link to Testing Scenario](../../testing/iam-security/test-authentication.md)
 
 ---
 
-## 1. Pengantar Modul
+## 1. Module Introduction
 
-### 1.1 Deskripsi Singkat
+### 1.1 Brief Description
 Modul IAM & Security bertanggung jawab atas manajemen identitas pengguna, otentikasi (verifikasi identitas), dan otorisasi (hak akses) dalam sistem.
 
-### 1.2 Posisi & Peran
+### 1.2 Position & Role
 - **Tipe:** Core Module.
 - **Value:** Melindungi data bisnis dan memastikan hanya pihak berwenang yang memiliki akses.
 
 ---
 
-## 2. Daftar Fitur (Feature List)
+## 2. Feature List
 
 | Fitur                                                | Deskripsi                                    | Status |
 | :--------------------------------------------------- | :------------------------------------------- | :----- |
@@ -32,7 +32,7 @@ Modul IAM & Security bertanggung jawab atas manajemen identitas pengguna, otenti
 
 ---
 
-## 3. Arsitektur Level Tinggi
+## 3. High-Level Architecture
 
 ```mermaid
 graph LR
@@ -44,7 +44,7 @@ graph LR
 
 ---
 
-## 4. Ketergantungan Global
+## 4. Global Dependencies
 
 - **Database:** PostgreSQL (Users, Roles tables).
 - **Services:** Email Service (untuk reset password).

@@ -1,28 +1,28 @@
-# Ikhtisar Modul: Media Management
+# Module Overview: Media Management
 
 > Modul terpusat untuk penyimpanan dan pengelolaan aset digital.
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Daftar Modul](../../../README.md)
-- [Link ke Skenario Pengujian](../../testing/media-management/test-media-management.md)
+- [Back to Module List](../../../README.md)
+- [Link to Testing Scenario](../../testing/media-management/test-media-management.md)
 
 ---
 
-## 1. Pengantar Modul
+## 1. Module Introduction
 
-### 1.1 Deskripsi Singkat
+### 1.1 Brief Description
 Modul ini menangani upload, penyimpanan (Storage Abstraction), dan retrieval file dengan dukungan relasi polimorfik ke entitas lain.
 
-### 1.2 Posisi & Peran
+### 1.2 Position & Role
 - **Tipe:** Core Support Module.
 - **Value:** Unified Asset Management.
 
 ---
 
-## 2. Daftar Fitur (Feature List)
+## 2. Feature List
 
 | Fitur                                   | Deskripsi                              | Status |
 | :-------------------------------------- | :------------------------------------- | :----- |
@@ -30,7 +30,7 @@ Modul ini menangani upload, penyimpanan (Storage Abstraction), dan retrieval fil
 
 ---
 
-## 3. Arsitektur Level Tinggi
+## 3. High-Level Architecture
 
 ```mermaid
 graph LR
@@ -43,7 +43,7 @@ graph LR
 
 ---
 
-## 4. Ketergantungan Global
+## 4. Global Dependencies
 
 - **Configuration:** Storage Credentials.
 - **Libs:** Flysystem / Multer / Sharp (Image Processing).

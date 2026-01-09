@@ -4,15 +4,15 @@
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Ikhtisar Modul](./overview.md)
-- [Link ke Spesifikasi API](../../api/iam-security/api-authentication.md)
-- [Link ke Skenario Pengujian](../../testing/iam-security/test-authentication.md)
+- [Back to Module Overview](./overview.md)
+- [Link to API Specification](../../api/iam-security/api-authentication.md)
+- [Link to Testing Scenario](../../testing/iam-security/test-authentication.md)
 
 ---
 
-## 1. Ikhtisar Fitur (Feature Overview)
+## 1. Feature Overview
 
 - **Deskripsi singkat fitur:** Menangani Login, Register, Forgot Password, dan Token Management.
 - **Peran dalam modul:** Gerbang utama keamanan sistem.
@@ -20,7 +20,7 @@
 
 ---
 
-## 2. Cerita Pengguna (User Stories)
+## 2. User Stories
 
 | ID    | Peran (Role) | Tujuan (Goal)              | Manfaat (Benefit)                         |
 | :---- | :----------- | :------------------------- | :---------------------------------------- |
@@ -32,9 +32,9 @@
 
 ---
 
-## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+## 3. Business Flow & Rules
 
-### 3.1 Alur Bisnis
+### 3.1 Business Flow
 
 #### Login Flow
 ```mermaid
@@ -54,14 +54,14 @@ sequenceDiagram
     end
 ```
 
-### 3.2 Aturan Bisnis
+### 3.2 Business Rules
 - **Unique Email:** Setiap pengguna harus memiliki email yang unik.
 - **Strong Password:** Minimal 8 karakter, huruf besar, kecil, dan angka.
 - **Token Expiry:** Access Token (1 jam), Refresh Token (30 hari).
 
 ---
 
-## 4. Model Data (Data Model)
+## 4. Data Model
 
 - **Users:** Menyimpan Email dan Password Hash.
 - **Tokens:** Menyimpan Refresh Token dan Reset Token.
@@ -70,14 +70,14 @@ sequenceDiagram
 
 ---
 
-## 5. Kepatuhan & Audit (Compliance & Audit)
+## 5. Compliance & Audit
 
 - **Encryption:** Password wajib di-hash (Bcrypt/Argon2).
 - **Audit:** Mencatat setiap upaya login (sukses/gagal) dan IP Address.
 
 ---
 
-## 6. Tugas Implementasi (Implementation Tasks)
+## 6. Implementation Tasks
 
 | ID     | Platform | Status | Deskripsi                                         |
 | :----- | :------- | :----- | :------------------------------------------------ |

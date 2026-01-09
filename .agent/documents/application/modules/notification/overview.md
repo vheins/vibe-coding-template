@@ -1,28 +1,28 @@
-# Ikhtisar Modul: Notification
+# Module Overview: Notification
 
 > Modul komunikasi terpusat untuk Email, Push, SMS, dan In-App.
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Daftar Modul](../../../README.md)
-- [Link ke Skenario Pengujian](../../testing/notification/test-notification.md)
+- [Back to Module List](../../../README.md)
+- [Link to Testing Scenario](../../testing/notification/test-notification.md)
 
 ---
 
-## 1. Pengantar Modul
+## 1. Module Introduction
 
-### 1.1 Deskripsi Singkat
+### 1.1 Brief Description
 Modul ini mengelola template dan pengiriman pesan transaksional/promosi ke pengguna melalui berbagai kanal (Omnichannel).
 
-### 1.2 Posisi & Peran
+### 1.2 Position & Role
 - **Tipe:** Core Support Module.
 - **Value:** User Engagement.
 
 ---
 
-## 2. Daftar Fitur (Feature List)
+## 2. Feature List
 
 | Fitur                                           | Deskripsi                      | Status |
 | :---------------------------------------------- | :----------------------------- | :----- |
@@ -30,7 +30,7 @@ Modul ini mengelola template dan pengiriman pesan transaksional/promosi ke pengg
 
 ---
 
-## 3. Arsitektur Level Tinggi
+## 3. High-Level Architecture
 
 ```mermaid
 graph LR
@@ -43,7 +43,7 @@ graph LR
 
 ---
 
-## 4. Ketergantungan Global
+## 4. Global Dependencies
 
 - **IAM:** Validasi User ID.
 - **Configuration:** Credentials Provider.

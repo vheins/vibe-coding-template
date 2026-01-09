@@ -4,15 +4,15 @@
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Ikhtisar Modul](./overview.md)
-- [Link ke Spesifikasi API](../../api/configuration/api-configurations.md)
-- [Link ke Skenario Pengujian](../../testing/configuration/test-configuration.md)
+- [Back to Module Overview](./overview.md)
+- [Link to API Specification](../../api/configuration/api-configurations.md)
+- [Link to Testing Scenario](../../testing/configuration/test-configuration.md)
 
 ---
 
-## 1. Ikhtisar Fitur (Feature Overview)
+## 1. Feature Overview
 
 - **Deskripsi singkat fitur:** Manajemen Key-Value pair statis dan dinamis dengan dukungan caching.
 - **Peran dalam modul:** Inti dari fleksibilitas operasional aplikasi.
@@ -20,7 +20,7 @@
 
 ---
 
-## 2. Cerita Pengguna (User Stories)
+## 2. User Stories
 
 | ID        | Peran (Role)  | Tujuan (Goal)                         | Manfaat (Benefit)                                          |
 | :-------- | :------------ | :------------------------------------ | :--------------------------------------------------------- |
@@ -31,9 +31,9 @@
 
 ---
 
-## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+## 3. Business Flow & Rules
 
-### 3.1 Alur Bisnis
+### 3.1 Business Flow
 
 #### Fetch Configuration Flow
 ```mermaid
@@ -55,14 +55,14 @@ sequenceDiagram
     API-->>Client: 200 OK
 ```
 
-### 3.2 Aturan Bisnis
+### 3.2 Business Rules
 - **Immutability:** Key tidak boleh diubah namanya setelah dibuat.
 - **Data Types:** Supports String, Boolean, Number, JSON.
 - **Cache Invalidation:** Update DB -> Hapus Cache Key.
 
 ---
 
-## 4. Model Data (Data Model)
+## 4. Data Model
 
 - **Configuration:** Key (Unique), Value, Type (String/Bool/JSON/Number), IsPublic, Group.
 
@@ -70,13 +70,13 @@ sequenceDiagram
 
 ---
 
-## 5. Kepatuhan & Audit (Compliance & Audit)
+## 5. Compliance & Audit
 
 - **Audit Trail:** Mencatat `old_value`, `new_value`, `actor` saat update konfigurasi.
 
 ---
 
-## 6. Tugas Implementasi (Implementation Tasks)
+## 6. Implementation Tasks
 
 | ID     | Platform | Status | Deskripsi                             |
 | :----- | :------- | :----- | :------------------------------------ |

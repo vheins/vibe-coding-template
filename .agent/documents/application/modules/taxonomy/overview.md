@@ -1,28 +1,28 @@
-# Ikhtisar Modul: Taxonomy
+# Module Overview: Taxonomy
 
 > Modul klasifikasi universal untuk pengelompokan entitas (Tagging, Categorization).
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Daftar Modul](../../../README.md)
-- [Link ke Skenario Pengujian](../../testing/taxonomy/test-taxonomy.md)
+- [Back to Module List](../../../README.md)
+- [Link to Testing Scenario](../../testing/taxonomy/test-taxonomy.md)
 
 ---
 
-## 1. Pengantar Modul
+## 1. Module Introduction
 
-### 1.1 Deskripsi Singkat
+### 1.1 Brief Description
 Modul ini menyediakan sistem klasifikasi terpusat yang agnostik terhadap entitas, memungkinkan fitur seperti Kategori Produk, Skill Karyawan, dan Label Konten dikelola di satu tempat.
 
-### 1.2 Posisi & Peran
+### 1.2 Position & Role
 - **Tipe:** Core Support Module (Shared Kernel).
 - **Value:** Data Consistency & flexibility.
 
 ---
 
-## 2. Daftar Fitur (Feature List)
+## 2. Feature List
 
 | Fitur                                           | Deskripsi                      | Status |
 | :---------------------------------------------- | :----------------------------- | :----- |
@@ -30,7 +30,7 @@ Modul ini menyediakan sistem klasifikasi terpusat yang agnostik terhadap entitas
 
 ---
 
-## 3. Arsitektur Level Tinggi
+## 3. High-Level Architecture
 
 ```mermaid
 graph LR
@@ -41,7 +41,7 @@ graph LR
 
 ---
 
-## 4. Ketergantungan Global
+## 4. Global Dependencies
 
 - **Database:** Relational DB (FK integrity).
 

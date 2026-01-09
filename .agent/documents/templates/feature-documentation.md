@@ -1,64 +1,64 @@
-# Feature Documentation: [Nama Fitur]
+# [Feature Name]
 
 > Gunakan template ini untuk mendokumentasikan spesifikasi detail dari setiap FITUR dalam modul secara mendalam.
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Ikhtisar Modul](./overview.md)
-- [Link ke Spesifikasi API](../../api/<module-name>/api-<module-name>.md)
-- [Link ke Skenario Pengujian](../../testing/<module-name>/test-<module-name>.md)
-
----
-
-## 1. Ikhtisar Fitur (Feature Overview)
-
-- **Deskripsi singkat fitur:**
-- **Peran dalam modul:**
-- **Nilai bisnis:**
+- [Back to Module Overview](./overview.md)
+- [Link to API Specification](../../api/<module-name>/api-<module-name>.md)
+- [Link to Testing Scenario](../../testing/<module-name>/test-<module-name>.md)
 
 ---
 
-## 2. Cerita Pengguna (User Stories)
+## 1. Feature Overview
+
+- **Brief Description:**
+- **Role in Module:**
+- **Business Value:**
+
+---
+
+## 2. User Stories
 
 Daftar kebutuhan berbasis peran (role) untuk fitur ini.
 
-| ID   | Peran (Role) | Tujuan (Goal) | Manfaat (Benefit) |
-| :--- | :----------- | :------------ | :---------------- |
-|      |              |               |                   |
+| ID   | Role | Goal | Benefit |
+| :--- | :--- | :--- | :------ |
+|      |      |      |         |
 
 ---
 
-## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+## 3. Business Flow & Rules
 
-### 3.1 Alur Bisnis
-- **Wajib:** Sertakan diagram alur menggunakan Mermaid (Sequence/Flowchart).
+### 3.1 Business Flow
+- **Mandatory:** Sertakan diagram alur menggunakan Mermaid (Sequence/Flowchart).
 
-### 3.2 Aturan Bisnis
+### 3.2 Business Rules
 - Validasi input.
 - Batasan domain.
 
 ---
 
-## 4. Model Data (Data Model)
+## 4. Data Model
 
 - Entitas yang terlibat.
 - Relasi spesifik fitur ini.
 
 ---
 
-## 5. Kepatuhan & Audit (Compliance & Audit)
+## 5. Compliance & Audit
 
 - Aturan audit trail khusus fitur ini.
 - Kebutuhan regulasi.
 
 ---
 
-## 6. Tugas Implementasi (Implementation Tasks)
+## 6. Implementation Tasks
 
-| ID Tugas | Platform | Status | Deskripsi |
-| :------- | :------- | :----- | :-------- |
-|          |          |        |           |
+| Task ID | Platform | Status | Description |
+| :------ | :------- | :----- | :---------- |
+|         |          |        |             |
 
 ---

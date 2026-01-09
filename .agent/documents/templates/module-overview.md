@@ -1,39 +1,39 @@
-# [Nama Modul]
+# [Module Name]
 
 > Gunakan template ini sebagai halaman depan (landing page) untuk setiap Modul. Berisi ringkasan level tinggi dan daftar fitur.
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Daftar Modul](../../../README.md)
-- [Link ke Skenario Pengujian](../../testing/<module-name>/test-<module-name>.md)
+- [Back to Module List](../../../README.md)
+- [Link to Testing Scenario](../../testing/<module-name>/test-<module-name>.md)
 
 ---
 
-## 1. Pengantar Modul
+## 1. Module Introduction
 
-### 1.1 Deskripsi Singkat
+### 1.1 Brief Description
 [Jelaskan apa tanggung jawab utama modul ini dalam 1-2 kalimat]
 
-### 1.2 Posisi & Peran
-- **Tipe:** [Core / Support / Optional]
+### 1.2 Position & Role
+- **Type:** [Core / Support / Optional]
 - **Value:** [Nilai bisnis utama]
 
 ---
 
-## 2. Daftar Fitur (Feature List)
+## 2. Feature List
 
 Modul ini terdiri dari fitur-fitur berikut. Silakan klik untuk melihat spesifikasi detail.
 
-| Fitur                                   | Deskripsi                     | Status      |
+| Feature                                 | Description                   | Status      |
 | :-------------------------------------- | :---------------------------- | :---------- |
-| [Nama Fitur](./feature-file.md)         | Penjelasan singkat fitur      | Stable/Beta |
+| [Feature Name](./feature-file.md)       | Penjelasan singkat fitur      | Stable/Beta |
 | [User Management](./user-management.md) | CRUD user dan role assignment | Stable      |
 
 ---
 
-## 3. Arsitektur Level Tinggi
+## 3. High-Level Architecture
 
 Gambaran bagaimana modul ini berinteraksi dengan modul lain secara global.
 
@@ -46,7 +46,7 @@ graph LR
 
 ---
 
-## 4. Ketergantungan Global
+## 4. Global Dependencies
 
 - **Database:** [Nama DB]
 - **Services:** [Service lain yang dibutuhkan]

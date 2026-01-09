@@ -1,28 +1,28 @@
-# Ikhtisar Modul: Configuration
+# Module Overview: Configuration
 
 > Modul untuk pengaturan sistem dinamis dan feature switching.
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Daftar Modul](../../../README.md)
-- [Link ke Skenario Pengujian](../../testing/configuration/test-configuration.md)
+- [Back to Module List](../../../README.md)
+- [Link to Testing Scenario](../../testing/configuration/test-configuration.md)
 
 ---
 
-## 1. Pengantar Modul
+## 1. Module Introduction
 
-### 1.1 Deskripsi Singkat
+### 1.1 Brief Description
 Modul Configuration menyediakan mekanisme terpusat untuk mengelola pengaturan sistem, feature flags, dan parameter aplikasi secara dinamis tanpa perlu deploy ulang.
 
-### 1.2 Posisi & Peran
+### 1.2 Position & Role
 - **Tipe:** Core Module.
 - **Value:** Operational Efficiency & Reliability.
 
 ---
 
-## 2. Daftar Fitur (Feature List)
+## 2. Feature List
 
 | Fitur                                      | Deskripsi                                | Status |
 | :----------------------------------------- | :--------------------------------------- | :----- |
@@ -30,7 +30,7 @@ Modul Configuration menyediakan mekanisme terpusat untuk mengelola pengaturan si
 
 ---
 
-## 3. Arsitektur Level Tinggi
+## 3. High-Level Architecture
 
 ```mermaid
 graph LR
@@ -41,7 +41,7 @@ graph LR
 
 ---
 
-## 4. Ketergantungan Global
+## 4. Global Dependencies
 
 - **Database:** PostgreSQL.
 - **Cache:** Redis (Critical for performance).

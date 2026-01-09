@@ -4,15 +4,15 @@
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Ikhtisar Modul](./overview.md)
-- [Link ke Spesifikasi API](../../api/notification/api-notifications.md)
-- [Link ke Skenario Pengujian](../../testing/notification/test-notification.md)
+- [Back to Module Overview](./overview.md)
+- [Link to API Specification](../../api/notification/api-notifications.md)
+- [Link to Testing Scenario](../../testing/notification/test-notification.md)
 
 ---
 
-## 1. Ikhtisar Fitur (Feature Overview)
+## 1. Feature Overview
 
 - **Deskripsi singkat fitur:** Pengiriman Email, Push, SMS, dan In-App Notification.
 - **Peran dalam modul:** Hub komunikasi sistem.
@@ -20,7 +20,7 @@
 
 ---
 
-## 2. Cerita Pengguna (User Stories)
+## 2. User Stories
 
 | ID        | Peran (Role) | Tujuan (Goal)                          | Manfaat (Benefit)                           |
 | :-------- | :----------- | :------------------------------------- | :------------------------------------------ |
@@ -31,9 +31,9 @@
 
 ---
 
-## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+## 3. Business Flow & Rules
 
-### 3.1 Alur Bisnis
+### 3.1 Business Flow
 
 #### Sending Notification Flow
 ```mermaid
@@ -62,14 +62,14 @@ sequenceDiagram
     end
 ```
 
-### 3.2 Aturan Bisnis
+### 3.2 Business Rules
 - **User Preference:** Jangan kirim jika user Opt-Out.
 - **Rate Limit:** Limit OTP (misal 10/jam).
 - **Retention:** Log disimpan 1 tahun.
 
 ---
 
-## 4. Model Data (Data Model)
+## 4. Data Model
 
 - **Notification:** Log pesan (Type, Channel, Status).
 - **Template:** Blueprint pesan (`Hello {{name}}`).
@@ -79,14 +79,14 @@ sequenceDiagram
 
 ---
 
-## 5. Kepatuhan & Audit (Compliance & Audit)
+## 5. Compliance & Audit
 
 - **Anti-Spam:** Hormati Unsubscribe.
 - **Security:** Masking OTP di log.
 
 ---
 
-## 6. Tugas Implementasi (Implementation Tasks)
+## 6. Implementation Tasks
 
 | ID        | Platform | Status | Deskripsi                                       |
 | :-------- | :------- | :----- | :---------------------------------------------- |

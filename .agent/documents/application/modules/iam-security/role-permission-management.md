@@ -4,15 +4,15 @@
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Ikhtisar Modul](./overview.md)
-- [Link ke Spesifikasi API](../../api/iam-security/api-role-permission-management.md)
-- [Link ke Skenario Pengujian](../../testing/iam-security/test-authentication.md)
+- [Back to Module Overview](./overview.md)
+- [Link to API Specification](../../api/iam-security/api-role-permission-management.md)
+- [Link to Testing Scenario](../../testing/iam-security/test-authentication.md)
 
 ---
 
-## 1. Ikhtisar Fitur (Feature Overview)
+## 1. Feature Overview
 
 - **Deskripsi singkat fitur:** Manajemen Roles, Permissions, dan Assignment.
 - **Peran dalam modul:** Definisi Hak Akses.
@@ -20,7 +20,7 @@
 
 ---
 
-## 2. Cerita Pengguna (User Stories)
+## 2. User Stories
 
 | ID    | Peran (Role) | Tujuan (Goal)                 | Manfaat (Benefit)                                   |
 | :---- | :----------- | :---------------------------- | :-------------------------------------------------- |
@@ -30,9 +30,9 @@
 
 ---
 
-## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+## 3. Business Flow & Rules
 
-### 3.1 Alur Bisnis
+### 3.1 Business Flow
 ```mermaid
 sequenceDiagram
     participant Admin
@@ -45,25 +45,25 @@ sequenceDiagram
     API->>DB: Update Relation
 ```
 
-### 3.2 Aturan Bisnis
+### 3.2 Business Rules
 - **Super Admin:** Role spesial yang tidak bisa dihapus.
 - **Immutable permissions:** Permission code didefinisikan di code.
 
 ---
 
-## 4. Model Data (Data Model)
+## 4. Data Model
 
 - **Roles, Permissions, RolePermissions, UserRoles.**
 
 ---
 
-## 5. Kepatuhan & Audit (Compliance & Audit)
+## 5. Compliance & Audit
 
 - **Audit:** Perubahan hak akses Role adalah tindakan kritis yang wajib dicatat.
 
 ---
 
-## 6. Tugas Implementasi (Implementation Tasks)
+## 6. Implementation Tasks
 
 | ID     | Platform | Status | Deskripsi                                                 |
 | :----- | :------- | :----- | :-------------------------------------------------------- |

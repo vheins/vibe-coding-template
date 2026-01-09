@@ -4,15 +4,15 @@
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Ikhtisar Modul](./overview.md)
-- [Link ke Spesifikasi API](../../api/media-management/api-media-management.md)
-- [Link ke Skenario Pengujian](../../testing/media-management/test-media-management.md)
+- [Back to Module Overview](./overview.md)
+- [Link to API Specification](../../api/media-management/api-media-management.md)
+- [Link to Testing Scenario](../../testing/media-management/test-media-management.md)
 
 ---
 
-## 1. Ikhtisar Fitur (Feature Overview)
+## 1. Feature Overview
 
 - **Deskripsi singkat fitur:** Layanan upload, penyimpanan (multi-provider), dan metadata file.
 - **Peran dalam modul:** Fitur inti Media Management.
@@ -20,7 +20,7 @@
 
 ---
 
-## 2. Cerita Pengguna (User Stories)
+## 2. User Stories
 
 | ID        | Peran (Role) | Tujuan (Goal)                        | Manfaat (Benefit)                    |
 | :-------- | :----------- | :----------------------------------- | :----------------------------------- |
@@ -31,9 +31,9 @@
 
 ---
 
-## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+## 3. Business Flow & Rules
 
-### 3.1 Alur Bisnis
+### 3.1 Business Flow
 
 #### Upload & Attach Flow
 ```mermaid
@@ -56,14 +56,14 @@ sequenceDiagram
     API-->>Client: 201 Created (Media Object)
 ```
 
-### 3.2 Aturan Bisnis
+### 3.2 Business Rules
 - **Max File Size:** 5MB (Img), 20MB (Doc).
 - **Allowed Types:** JPG, PNG, WEBP, PDF.
 - **Cleanup:** Temp files akan dihapus jika tidak di-link dalam 24 jam.
 
 ---
 
-## 4. Model Data (Data Model)
+## 4. Data Model
 
 - **Media:** Metadata file (Filename, Size, URL, Disk).
 - **MediaAttachment:** Tabel pivot polimorfik (Entity Type, Entity ID).
@@ -72,13 +72,13 @@ sequenceDiagram
 
 ---
 
-## 5. Kepatuhan & Audit (Compliance & Audit)
+## 5. Compliance & Audit
 
 - **Access Control:** File privat hanya bisa diakses via Presigned URL/Proxy.
 
 ---
 
-## 6. Tugas Implementasi (Implementation Tasks)
+## 6. Implementation Tasks
 
 | ID        | Platform | Status | Deskripsi                                       |
 | :-------- | :------- | :----- | :---------------------------------------------- |

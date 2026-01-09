@@ -4,15 +4,15 @@
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Ikhtisar Modul](./overview.md)
-- [Link ke Spesifikasi API](../../api/taxonomy/api-taxonomy.md)
-- [Link ke Skenario Pengujian](../../testing/taxonomy/test-taxonomy.md)
+- [Back to Module Overview](./overview.md)
+- [Link to API Specification](../../api/taxonomy/api-taxonomy.md)
+- [Link to Testing Scenario](../../testing/taxonomy/test-taxonomy.md)
 
 ---
 
-## 1. Ikhtisar Fitur (Feature Overview)
+## 1. Feature Overview
 
 - **Deskripsi singkat fitur:** Manajemen namespace taksonomi (Hierarkis/Flat) dan assignment ke entitas lain.
 - **Peran dalam modul:** Single Source of Truth klasifikasi.
@@ -20,7 +20,7 @@
 
 ---
 
-## 2. Cerita Pengguna (User Stories)
+## 2. User Stories
 
 | ID        | Peran (Role) | Tujuan (Goal)                             | Manfaat (Benefit)                                        |
 | :-------- | :----------- | :---------------------------------------- | :------------------------------------------------------- |
@@ -31,9 +31,9 @@
 
 ---
 
-## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+## 3. Business Flow & Rules
 
-### 3.1 Alur Bisnis
+### 3.1 Business Flow
 
 #### Term Attachment (Polymorphic)
 ```mermaid
@@ -54,14 +54,14 @@ sequenceDiagram
     end
 ```
 
-### 3.2 Aturan Bisnis
+### 3.2 Business Rules
 - **Stable Codes:** Taxonomy & Term wajib punya `slug/code` yang unik dan stabil.
 - **Polymorphic:** Tabel relasi menggunakan `entity_type` dan `entity_id`.
 - **Validation:** Cegah duplikasi tag pada entitas yang sama.
 
 ---
 
-## 4. Model Data (Data Model)
+## 4. Data Model
 
 - **Taxonomy:** Namespace (misal `product_category`, `tags`).
 - **Term:** Nilai (misal `electronics`, `fashion`).
@@ -71,13 +71,13 @@ sequenceDiagram
 
 ---
 
-## 5. Kepatuhan & Audit (Compliance & Audit)
+## 5. Compliance & Audit
 
 - **Audit:** Perubahan struktur taksonomi (Taxonomy/Term) wajib dicatat aktor-nya.
 
 ---
 
-## 6. Tugas Implementasi (Implementation Tasks)
+## 6. Implementation Tasks
 
 | ID        | Platform | Status | Deskripsi                                              |
 | :-------- | :------- | :----- | :----------------------------------------------------- |

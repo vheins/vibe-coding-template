@@ -1,28 +1,28 @@
-# Ikhtisar Modul: Background Jobs
+# Module Overview: Background Jobs
 
 > Modul infrastruktur untuk pemrosesan asinkron dan terjadwal.
 
 ---
 
-## Header & Navigasi
+## Header & Navigation
 
-- [Kembali ke Daftar Modul](../../../README.md)
-- [Link ke Skenario Pengujian](../../testing/background-jobs/test-background-jobs.md)
+- [Back to Module List](../../../README.md)
+- [Link to Testing Scenario](../../testing/background-jobs/test-background-jobs.md)
 
 ---
 
-## 1. Pengantar Modul
+## 1. Module Introduction
 
-### 1.1 Deskripsi Singkat
+### 1.1 Brief Description
 Modul ini menangani antrian tugas (Queue) dan penjadwalan (Scheduler) untuk mengurangi beban server API utama dan menangani proses yang memakan waktu lama.
 
-### 1.2 Posisi & Peran
+### 1.2 Position & Role
 - **Tipe:** Support Module.
 - **Value:** Performance & Scalability.
 
 ---
 
-## 2. Daftar Fitur (Feature List)
+## 2. Feature List
 
 | Fitur                                 | Deskripsi                     | Status |
 | :------------------------------------ | :---------------------------- | :----- |
@@ -30,7 +30,7 @@ Modul ini menangani antrian tugas (Queue) dan penjadwalan (Scheduler) untuk meng
 
 ---
 
-## 3. Arsitektur Level Tinggi
+## 3. High-Level Architecture
 
 ```mermaid
 graph LR
@@ -41,7 +41,7 @@ graph LR
 
 ---
 
-## 4. Ketergantungan Global
+## 4. Global Dependencies
 
 - **Configuration:** Redis Config.
 - **Notification:** Mengirim alert jika job gagal (Optional).
