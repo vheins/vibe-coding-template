@@ -31,7 +31,7 @@ Gunakan workflow ini setiap kali ada perubahan fitur, perbaikan bug signifikan, 
 
 5.  **Langkah 4: Cek Konsistensi (Gap Analysis)**
     *   **Cek Link**: Pastikan semua `[Link ke ...]` di tiga dokumen di atas saling terhubung dan tidak broken (404).
-    *   **Cek Master Task List**: Jika ada task baru di Overview, jalankan workflow `update-task` (Langkah 2) untuk menambahkannya ke `tasks/implementation-tasks.md`.
+    *   **Cek Master Task List**: Jika ada task baru di Overview, jalankan workflow `update-task` (Langkah 2) untuk menambahkannya ke `.agent/tasks/implementation-tasks.md`.
 
 6.  **Verifikasi & Commit**:
     *   Jalankan: `git add .agent/documents/`

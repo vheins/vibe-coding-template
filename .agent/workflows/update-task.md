@@ -2,10 +2,10 @@
 description: Memperbarui status tugas dalam daftar tugas implementasi
 ---
 
-Ikuti langkah-langkah berikut untuk memperbarui status tugas di `tasks/implementation-tasks.md`:
+Ikuti langkah-langkah berikut untuk memperbarui status tugas di `.agent/tasks/implementation-tasks.md`:
 
 1.  **Identifikasi Tugas**:
-    *   Jalankan perintah: `cat tasks/implementation-tasks.md`
+    *   Jalankan perintah: `cat .agent/tasks/implementation-tasks.md`
     *   Cari **ID Tugas** yang relevan (misal: `IAM-01`).
 
 2.  **Tambahkan Tugas Baru (Jika Belum Ada)**:
@@ -28,7 +28,7 @@ Ikuti langkah-langkah berikut untuk memperbarui status tugas di `tasks/implement
 
 5.  **Verifikasi & Commit**:
     *   Pastikan format tabel markdown tidak rusak.
-    *   Jalankan: `git add tasks/implementation-tasks.md && git commit -m "docs(tasks): update <TASK-ID> status / add new task"`
+    *   Jalankan: `git add .agent/tasks/implementation-tasks.md && git commit -m "docs(tasks): update <TASK-ID> status / add new task"`
 
 // turbo
 6.  **Cek Status Git**:
