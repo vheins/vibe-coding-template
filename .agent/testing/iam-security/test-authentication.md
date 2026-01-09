@@ -72,6 +72,14 @@
 | AUTH-API-021 | Request reset for valid email | User exists | Valid Email | 202 Accepted, Email sent | High |
 | AUTH-API-022 | Request reset for invalid email | - | Unregistered Email | 202 Accepted (Security practice) | Medium |
 
+### 3.4 Reset Password (POST /auth/reset-password)
+
+| ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| AUTH-API-031 | Reset with valid token | Valid Token exists | Token, New Password | 200 OK, Password Updated | High |
+| AUTH-API-032 | Reset with expired token | Token Expired | Token, New Password | 400 Bad Request | High |
+| AUTH-API-033 | Reset with invalid token | - | Random String | 400 Bad Request | Medium |
+
 ---
 
 ## 4. Frontend Testing Scenarios
@@ -92,6 +100,7 @@
 | AUTH-E2E-001 | Login Success & Redirect | 1. Open Login<br>2. Fill Valid Creds<br>3. Submit | Redirect to Dashboard, Token stored in LocalStorage/Cookie |
 | AUTH-E2E-002 | Register & Auto Login | 1. Open Register<br>2. Fill Data<br>3. Submit | Account created, Redirect to Dashboard |
 | AUTH-E2E-003 | Logout | 1. Click Logout Button | Redirect to Login, Token cleared |
+| AUTH-E2E-004 | Full Password Reset | 1. Request Reset<br>2. (Mock) Get Token<br>3. Open Reset Page<br>4. Submit New Pass | Password updated, Redirect to Login, New Pass works |
 
 ---
 
@@ -105,6 +114,8 @@
 | AUTH-MAN-002 | Password visibility toggle | Type password, click "eye" icon | Password text becomes visible/hidden |
 | AUTH-MAN-003 | Copy-paste disabled in password confirm | Try to paste password in confirm field | (Optional) Paste might be blocked or allowed depending on UX policy |
 | AUTH-MAN-004 | Email case sensitivity | Login with `USER@Example.com` | Should accept and treat as `user@example.com` |
+| AUTH-MAN-005 | Email Link Validation | 1. Request Reset<br>2. Check Email Inbox<br>3. Click Link | Link opens correct app page with token param, no 404 error |
+
 
 ---
 

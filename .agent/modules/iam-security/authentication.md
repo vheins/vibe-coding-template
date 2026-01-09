@@ -129,6 +129,28 @@ sequenceDiagram
     API-->>Client: 202 Accepted (If email exists)
 ```
 
+#### Reset Password Flow (Execution)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Client
+    participant API as Auth Service
+    participant DB as Database
+
+    User->>Client: Click Link from Email (with Token)
+    Client->>Client: Open Reset Password Page
+    User->>Client: Input New Password
+    Client->>API: POST /auth/reset-password
+    API->>DB: Find Token (Validate & Check Expiry)
+    alt Invalid/Expired Token
+        API-->>Client: 400 Bad Request (Error Object)
+    else Token Valid
+        API->>API: Hash New Password
+        API->>DB: Update Password & Invalidate Token
+        API-->>Client: 200 OK (Success Message)
+    end
+```
+
 ### 5.2 Business Rules
 - **Password Policy:** Minimal 8 karakter, kombinasi huruf besar, kecil, dan angka.
 - **Session Timeout:** Access Token berlaku 1 jam, Refresh Token berlaku 30 hari.
