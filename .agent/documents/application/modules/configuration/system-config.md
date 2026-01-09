@@ -21,6 +21,17 @@ Kemampuan mengubah perilaku sistem secara real-time.
     - Cek Redis Cache.
     - Jika ada, kembalikan.
     - Jika tidak, query DB -> convert type -> simpan Redis -> kembalikan.
+    
+    ```mermaid
+    flowchart TD
+        Start[Request Config] --> CheckCache{Cache Exists?}
+        CheckCache -- Yes --> ReturnCache[Return Value]
+        CheckCache -- No --> QueryDB[Query Database]
+        QueryDB --> Convert[Convert Type]
+        Convert --> SaveCache[Save to Redis]
+        SaveCache --> ReturnDB[Return Value]
+    ```
+
 2.  **Update:**
     - Update DB.
     - **Invalidate Cache:** Hapus key terkait di Redis agar fetch selanjutnya mengambil data baru.

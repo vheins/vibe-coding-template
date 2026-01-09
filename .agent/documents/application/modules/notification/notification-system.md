@@ -26,6 +26,19 @@ Mekanisme standar untuk mengirim notifikasi ke user via berbagai channel.
 3.  **Render Template:** Menggabungkan template dengan variable data.
 4.  **Queueing:** Masukkan ke antrian agar response API cepat.
 5.  **Dispatch:** Worker mengambil job dan mengirim ke 3rd party provider.
+    
+    ```mermaid
+    flowchart TD
+        Req[Request Send] --> Validate{Valid?}
+        Validate -- No --> Err[Return Error]
+        Validate -- Yes --> Pref{User Opt-in?}
+        Pref -- No --> Skip[Skip / Log]
+        Pref -- Yes --> Render[Render Template]
+        Render --> Queue[Enqueue Job]
+        Queue --> Worker[Worker Process]
+        Worker --> Provider[External Provider]
+    ```
+
 
 ### 1.4 Constraints
 - Ukuran payload maksimal 10KB.
