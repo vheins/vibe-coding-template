@@ -2,7 +2,7 @@
 
 - [Back to Module Overview](#)
 - [Link ke All Modules](../../../README.md)
-- [Link ke Scenario Testing](../../testing/notification/overview.md)
+- [Link ke Scenario Testing](../../testing/notification/test-notification.md)
 
 ---
 

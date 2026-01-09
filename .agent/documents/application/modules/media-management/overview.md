@@ -1,7 +1,7 @@
 # Ikhtisar Modul: Media Management
 
 - [Kembali ke Ikhtisar Modul](#)
-- [Link ke Semua Modul](../../../../README.md)
+- [Link ke Semua Modul](../../../README.md)
 - [Link ke Skenario Pengujian](../../../testing/media-management/test-media-management.md)
 
 ---

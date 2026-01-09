@@ -7,7 +7,7 @@
 ## Header & Navigasi
 
 - [Kembali ke Ikhtisar Modul](#)
-- [Link ke Semua Modul](../../../../README.md)
+- [Link ke Semua Modul](../../../README.md)
 - [Link ke Skenario Pengujian](../../../testing/iam-security/test-authentication.md)
 
 ---

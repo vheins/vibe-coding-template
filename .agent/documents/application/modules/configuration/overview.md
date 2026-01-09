@@ -2,7 +2,7 @@
 
 - [Back to Module Overview](#)
 - [Link ke All Modules](../../../README.md)
-- [Link ke Scenario Testing](../../testing/configuration/overview.md)
+- [Link ke Scenario Testing](../../testing/configuration/test-configuration.md)
 
 ---
 
