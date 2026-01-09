@@ -8,7 +8,7 @@
 
 - [Back to Module Overview](#)
 - [Link ke All Modules](#)
-- [Link ke Scenario Testing (jika tersedia)](#)
+- [Link ke Scenario Testing](../../testing/<module-name>/overview.md)
 
 ---
 

@@ -17,7 +17,7 @@
 ## 2. Endpoints
 
 ### 2.1 Register (Create User)
-- **URL:** `POST /users`
+- **URL:** `POST /auth/register`
 - **Description:** Mendaftarkan pengguna baru.
 - **Access Control:** Public
 
@@ -33,7 +33,7 @@ Accept: application/vnd.api+json
 ```json
 {
   "data": {
-    "type": "users",
+    "type": "auth_register",
     "attributes": {
       "email": "user@example.com",
       "password": "securePassword123",
@@ -66,8 +66,8 @@ Accept: application/vnd.api+json
 
 ---
 
-### 2.2 Login (Create Token)
-- **URL:** `POST /tokens`
+### 2.2 Login (Auth Login)
+- **URL:** `POST /auth/login`
 - **Description:** Melakukan login dan mendapatkan token akses.
 - **Access Control:** Public
 
@@ -83,7 +83,7 @@ Accept: application/vnd.api+json
 ```json
 {
   "data": {
-    "type": "tokens",
+    "type": "auth_login",
     "attributes": {
       "email": "user@example.com",
       "password": "securePassword123"
@@ -94,11 +94,11 @@ Accept: application/vnd.api+json
 
 #### Response
 
-**Success (201 Created):**
+**Success (200 OK):**
 ```json
 {
   "data": {
-    "type": "tokens",
+    "type": "auth_session",
     "id": "uuid-token-session",
     "attributes": {
       "access_token": "eyJhbG...",
@@ -107,7 +107,7 @@ Accept: application/vnd.api+json
       "token_type": "Bearer"
     },
     "links": {
-      "self": "/api/v1/tokens/uuid-token-session"
+      "self": "/api/v1/auth/session"
     }
   }
 }
@@ -116,7 +116,7 @@ Accept: application/vnd.api+json
 ---
 
 ### 2.3 Forgot Password (Request Reset)
-- **URL:** `POST /password-reset-requests`
+- **URL:** `POST /auth/forgot-password`
 - **Description:** Meminta link reset password via email.
 - **Access Control:** Public
 
@@ -132,7 +132,7 @@ Accept: application/vnd.api+json
 ```json
 {
   "data": {
-    "type": "password-reset-requests",
+    "type": "auth_forgot_password",
     "attributes": {
       "email": "user@example.com"
     }
@@ -155,7 +155,7 @@ Accept: application/vnd.api+json
 ---
 
 ### 2.4 Reset Password (Execute Reset)
-- **URL:** `POST /password-resets`
+- **URL:** `POST /auth/reset-password`
 - **Description:** Mengatur ulang password menggunakan token reset.
 - **Access Control:** Public
 
@@ -171,7 +171,7 @@ Accept: application/vnd.api+json
 ```json
 {
   "data": {
-    "type": "password-resets",
+    "type": "auth_reset_password",
     "attributes": {
       "token": "reset-token-xyz",
       "new_password": "newSecurePassword1"

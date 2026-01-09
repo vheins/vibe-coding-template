@@ -73,7 +73,7 @@ sequenceDiagram
     participant DB as Database
 
     User->>Client: Input Email & Password
-    Client->>API: POST /tokens (Login)
+    Client->>API: POST /auth/login (Login)
     API->>DB: Find User by Email
     alt User Not Found
         API-->>Client: 401 Unauthorized (Error Object)
@@ -97,7 +97,7 @@ sequenceDiagram
     participant DB as Database
 
     User->>Client: Input Registration Data
-    Client->>API: POST /users (Register)
+    Client->>API: POST /auth/register (Register)
     API->>DB: Check if Email exists
     alt Email Exists
         API-->>Client: 409 Conflict (Error Object)
@@ -119,7 +119,7 @@ sequenceDiagram
     participant Email as Email Service
 
     User->>Client: Request Password Reset (Email)
-    Client->>API: POST /password-reset-requests
+    Client->>API: POST /auth/forgot-password
     API->>DB: Find User by Email
     alt User Found
         API->>API: Generate Reset Token
@@ -127,6 +127,28 @@ sequenceDiagram
         API->>Email: Send Reset Link
     end
     API-->>Client: 202 Accepted (If email exists)
+```
+
+#### Reset Password Flow (Execution)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Client
+    participant API as Auth Service
+    participant DB as Database
+
+    User->>Client: Click Link from Email (with Token)
+    Client->>Client: Open Reset Password Page
+    User->>Client: Input New Password
+    Client->>API: POST /auth/reset-password
+    API->>DB: Find Token (Validate & Check Expiry)
+    alt Invalid/Expired Token
+        API-->>Client: 400 Bad Request (Error Object)
+    else Token Valid
+        API->>API: Hash New Password
+        API->>DB: Update Password & Invalidate Token
+        API-->>Client: 200 OK (Success Message)
+    end
 ```
 
 ### 5.2 Business Rules
@@ -184,9 +206,9 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model) untuk diagram lengkap.
 
 | Task ID | Platform | Status | Description |
 | :--- | :--- | :--- | :--- |
-| AUTH-01 | Backend | Todo | Implement `POST /users` (Register) |
+| AUTH-01 | Backend | Todo | Implement `POST /auth/register` (Register) |
 | AUTH-02 | Frontend | Todo | Implement Register Page with validation |
-| AUTH-03 | Backend | Todo | Implement `POST /tokens` (Login) |
+| AUTH-03 | Backend | Todo | Implement `POST /auth/login` (Login) |
 | AUTH-04 | Frontend | Todo | Implement Login Page with token storage |
 | AUTH-05 | Backend | Todo | Implement Password Reset Logic |
 | AUTH-06 | Frontend | Todo | Implement Forgot Password & Reset Password Pages |
