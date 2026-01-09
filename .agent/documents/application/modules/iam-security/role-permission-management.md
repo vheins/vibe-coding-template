@@ -1,61 +1,71 @@
-# Feature Specification: Role & Permission Management
+# TEMPLATE DOKUMENTASI FITUR (Feature Documentation): Role & Permission
 
-> Dokumen ini merinci logika dan spesifikasi fitur RBAC (Role-Based Access Control).
-
----
-
-## Header & Navigation
-
-- [Back to Module Overview](./overview.md)
-- [Link ke API Specification](../../api/iam-security/api-role-permission-management.md)
+> Fitur untuk mengelola Role-Based Access Control (RBAC).
 
 ---
 
-## 1. Feature Description
+## Header & Navigasi
 
-### 1.1 Description
-Mekanisme kontrol akses granular di mana hak akses (Permission) dikelompokkan ke dalam Peran (Role), dan Role diberikan kepada User.
+- [Kembali ke Ikhtisar Modul](./overview.md)
+- [Link ke Spesifikasi API](../../api/iam-security/api-role-permission-management.md)
+- [Link ke Skenario Pengujian](../../testing/iam-security/test-authentication.md)
 
-### 1.2 Business Logic
-1.  **Define Roles:** Admin membuat role (e.g., Editor, Viewer).
-2.  **Assign Permissions:** Admin memilih permission apa saja yang dimiliki Role tersebut.
-3.  **Check Access:** Middleware mengecek `User -> Roles -> Permissions` saat request masuk.
+---
 
+## 1. Ikhtisar Fitur (Feature Overview)
+
+- **Deskripsi singkat fitur:** Manajemen Roles, Permissions, dan Assignment.
+- **Peran dalam modul:** Definisi Hak Akses.
+- **Nilai bisnis:** Granular Access Control dan Fleksibilitas wewenang.
+
+---
+
+## 2. Cerita Pengguna (User Stories)
+
+| ID    | Peran (Role) | Tujuan (Goal)                 | Manfaat (Benefit)                                   |
+| :---- | :----------- | :---------------------------- | :-------------------------------------------------- |
+| US-04 | Admin        | Membuat Role baru             | Mengelompokkan hak akses pengguna                   |
+| US-05 | Admin        | Menetapkan Permission ke Role | Mengatur apa yang bisa dilakukan oleh Role tertentu |
+| US-11 | Admin        | Assign Role ke User           | Memberikan wewenang kepada user                     |
+
+---
+
+## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+
+### 3.1 Alur Bisnis
 ```mermaid
 sequenceDiagram
     participant Admin
-    participant API as IAM Service
-    participant DB as Database
+    participant API
+    participant DB
 
-    Admin->>API: POST /roles (Create Role)
+    Admin->>API: Create Role
     API->>DB: Insert Role
-    Admin->>API: PATCH /roles/{id}/permissions
-    API->>DB: Update Role_Permissions Relation
-    API-->>Admin: 204 No Content
+    Admin->>API: Assign Permissions
+    API->>DB: Update Relation
 ```
 
-### 1.3 Data Handling
-- **Super Admin:** Role spesial yang memiliki akses `*` (wildcard) atau bypass check.
-- **Immutability:** Permission code (misal `USER:CREATE`) didefinisikan di kode/seed database dan tidak dapat diubah via UI Admin.
+### 3.2 Aturan Bisnis
+- **Super Admin:** Role spesial yang tidak bisa dihapus.
+- **Immutable permissions:** Permission code didefinisikan di code.
 
 ---
 
-## 2. Technical Details
+## 4. Model Data (Data Model)
 
-### 2.1 Dependencies
-- **Database:** Tabel `roles`, `permissions`, `role_permissions`, `user_roles`.
-- **Middleware:** `AuthMiddleware` untuk intercept request dan validasi scope.
-
-### 2.2 Configuration
-- `SUPER_ADMIN_ROLE_NAME`: Nama role super admin (default: `SUPER_ADMIN`).
+- **Roles, Permissions, RolePermissions, UserRoles.**
 
 ---
 
-## 3. Implementation Tasks Summary
+## 5. Kepatuhan & Audit (Compliance & Audit)
 
-> Tugas detail telah diagregasi di `tasks/implementation-tasks.md`.
+- **Audit:** Perubahan hak akses Role adalah tindakan kritis yang wajib dicatat.
 
-- [Backend] CRUD Roles & Permissions endpoints.
-- [Backend] Implementation of Relationship endpoints (Assign Perms to Role).
-- [Frontend] Role Management UI & Permission Assignment Checkbox.
-- [Backend] Permission Seeder logic.
+---
+
+## 6. Tugas Implementasi (Implementation Tasks)
+
+| ID     | Platform | Status | Deskripsi                                                 |
+| :----- | :------- | :----- | :-------------------------------------------------------- |
+| IAM-06 | Backend  | Todo   | Implement JSON:API compliant Role & Permission endpoints. |
+| IAM-07 | Frontend | Todo   | Implement Role & Permission Management UI.                |

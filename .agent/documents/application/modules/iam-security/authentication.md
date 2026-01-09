@@ -1,28 +1,42 @@
-# Feature Specification: Authentication
+# TEMPLATE DOKUMENTASI FITUR (Feature Documentation): Authentication
 
-> Dokumen ini merinci logika dan spesifikasi fitur Authentication (Login, Register, Reset Password).
-
----
-
-## Header & Navigation
-
-- [Back to Module Overview](./overview.md)
-- [Link ke API Specification](../../api/iam-security/api-authentication.md)
+> Fitur untuk menangani verifikasi identitas pengguna (siapa mereka) dan pengelolaan sesi akses.
 
 ---
 
-## 1. Feature Description
+## Header & Navigasi
 
-### 1.1 Description
-Fitur inti untuk menangani verifikasi identitas pengguna (siapa mereka) dan pengelolaan sesi akses aman menggunakan JWT (JSON Web Token).
+- [Kembali ke Ikhtisar Modul](./overview.md)
+- [Link ke Spesifikasi API](../../api/iam-security/api-authentication.md)
+- [Link ke Skenario Pengujian](../../testing/iam-security/test-authentication.md)
 
-### 1.2 Business Logic
+---
+
+## 1. Ikhtisar Fitur (Feature Overview)
+
+- **Deskripsi singkat fitur:** Menangani Login, Register, Forgot Password, dan Token Management.
+- **Peran dalam modul:** Gerbang utama keamanan sistem.
+- **Nilai bisnis:** Mencegah akses tidak sah (Security) dan memberikan pengalaman login yang aman (UX).
+
+---
+
+## 2. Cerita Pengguna (User Stories)
+
+| ID    | Peran (Role) | Tujuan (Goal)              | Manfaat (Benefit)                         |
+| :---- | :----------- | :------------------------- | :---------------------------------------- |
+| US-01 | Guest        | Mendaftar akun baru        | Dapat mengakses fitur sistem              |
+| US-02 | Guest        | Melakukan login            | Mendapatkan akses ke akun pribadi         |
+| US-03 | Guest        | Mereset password yang lupa | Memulihkan akses ke akun                  |
+| US-07 | User         | Melakukan logout           | Mengamankan akun saat selesai menggunakan |
+| US-08 | User         | Refresh Token              | Memperpanjang sesi tanpa login ulang      |
+
+---
+
+## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+
+### 3.1 Alur Bisnis
 
 #### Login Flow
-1. User input credential (Email/Password).
-2. API verifikasi password hash (Bcrypt/Argon2).
-3. Jika valid, return Access Token (1 jam) & Refresh Token (30 hari).
-
 ```mermaid
 sequenceDiagram
     participant User
@@ -31,45 +45,41 @@ sequenceDiagram
 
     User->>API: POST /auth/login
     API->>DB: Find User
-    alt Invalid Creds
+    alt Invalid
         API-->>User: 401 Unauthorized
     else Valid
         API->>API: Verify Hash
         API->>API: Generate Tokens
-        API-->>User: 200 OK (Tokens)
+        API-->>User: 200 OK
     end
 ```
 
-#### Register Flow
-1. Cek ketersediaan Email.
-2. Validate Password policy.
-3. Hash password -> Simpan User -> Return 201.
-
-### 1.3 Data Handling
-- **Password Policy:** Min 8 chars, 1 Uppercase, 1 Lowercase, 1 Number.
-- **Hashing:** Password **WAJIB** di-hash sebelum disimpan.
-- **Tokens:** Disimpan di client side (HttpOnly Cookie recommended atau Secure Storage).
+### 3.2 Aturan Bisnis
+- **Unique Email:** Setiap pengguna harus memiliki email yang unik.
+- **Strong Password:** Minimal 8 karakter, huruf besar, kecil, dan angka.
+- **Token Expiry:** Access Token (1 jam), Refresh Token (30 hari).
 
 ---
 
-## 2. Technical Details
+## 4. Model Data (Data Model)
 
-### 2.1 Dependencies
-- **Email Service:** Untuk mengirim link 'Forgot Password'.
-- **Crypto Library:** Bcrypt / Argon2.
+- **Users:** Menyimpan Email dan Password Hash.
+- **Tokens:** Menyimpan Refresh Token dan Reset Token.
 
-### 2.2 Configuration
-- `JWT_SECRET`: Kunci rahasia signing token.
-- `ACCESS_TOKEN_TTL`: Durasi token (default 60m).
-- `REFRESH_TOKEN_TTL`: Durasi refresh (default 30d).
+*(Lihat ERD lengkap di Module Overview jika diperlukan)*
 
 ---
 
-## 3. Implementation Tasks Summary
+## 5. Kepatuhan & Audit (Compliance & Audit)
 
-> Tugas detail telah diagregasi di `tasks/implementation-tasks.md`.
+- **Encryption:** Password wajib di-hash (Bcrypt/Argon2).
+- **Audit:** Mencatat setiap upaya login (sukses/gagal) dan IP Address.
 
-- [Backend] Implement Login, Register, Refresh Token endpoints.
-- [Frontend] Implement Login & Register Pages.
-- [Backend] Implement Forgot/Reset Password flow.
-- [Frontend] Implement Reset Password UI.
+---
+
+## 6. Tugas Implementasi (Implementation Tasks)
+
+| ID     | Platform | Status | Deskripsi                                         |
+| :----- | :------- | :----- | :------------------------------------------------ |
+| IAM-02 | Backend  | Todo   | Implement JSON:API Authentication endpoints.      |
+| IAM-03 | Frontend | Todo   | Implement Login, Register, Forgot Password Pages. |
