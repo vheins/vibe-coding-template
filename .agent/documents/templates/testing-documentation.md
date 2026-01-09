@@ -15,7 +15,7 @@
 
 - **Module Name:**
 - **Scope of Testing:** (Unit, Integration, E2E, Security, Performance, Monkey Testing)
-- **Test Tools:** (Jest, Supertest, Playwright, k6, etc.)
+
 
 ---
 

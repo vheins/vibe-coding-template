@@ -16,7 +16,7 @@
 
 - **Module Name:** IAM & Security - Authentication
 - **Scope of Testing:** Unit Testing (Services), Integration Testing (API Endpoints), E2E (Login/Register Flows), Security Testing, Monkey Testing.
-- **Test Tools:** Jest (Unit/Integration), Supertest (API), Playwright (E2E), Faker.js/Gremlins.js (Monkey).
+
 
 ---
 

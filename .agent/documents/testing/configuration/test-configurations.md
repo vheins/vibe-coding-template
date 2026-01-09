@@ -15,7 +15,7 @@
 
 - **Module Name:** Configuration System
 - **Scope of Testing:** CRUD Configuration, Caching mechanism, Public access control.
-- **Test Tools:** Jest, Supertest, Redis Mock.
+
 
 ---
 

@@ -15,7 +15,7 @@
 
 - **Module Name:** Notification System
 - **Scope of Testing:** Sending notifications (Email, Push), Template rendering, Queue processing.
-- **Test Tools:** Jest, Supertest, Queue Mock.
+
 
 ---
 

@@ -16,7 +16,7 @@
 
 - **Module Name:** IAM & Security - Role & Permission Management
 - **Scope of Testing:** Role creation, Permission assignment, RBAC enforcement, Monkey Testing.
-- **Test Tools:** Jest, Supertest, Gremlins.js (optional).
+
 
 ---
 
