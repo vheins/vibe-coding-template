@@ -97,7 +97,7 @@ sequenceDiagram
     participant DB as Database
 
     User->>Client: Input Registration Data
-    Client->>API: POST /users (Register)
+    Client->>API: POST /auth/register (Register)
     API->>DB: Check if Email exists
     alt Email Exists
         API-->>Client: 409 Conflict (Error Object)
@@ -184,7 +184,7 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model) untuk diagram lengkap.
 
 | Task ID | Platform | Status | Description |
 | :--- | :--- | :--- | :--- |
-| AUTH-01 | Backend | Todo | Implement `POST /users` (Register) |
+| AUTH-01 | Backend | Todo | Implement `POST /auth/register` (Register) |
 | AUTH-02 | Frontend | Todo | Implement Register Page with validation |
 | AUTH-03 | Backend | Todo | Implement `POST /auth/login` (Login) |
 | AUTH-04 | Frontend | Todo | Implement Login Page with token storage |

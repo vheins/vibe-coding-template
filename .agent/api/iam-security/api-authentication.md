@@ -17,7 +17,7 @@
 ## 2. Endpoints
 
 ### 2.1 Register (Create User)
-- **URL:** `POST /users`
+- **URL:** `POST /auth/register`
 - **Description:** Mendaftarkan pengguna baru.
 - **Access Control:** Public
 
@@ -33,7 +33,7 @@ Accept: application/vnd.api+json
 ```json
 {
   "data": {
-    "type": "users",
+    "type": "auth_register",
     "attributes": {
       "email": "user@example.com",
       "password": "securePassword123",

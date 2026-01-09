@@ -32,7 +32,7 @@
 ### 2.2 Integration Testing
 - **API Endpoints:**
   - `POST /auth/login` (Login)
-  - `POST /users` (Register)
+  - `POST /auth/register` (Register)
   - `POST /password-reset-requests` (Forgot Password)
 - **Database Interactions:**
   - Verify user creation
@@ -56,7 +56,7 @@
 | AUTH-API-003 | Login with non-existent email | - | Unregistered Email, Any Password | 401 Unauthorized (Generic Message) | High |
 | AUTH-API-004 | Login with missing fields | - | Empty Email or Password | 400 Bad Request (Validation Error) | Medium |
 
-### 3.2 Register (POST /users)
+### 3.2 Register (POST /auth/register)
 
 | ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
 | :--- | :--- | :--- | :--- | :--- | :--- |
