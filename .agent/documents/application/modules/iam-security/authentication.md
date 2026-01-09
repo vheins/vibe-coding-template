@@ -1,4 +1,4 @@
-# TEMPLATE DOKUMENTASI FITUR (Feature Documentation): Authentication
+# Authentication
 
 > Fitur untuk menangani verifikasi identitas pengguna (siapa mereka) dan pengelolaan sesi akses.
 

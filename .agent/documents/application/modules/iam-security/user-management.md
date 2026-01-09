@@ -1,4 +1,4 @@
-# TEMPLATE DOKUMENTASI FITUR (Feature Documentation): User Management
+# User Management
 
 > Fitur administratif untuk mengelola daur hidup dan data pengguna.
 

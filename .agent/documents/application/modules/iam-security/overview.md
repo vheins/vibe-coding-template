@@ -1,4 +1,4 @@
-# TEMPLATE IKHTISAR MODUL (Module Overview): IAM & Security
+# Ikhtisar Modul: IAM & Security
 
 > Modul fondasi untuk identitas, otentikasi, dan otorisasi.
 

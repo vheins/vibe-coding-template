@@ -1,4 +1,4 @@
-# TEMPLATE DOKUMENTASI FITUR (Feature Documentation): Role & Permission
+# Role & Permission Management
 
 > Fitur untuk mengelola Role-Based Access Control (RBAC).
 
