@@ -87,62 +87,12 @@ Daftar kebutuhan berbasis role.
 
 ---
 
-## 7. Feature Details (API Specification)
+## 7. API Specification
 
-**Strict Rule:** All API endpoints must strictly follow the **JSON:API** standard (https://jsonapi.org).
-- **Content-Type:** `application/vnd.api+json`
-- **Top-level members:** `data`, `errors`, `meta`, `links`, `included`.
-- **Resource Object:** Must contain `type`, `id` (for existing resources), and `attributes`.
+> Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri untuk menjaga kebersihan dokumen ini.
+> Silakan rujuk ke file API Specification terkait.
 
-### 7.1 Feature Summary
-- Ringkasan fitur utama
-- Prioritas
-
-### 7.2 API Endpoints
-
-#### [Method] [Endpoint URL]
-- **Description:** ...
-- **Request Headers:**
-  - `Content-Type: application/vnd.api+json`
-  - `Accept: application/vnd.api+json`
-- **Request Body:**
-  ```json
-  {
-    "data": {
-      "type": "resource_type",
-      "attributes": {
-        "field_name": "value"
-      },
-      "relationships": { ... }
-    }
-  }
-  ```
-- **Response (Success - 2xx):**
-  ```json
-  {
-    "data": {
-      "type": "resource_type",
-      "id": "uuid",
-      "attributes": { ... },
-      "links": {
-        "self": "http://example.com/resource/uuid"
-      }
-    }
-  }
-  ```
-- **Response (Error - 4xx/5xx):**
-  ```json
-  {
-    "errors": [
-      {
-        "status": "422",
-        "source": { "pointer": "/data/attributes/field_name" },
-        "title": "Invalid Attribute",
-        "detail": "Description of the error"
-      }
-    ]
-  }
-  ```
+- [Link ke API Specification](#)
 
 ---
 
