@@ -102,11 +102,15 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model).
 
 ## 7. Feature Details (API Specification)
 
-Semua endpoint mengikuti standar **JSON:API**.
+**Strict Rule:** All API endpoints must strictly follow the **JSON:API** standard (https://jsonapi.org).
+- **Content-Type:** `application/vnd.api+json`
+- **Top-level members:** `data`, `errors`, `meta`, `links`, `included`.
 
 ### 7.1 List Users
 - **Endpoint:** `GET /api/v1/users`
 - **Query Params:** `page[number]=1`, `page[size]=10`, `filter[search]=John`
+- **Request Headers:**
+  - `Accept: application/vnd.api+json`
 - **Response:**
   ```json
   {
@@ -138,6 +142,8 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ### 7.2 Get Single User
 - **Endpoint:** `GET /api/v1/users/:id`
+- **Request Headers:**
+  - `Accept: application/vnd.api+json`
 - **Response:**
   ```json
   {
@@ -158,7 +164,9 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ### 7.3 Update User
 - **Endpoint:** `PATCH /api/v1/users/:id`
-- **Request:**
+- **Request Headers:**
+  - `Content-Type: application/vnd.api+json`
+- **Request Body:**
   ```json
   {
     "data": {
@@ -191,6 +199,8 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ### 7.4 Delete User
 - **Endpoint:** `DELETE /api/v1/users/:id`
+- **Request Headers:**
+  - `Accept: application/vnd.api+json`
 - **Response:** `204 No Content`
 
 ---

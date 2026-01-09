@@ -148,11 +148,15 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model) untuk diagram lengkap.
 
 ## 7. Feature Details (API Specification)
 
-Semua endpoint mengikuti standar **JSON:API**.
+**Strict Rule:** All API endpoints must strictly follow the **JSON:API** standard (https://jsonapi.org).
+- **Content-Type:** `application/vnd.api+json`
+- **Top-level members:** `data`, `errors`, `meta`, `links`, `included`.
 
 ### 7.1 Register (Create User)
 - **Endpoint:** `POST /api/v1/users`
-- **Request:**
+- **Request Headers:**
+  - `Content-Type: application/vnd.api+json`
+- **Request Body:**
   ```json
   {
     "data": {
@@ -186,7 +190,9 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ### 7.2 Login (Create Token)
 - **Endpoint:** `POST /api/v1/tokens`
-- **Request:**
+- **Request Headers:**
+  - `Content-Type: application/vnd.api+json`
+- **Request Body:**
   ```json
   {
     "data": {
@@ -209,6 +215,9 @@ Semua endpoint mengikuti standar **JSON:API**.
         "refresh_token": "eyJhbG...",
         "expires_in": 3600,
         "token_type": "Bearer"
+      },
+      "links": {
+        "self": "/api/v1/tokens/uuid-token-session"
       }
     }
   }
@@ -216,7 +225,9 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ### 7.3 Forgot Password (Request Reset)
 - **Endpoint:** `POST /api/v1/password-reset-requests`
-- **Request:**
+- **Request Headers:**
+  - `Content-Type: application/vnd.api+json`
+- **Request Body:**
   ```json
   {
     "data": {
@@ -232,13 +243,16 @@ Semua endpoint mengikuti standar **JSON:API**.
   {
     "meta": {
       "message": "If the email exists, a reset link has been sent."
-    }
+    },
+    "data": null
   }
   ```
 
 ### 7.4 Reset Password (Execute Reset)
 - **Endpoint:** `POST /api/v1/password-resets`
-- **Request:**
+- **Request Headers:**
+  - `Content-Type: application/vnd.api+json`
+- **Request Body:**
   ```json
   {
     "data": {
@@ -255,7 +269,8 @@ Semua endpoint mengikuti standar **JSON:API**.
   {
      "meta": {
         "message": "Password updated successfully."
-     }
+     },
+     "data": null
   }
   ```
 

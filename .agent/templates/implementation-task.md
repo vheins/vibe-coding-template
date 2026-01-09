@@ -11,7 +11,7 @@
 
 - Jam kerja efektif per hari
 - Parallel work strategy
-- API / contract-first approach
+- API / contract-first approach (Must follow JSON:API strict standard)
 - Buffer time (%)
 
 ---
