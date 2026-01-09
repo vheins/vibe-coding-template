@@ -60,6 +60,8 @@
  ## 5. Alur & Aturan Bisnis (Business Flow & Rules)
  
  ### 5.1 Alur Bisnis (Business Flow)
+ > Jika alur sangat kompleks, pisahkan ke dokumen Feature Specification (gunakan `templates/feature-specification.md`) dan link di sini.
+
  - **Wajib:** Sertakan diagram alur menggunakan Mermaid (Sequence/Flowchart).
  - Siklus hidup proses
  

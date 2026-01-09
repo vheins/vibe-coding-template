@@ -56,6 +56,8 @@
 
 ### 5.1 Alur Bisnis (Business Flow)
 
+ > Lihat detail alur teknis di [Job Processing Spec](./job-processing.md).
+
 #### Job Processing Flow
 
 ```mermaid
