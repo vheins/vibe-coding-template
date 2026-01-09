@@ -98,11 +98,15 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model).
 
 ## 7. Feature Details (API Specification)
 
-Semua endpoint mengikuti standar **JSON:API**.
+**Strict Rule:** All API endpoints must strictly follow the **JSON:API** standard (https://jsonapi.org).
+- **Content-Type:** `application/vnd.api+json`
+- **Top-level members:** `data`, `errors`, `meta`, `links`, `included`.
 
 ### 7.1 Create Role
 - **Endpoint:** `POST /api/v1/roles`
-- **Request:**
+- **Request Headers:**
+  - `Content-Type: application/vnd.api+json`
+- **Request Body:**
   ```json
   {
     "data": {
@@ -133,6 +137,8 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ### 7.2 List Roles
 - **Endpoint:** `GET /api/v1/roles`
+- **Request Headers:**
+  - `Accept: application/vnd.api+json`
 - **Response:**
   ```json
   {
@@ -143,14 +149,22 @@ Semua endpoint mengikuti standar **JSON:API**.
         "attributes": {
           "name": "EDITOR",
           "description": "Can edit content"
+        },
+        "links": {
+            "self": "/api/v1/roles/role-uuid-1"
         }
       }
-    ]
+    ],
+    "links": {
+        "self": "/api/v1/roles"
+    }
   }
   ```
 
 ### 7.3 List Permissions
 - **Endpoint:** `GET /api/v1/permissions`
+- **Request Headers:**
+  - `Accept: application/vnd.api+json`
 - **Response:**
   ```json
   {
@@ -161,15 +175,23 @@ Semua endpoint mengikuti standar **JSON:API**.
         "attributes": {
           "code": "ARTICLE:CREATE",
           "description": "Can create articles"
+        },
+        "links": {
+            "self": "/api/v1/permissions/perm-uuid-1"
         }
       }
-    ]
+    ],
+    "links": {
+        "self": "/api/v1/permissions"
+    }
   }
   ```
 
 ### 7.4 Assign Permissions to Role (Update Relationship)
 - **Endpoint:** `PATCH /api/v1/roles/:id/relationships/permissions`
-- **Request:**
+- **Request Headers:**
+  - `Content-Type: application/vnd.api+json`
+- **Request Body:**
   ```json
   {
     "data": [
@@ -182,7 +204,9 @@ Semua endpoint mengikuti standar **JSON:API**.
 
 ### 7.5 Assign Roles to User (Update Relationship)
 - **Endpoint:** `PATCH /api/v1/users/:id/relationships/roles`
-- **Request:**
+- **Request Headers:**
+  - `Content-Type: application/vnd.api+json`
+- **Request Body:**
   ```json
   {
     "data": [
