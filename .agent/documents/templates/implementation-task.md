@@ -1,43 +1,33 @@
-# Implementation Tasks — <PROJECT NAME> (GitHub Project Format)
+# Daftar Tugas Implementasi (Implementation Tasks)
 
-## Overview
-
-- **Project:** <Project Name>
-- **Duration:** <X Bulan / Minggu>
-- **Timeline:** <Start Date> — <End Date>
-- **Team:** <Backend / Frontend / Mobile / Others>
-
-### Working Principles
-
-- Jam kerja efektif per hari
-- Parallel work strategy
-- API / contract-first approach (Must follow JSON:API strict standard)
-- Buffer time (%)
+> Gunakan dokumen ini sebagai backlog utama pengembangan proyek.
 
 ---
 
-## Sprint <N>: <Sprint Name> (<Start Date> — <End Date>)
+## Modul: [Nama Modul] (`slug-modul`)
 
-### Backend Tasks
+**Deskripsi:** [Deskripsi singkat modul]
 
-| Task ID | Module | Priority | Difficulty | Sprint | Reference | Estimate (Hours) | Start Date | End Date | Description | DoD |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| | | | | | | | | | | |
+**Dokumentasi:**
+- [Overview](../application/modules/<slug>/overview.md)
+- [API Spec](../application/api/<slug>/api-<slug>.md)
+- [Testing](../application/testing/<slug>/test-<slug>.md)
 
-### Frontend Tasks
-
-| Task ID | Module | Priority | Difficulty | Sprint | Reference | Estimate (Hours) | Start Date | End Date | Description | DoD |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| | | | | | | | | | | |
-
-### Mobile Tasks
-
-| Task ID | Module | Priority | Difficulty | Sprint | Reference | Estimate (Hours) | Start Date | End Date | Description | DoD |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| | | | | | | | | | | |
+| ID Tugas | Platform | Status | Deskripsi | Estimasi | Referensi |
+| :------- | :------- | :----- | :-------- | :------- | :-------- |
+| MOD-01   | Backend  | Todo   | ...       | 2 Jam    | [US-01]   |
+| MOD-02   | Frontend | Todo   | ...       | 4 Jam    | [US-01]   |
 
 ---
 
-## Sprint <N+1>: <Sprint Name> (<Start Date> — <End Date>)
+## Sprint Planning (Opsional)
 
-> Ulangi struktur Backend / Frontend / Mobile
+Jika menggunakan metodologi Sprint, Anda dapat mengelompokkan tugas di atas ke dalam sprint berikut:
+
+### Sprint <N>: <Nama Sprint> (<Tanggal Mulai> — <Tanggal Selesai>)
+
+| Task ID | Module | Priority | Status      | Assignee    |
+| :------ | :----- | :------- | :---------- | :---------- |
+| MOD-01  | Login  | High     | In Progress | Backend Dev |
+
+---
