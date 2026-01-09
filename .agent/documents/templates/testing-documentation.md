@@ -7,7 +7,7 @@
  ## Header & Navigasi
  
  - [Kembali ke Ikhtisar Modul](../../modules/<module-name>/overview.md)
- - [Link ke Spesifikasi API](../../api/<module-name>/)
+ - [Link ke Spesifikasi API](../../api/<module-name>/api-<module-name>.md)
  
  ---
  

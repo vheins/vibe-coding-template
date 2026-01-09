@@ -6,8 +6,8 @@
 
 ## Header & Navigasi
 
-- [Kembali ke Ikhtisar Modul](../../modules/media-management/overview.md)
-- [Link ke Spesifikasi API](../../api/media-management/api-media-management.md)
+- [Kembali ke Ikhtisar Modul](../../../modules/media-management/overview.md)
+- [Link ke Spesifikasi API](../../../api/media-management/api-media-management.md)
 
 ---
 

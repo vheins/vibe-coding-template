@@ -1,13 +1,4 @@
-# Spesifikasi API: Media Management
-
-> Dokumen ini berisi spesifikasi teknis API untuk fitur Media & File Management.
-
----
-
-## 1. Standar Global
-
-- **Base URL:** `/api/v1/media`
-- **Content-Type:** `multipart/form-data` (untuk upload), `application/json` (lainnya).
+- [Kembali ke Ikhtisar Modul](../../../modules/media-management/overview.md)
 
 ---
 

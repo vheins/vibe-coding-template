@@ -7,8 +7,8 @@
  ## Header & Navigasi
  
  - [Kembali ke Ikhtisar Modul](#)
- - [Link ke Semua Modul](#)
- - [Link ke Skenario Pengujian](../../testing/<module-name>/overview.md)
+ - [Link ke Semua Modul](../../../../README.md)
+ - [Link ke Skenario Pengujian](../../testing/<module-name>/test-<module-name>.md)
  
  ---
  
@@ -92,7 +92,7 @@
  > Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri di folder `.agent/api/<module-name>/`.
  > Silakan rujuk ke file Spesifikasi API terkait.
  
- - [Link ke Spesifikasi API](../../api/<module-name>/api-<feature>.md)
+ - [Link ke Spesifikasi API](../../api/<module-name>/api-<module-name>.md)
  
  ---
  

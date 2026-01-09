@@ -1,17 +1,18 @@
-# IAM & Security Module Overview
+# Ikhtisar Modul: IAM & Security
 
 > Dokumen ini memberikan gambaran umum untuk modul Identity and Access Management (IAM) & Security.
 
 ---
 
-## Header & Navigation
+## Header & Navigasi
 
-- [Back to Module Overview](../../../README.md)
-- [Link ke All Modules](../../../README.md)
+- [Kembali ke Ikhtisar Modul](#)
+- [Link ke Semua Modul](../../../../README.md)
+- [Link ke Skenario Pengujian](../../../testing/iam-security/test-authentication.md)
 
 ---
 
-## 1. Module Overview
+## 1. Ikhtisar Modul (Module Overview)
 
 - **Deskripsi singkat modul:** Modul IAM & Security bertanggung jawab atas manajemen identitas pengguna, otentikasi (verifikasi identitas), dan otorisasi (hak akses) dalam sistem.
 - **Posisi modul dalam sistem:** Core Module. Modul ini menjadi fondasi keamanan bagi modul-modul lain.
@@ -19,7 +20,7 @@
 
 ---
 
-## 2. Purpose & Business Value
+## 2. Tujuan & Nilai Bisnis (Purpose & Business Value)
 
 ### 2.1 Tanggung Jawab Utama
 - Mengelola data pengguna, peran, dan hak akses.
@@ -27,30 +28,30 @@
 - Menyediakan mekanisme otentikasi (Token-based) untuk modul lain.
 
 ### 2.2 Nilai Bisnis
-- **Compliance:** Memenuhi standar keamanan data dan privasi pengguna (misal: GDPR/PDP).
-- **Risk reduction:** Mencegah akses tidak sah yang berpotensi merugikan bisnis.
-- **Operational efficiency:** Sentralisasi manajemen akses memudahkan administrasi.
-- **Data accuracy:** Memastikan integritas data identitas pengguna.
-- **Strategic enablement:** Memungkinkan implementasi fitur berbasis peran (RBAC) di seluruh sistem.
+- **Kepatuhan (Compliance):** Memenuhi standar keamanan data dan privasi pengguna (misal: GDPR/PDP).
+- **Pengurangan Risiko (Risk reduction):** Mencegah akses tidak sah yang berpotensi merugikan bisnis.
+- **Efisiensi Operasional (Operational efficiency):** Sentralisasi manajemen akses memudahkan administrasi.
+- **Akurasi Data (Data accuracy):** Memastikan integritas data identitas pengguna.
+- **Pemberdayaan Strategis (Strategic enablement):** Memungkinkan implementasi fitur berbasis peran (RBAC) di seluruh sistem.
 
 ---
 
-## 3. Scope
+## 3. Lingkup (Scope)
 
-### 3.1 In-Scope
+### 3.1 Dalam Lingkup (In-Scope)
 - **Authentication:** Login, Register, Forgot/Reset Password, Logout, Refresh Token.
 - **User Management:** CRUD Users, Activation/Deactivation.
 - **Role & Permission:** CRUD Roles, Permission Assignment, Role Assignment.
 - **Security:** Password Hashing, JWT Token Generation & Validation.
 
-### 3.2 Out-of-Scope
+### 3.2 Di Luar Lingkup (Out-of-Scope)
 - **Profile Management:** Detail profil pengguna (alamat, bio, dll) mungkin ditangani modul User Profile terpisah, namun data akun dasar ada di sini.
 - **Third-party OAuth (MVP):** Login via Google/Facebook (fase selanjutnya).
 - **MFA (Multi-Factor Authentication):** Belum termasuk dalam scope MVP.
 
 ---
 
-## 4. User Stories
+## 4. Cerita Pengguna (User Stories)
 
 Daftar kebutuhan berbasis role.
 
@@ -70,9 +71,9 @@ Daftar kebutuhan berbasis role.
 
 ---
 
-## 5. Business Flow & Rules
+## 5. Alur & Aturan Bisnis (Business Flow & Rules)
 
-### 5.1 Business Flow
+### 5.1 Alur Bisnis (Business Flow)
 Berikut adalah diagram konteks level tinggi untuk modul IAM. Untuk detail alur (Login, Register, dsb), lihat spesifikasi masing-masing fitur.
 
 ```mermaid
@@ -94,9 +95,9 @@ Detail Flows:
 - [User Management Flows](./user-management.md#2-business-flow)
 - [Role Assignment Flows](./role-permission-management.md#2-business-flow)
 
-### 5.2 Business Rules & Functional Requirements
+### 5.2 Aturan Bisnis
 
-#### 5.2.1 Domain Rules
+#### 5.2.1 Aturan Domain
 - **Unique Email:** Setiap pengguna harus memiliki email yang unik.
 - **Strong Password:** Password minimal 8 karakter, mengandung huruf besar, kecil, dan angka.
 - **Token Expiry:** Access token berlaku 1 jam, Refresh token berlaku 30 hari.
@@ -106,7 +107,7 @@ Detail Flows:
 
 ---
 
-## 6. Data Model
+## 6. Model Data (Data Model)
 
 ### 6.1 Entity Relationship Diagram (ERD)
 
@@ -159,7 +160,7 @@ erDiagram
     USERS ||--|{ TOKENS : owns
 ```
 
-### 6.2 Entity Definition
+### 6.2 Definisi Entitas
 - **Users:** Entitas utama pengguna.
 - **Roles:** Definisi peran (e.g., Admin, Editor, Viewer).
 - **Permissions:** Granular access control (e.g., `ARTICLE:CREATE`).
@@ -167,139 +168,65 @@ erDiagram
 
 ---
 
-## 7. Feature List
+## 7. Spesifikasi API (API Specification)
 
-### 7.1 Feature Summary
-- **Authentication:** Login, Register, Logout, Password Recovery.
-- **User Administration:** Manage users status and details.
-- **RBAC:** Role-Based Access Control management.
+> Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri.
 
-### 7.2 Feature Details
-Silakan merujuk ke dokumen spesifikasi detail berikut:
-- **[Authentication Specification](./authentication.md)**
-- **[User Management Specification](./user-management.md)**
-- **[Role & Permission Management Specification](./role-permission-management.md)**
+- [Link ke Spesifikasi API](../../../api/iam-security/api-authentication.md)
 
 ---
 
-## 8. Dependencies
+## 8. Ketergantungan (Dependencies)
 
-### 8.1 Required Modules
+### 8.1 Modul yang Dibutuhkan
 - **Database Module:** Koneksi ke database (PostgreSQL direkomendasikan).
 - **Email Service:** Diperlukan untuk mengirim email verifikasi dan reset password.
 
-### 8.2 Optional Modules
+### 8.2 Modul Opsional
 - **Notification Service:** Jika ingin mengirim notifikasi login via SMS/WA.
 
-### 8.3 Data Dependencies
-- **Data inbound:** User input (Email, Password).
-- **Referenced entities:** None (IAM is foundational).
+### 8.3 Ketergantungan Data
+- **Masukan Data (Data inbound):** User input (Email, Password).
+- **Entitas yang direferensikan:** None (IAM is foundational).
 
 ---
 
-## 9. Integration Points
+## 9. Titik Integrasi (Integration Points)
 
-### 9.1 Inbound Integration
-- **Source module:** Semua modul yang membutuhkan otentikasi.
+### 9.1 Integrasi Masuk
+- **Modul Sumber:** Semua modul yang membutuhkan otentikasi.
 - **Data:** Bearer Token (JWT).
-- **Integration pattern:** Synchronous HTTP Call (Middleware Validation).
+- **Pola Integrasi:** Synchronous HTTP Call (Middleware Validation).
 
-### 9.2 Outbound Integration
-- **Target module:** Email Service.
-- **Data exposed:** User Email, Token Link.
+### 9.2 Integrasi Keluar
+- **Modul Target:** Email Service.
+- **Data yang diekspos:** User Email, Token Link.
 
-### 9.3 Published Events
-- **Event name:** `USER_CREATED`
-- **Trigger:** Pendaftaran sukses.
+### 9.3 Event yang Diterbitkan
+- **Nama Event:** `USER_CREATED`
+- **Pemicu:** Pendaftaran sukses.
 - **Payload:** `{ "user_id": "...", "email": "..." }`
-- **Subscribers:** User Profile Module, Analytics.
+- **Subscriber:** User Profile Module, Analytics.
 
 ---
 
-## 10. Compliance & Audit
+## 10. Kepatuhan & Audit
 
-### 10.1 Regulatory Compliance
-- **GDPR/PDP:** Data password harus di-hash (Bcrypt/Argon2). Data pribadi harus bisa dihapus (Right to be forgotten).
-
-### 10.2 Data Retention & Archiving
-- **Retention period:** Data user disimpan selama akun aktif.
-- **Deletion:** Soft delete untuk menjaga referensi history, hard delete jika diminta user (sesuai regulasi).
-
-### 10.3 Audit Trail Requirements
+### 10.1 Kebutuhan Jejak Audit
 - **Audited fields:** Login attempts, Password changes, Role changes.
 - **Actor:** User ID or IP Address.
 - **Timestamp:** UTC.
 
 ---
 
-## 11. Data Ownership & Lifecycle
+## 11. Tugas Implementasi (Implementation Tasks)
 
-### 11.1 Entity Ownership
-- **Owner:** IAM Team / Security Admin.
-- **Read / Write permission:** User can read/write own data. Admin can read/write all.
-
-### 11.2 Lifecycle Status
-- **Status list:** `PENDING_VERIFICATION`, `ACTIVE`, `SUSPENDED`, `DELETED`.
-- **Transition diagram:** `PENDING` -> `ACTIVE` -> `SUSPENDED` -> `ACTIVE`.
-
-### 11.3 Status Transition Rules
-- **Trigger:** Admin action or Email Verification.
-- **Validation:** Cannot suspend Super Admin.
-
-### 11.4 Data Update Permissions
-- **Role vs Field matrix:**
-  - **User:** Can update `full_name`, `password`.
-  - **Admin:** Can update `status`, `roles`.
-
----
-
-## 12. Extensibility Notes
-
-### 12.1 Configuration & Customization
-- **JWT Secret:** Configurable via Environment Variable.
-- **Token Expiry:** Configurable.
-
-### 12.2 Future Enhancements
-- SSO (Single Sign-On).
-- MFA (Google Authenticator).
-
-### 12.3 Integration Extensibility
-- Custom Auth Providers (LDAP).
-
-### 12.4 Localization & Multi-Region Support
-- Error messages support i18n.
-
----
-
-## 13. Mandatory Invariants
-- `email` must always be unique in active users.
-- A user must have at least one role (default: `USER`).
-- Password hash must never be returned in API response.
-
----
-
-## 14. UI/UX Requirements
-
-### 14.1 Web / Admin
-- Login Page: Simple, fast.
-- User Table: Filterable, sortable.
-- Role Manager: Drag and drop permission assignment (nice to have).
-
-### 14.2 Mobile (if applicable)
-- Biometric Login (future).
-
----
-
-## 15. Implementation Tasks
-
-**Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
-
-| Task ID | Platform | Status | Description                                                       |
-| :------ | :------- | :----- | :---------------------------------------------------------------- |
-| IAM-01  | Backend  | Todo   | Setup database schema (Users, Roles, Permissions).                |
-| IAM-02  | Backend  | Todo   | Implement JSON:API compliant Authentication endpoints.            |
-| IAM-03  | Frontend | Todo   | Implement Login, Register, Forgot Password Pages.                 |
-| IAM-04  | Backend  | Todo   | Implement JSON:API compliant User Management endpoints.           |
-| IAM-05  | Frontend | Todo   | Implement User Management Dashboard (List, Create, Edit, Delete). |
-| IAM-06  | Backend  | Todo   | Implement JSON:API compliant Role & Permission endpoints.         |
-| IAM-07  | Frontend | Todo   | Implement Role & Permission Management UI.                        |
+| ID Tugas | Platform | Status | Deskripsi                                                         |
+| :------- | :------- | :----- | :---------------------------------------------------------------- |
+| IAM-01   | Backend  | Todo   | Setup database schema (Users, Roles, Permissions).                |
+| IAM-02   | Backend  | Todo   | Implement JSON:API compliant Authentication endpoints.            |
+| IAM-03   | Frontend | Todo   | Implement Login, Register, Forgot Password Pages.                 |
+| IAM-04   | Backend  | Todo   | Implement JSON:API compliant User Management endpoints.           |
+| IAM-05   | Frontend | Todo   | Implement User Management Dashboard (List, Create, Edit, Delete). |
+| IAM-06   | Backend  | Todo   | Implement JSON:API compliant Role & Permission endpoints.         |
+| IAM-07   | Frontend | Todo   | Implement Role & Permission Management UI.                        |
