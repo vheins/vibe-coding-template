@@ -34,19 +34,44 @@
 
 ---
 
-## 3. Test Scenarios
+## 3. Test Scenarios (Backend / API)
 
 ### 3.1 Roles & Permissions
 
 | ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| RBAC-TC-001 | Create new role | Admin Token | Role Name: "Editor" | 201 Created | High |
-| RBAC-TC-002 | Assign permission to role | Admin Token | Role ID, Permission ID | 200 OK | High |
-| RBAC-TC-003 | Access endpoint with correct role | User has Role | - | 200 OK / Success | High |
-| RBAC-TC-004 | Access endpoint without correct role | User lacks Role | - | 403 Forbidden | High |
+| RBAC-API-001 | Create new role | Admin Token | Role Name: "Editor" | 201 Created | High |
+| RBAC-API-002 | Assign permission to role | Admin Token | Role ID, Permission ID | 200 OK | High |
+| RBAC-API-003 | Access endpoint with correct role | User has Role | - | 200 OK / Success | High |
+| RBAC-API-004 | Access endpoint without correct role | User lacks Role | - | 403 Forbidden | High |
 
 ---
 
-## 4. Security Testing
+## 4. Frontend Testing Scenarios
+
+### 4.1 Component / Unit Testing
+
+| ID | Component | Test Case | Expected Behavior |
+| :--- | :--- | :--- | :--- |
+| RBAC-FE-001 | RoleManager | Add duplicate permission | Prevent selection or show "Already added" |
+| RBAC-FE-002 | PermissionGuard | User lacks permission | Component returns null or Redirects to 403 Page |
+
+### 4.2 E2E Testing
+
+| ID | Flow Name | Steps | Expected Outcome |
+| :--- | :--- | :--- | :--- |
+| RBAC-E2E-001 | Role Assignment | 1. Admin assigns "Editor" to User A<br>2. User A logs in | User A can see Editor-only menus |
+
+---
+
+## 5. Manual Testing Scenarios
+
+| ID | Scenario | Steps | Expected Result |
+| :--- | :--- | :--- | :--- |
+| RBAC-MAN-001 | Menu Visibility | Log in as different roles | Menu items appear/disappear based on role |
+
+---
+
+## 6. Security Testing
 
 - **Privilege Escalation:** Ensure regular users cannot assign Admin role to themselves.

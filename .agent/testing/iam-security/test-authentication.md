@@ -31,7 +31,7 @@
 
 ### 2.2 Integration Testing
 - **API Endpoints:**
-  - `POST /tokens` (Login)
+  - `POST /auth/login` (Login)
   - `POST /users` (Register)
   - `POST /password-reset-requests` (Forgot Password)
 - **Database Interactions:**
@@ -45,36 +45,70 @@
 
 ---
 
-## 3. Test Scenarios
+## 3. Test Scenarios (Backend / API)
 
-### 3.1 Login (POST /tokens)
+### 3.1 Login (POST /auth/login)
 
 | ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AUTH-TC-001 | Login with valid credentials | User exists, active | Valid Email, Valid Password | 201 Created, Access & Refresh Token returned | High |
-| AUTH-TC-002 | Login with invalid password | User exists | Valid Email, Invalid Password | 401 Unauthorized | High |
-| AUTH-TC-003 | Login with non-existent email | - | Unregistered Email, Any Password | 401 Unauthorized (Generic Message) | High |
-| AUTH-TC-004 | Login with missing fields | - | Empty Email or Password | 400 Bad Request (Validation Error) | Medium |
+| AUTH-API-001 | Login with valid credentials | User exists, active | Valid Email, Valid Password | 200 OK, Access & Refresh Token returned | High |
+| AUTH-API-002 | Login with invalid password | User exists | Valid Email, Invalid Password | 401 Unauthorized | High |
+| AUTH-API-003 | Login with non-existent email | - | Unregistered Email, Any Password | 401 Unauthorized (Generic Message) | High |
+| AUTH-API-004 | Login with missing fields | - | Empty Email or Password | 400 Bad Request (Validation Error) | Medium |
 
 ### 3.2 Register (POST /users)
 
 | ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AUTH-TC-011 | Register new user | Email unique | Valid Name, Email, Password | 201 Created, User Data returned | High |
-| AUTH-TC-012 | Register with existing email | User exists | Existing Email | 409 Conflict | High |
-| AUTH-TC-013 | Register with weak password | - | Password < 8 chars | 422 Unprocessable Entity | Medium |
-| AUTH-TC-014 | Register with invalid email format | - | Invalid Email | 422 Unprocessable Entity | Medium |
+| AUTH-API-011 | Register new user | Email unique | Valid Name, Email, Password | 201 Created, User Data returned | High |
+| AUTH-API-012 | Register with existing email | User exists | Existing Email | 409 Conflict | High |
+| AUTH-API-013 | Register with weak password | - | Password < 8 chars | 422 Unprocessable Entity | Medium |
+| AUTH-API-014 | Register with invalid email format | - | Invalid Email | 422 Unprocessable Entity | Medium |
 
 ### 3.3 Forgot Password
 
 | ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AUTH-TC-021 | Request reset for valid email | User exists | Valid Email | 202 Accepted, Email sent | High |
-| AUTH-TC-022 | Request reset for invalid email | - | Unregistered Email | 202 Accepted (Security practice) | Medium |
+| AUTH-API-021 | Request reset for valid email | User exists | Valid Email | 202 Accepted, Email sent | High |
+| AUTH-API-022 | Request reset for invalid email | - | Unregistered Email | 202 Accepted (Security practice) | Medium |
 
 ---
 
-## 4. Security Testing
+## 4. Frontend Testing Scenarios
+
+### 4.1 Component / Unit Testing
+
+| ID | Component | Test Case | Expected Behavior |
+| :--- | :--- | :--- | :--- |
+| AUTH-FE-001 | LoginForm | Submit empty form | Display "Email is required", "Password is required" |
+| AUTH-FE-002 | LoginForm | Submit invalid email format | Display "Invalid email format" |
+| AUTH-FE-003 | RegisterForm | Password mismatch | Display "Passwords do not match" |
+| AUTH-FE-004 | ForgotPassword | Submit success | Show success toast/message "Reset link sent" |
+
+### 4.2 E2E Testing (User Flows)
+
+| ID | Flow Name | Steps | Expected Outcome |
+| :--- | :--- | :--- | :--- |
+| AUTH-E2E-001 | Login Success & Redirect | 1. Open Login<br>2. Fill Valid Creds<br>3. Submit | Redirect to Dashboard, Token stored in LocalStorage/Cookie |
+| AUTH-E2E-002 | Register & Auto Login | 1. Open Register<br>2. Fill Data<br>3. Submit | Account created, Redirect to Dashboard |
+| AUTH-E2E-003 | Logout | 1. Click Logout Button | Redirect to Login, Token cleared |
+
+---
+
+## 5. Manual Testing Scenarios
+
+> Pengujian manual untuk UX dan penanganan kasus edge yang sulit diotomatisasi.
+
+| ID | Scenario | Steps | Expected Result |
+| :--- | :--- | :--- | :--- |
+| AUTH-MAN-001 | Login with slow internet | Throttle network to 3G, attempt login | Loading spinner appears, no timeout error immediately |
+| AUTH-MAN-002 | Password visibility toggle | Type password, click "eye" icon | Password text becomes visible/hidden |
+| AUTH-MAN-003 | Copy-paste disabled in password confirm | Try to paste password in confirm field | (Optional) Paste might be blocked or allowed depending on UX policy |
+| AUTH-MAN-004 | Email case sensitivity | Login with `USER@Example.com` | Should accept and treat as `user@example.com` |
+
+---
+
+## 6. Security Testing
 
 - **Authentication Checks:** Ensure password is never returned in response.
 - **Token Security:** Verify JWT signature and expiration.
@@ -83,14 +117,14 @@
 
 ---
 
-## 5. Performance Testing (Optional)
+## 7. Performance Testing (Optional)
 
 - **Load Testing:** Simulate 100 concurrent logins.
 - **Latency:** Ensure login response time < 500ms.
 
 ---
 
-## 6. Test Data
+## 8. Test Data
 
 - **Sample Data:**
   - Valid User: `user@example.com` / `Password123!`
@@ -98,6 +132,6 @@
 
 ---
 
-## 7. Known Issues & Limitations
+## 9. Known Issues & Limitations
 
 - **Deferred:** Lockout mechanism not yet implemented (Test Case AUTH-TC-005 Skipped).

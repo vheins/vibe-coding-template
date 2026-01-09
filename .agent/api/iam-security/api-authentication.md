@@ -66,8 +66,8 @@ Accept: application/vnd.api+json
 
 ---
 
-### 2.2 Login (Create Token)
-- **URL:** `POST /tokens`
+### 2.2 Login (Auth Login)
+- **URL:** `POST /auth/login`
 - **Description:** Melakukan login dan mendapatkan token akses.
 - **Access Control:** Public
 
@@ -83,7 +83,7 @@ Accept: application/vnd.api+json
 ```json
 {
   "data": {
-    "type": "tokens",
+    "type": "auth_login",
     "attributes": {
       "email": "user@example.com",
       "password": "securePassword123"
@@ -94,11 +94,11 @@ Accept: application/vnd.api+json
 
 #### Response
 
-**Success (201 Created):**
+**Success (200 OK):**
 ```json
 {
   "data": {
-    "type": "tokens",
+    "type": "auth_session",
     "id": "uuid-token-session",
     "attributes": {
       "access_token": "eyJhbG...",
@@ -107,7 +107,7 @@ Accept: application/vnd.api+json
       "token_type": "Bearer"
     },
     "links": {
-      "self": "/api/v1/tokens/uuid-token-session"
+      "self": "/api/v1/auth/session"
     }
   }
 }

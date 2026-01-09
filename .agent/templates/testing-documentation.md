@@ -34,23 +34,50 @@
 
 ---
 
-## 3. Test Scenarios
+## 3. Test Scenarios (Backend / API)
 
 ### 3.1 <Feature Name 1>
 
 | ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| TC-001 | Deskripsi test case | Kondisi awal | Data input | Hasil yang diharapkan | High/Medium/Low |
+| API-001 | Deskripsi test case | Kondisi awal | Data input | Hasil yang diharapkan | High/Medium/Low |
 
 ### 3.2 <Feature Name 2>
 
 | ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| TC-001 | | | | | |
+| API-001 | | | | | |
 
 ---
 
-## 4. Security Testing
+## 4. Frontend Testing Scenarios
+
+### 4.1 Component / Unit Testing
+- **Scope:** Validasi form, state management, UI rendering.
+
+| ID | Component | Test Case | Expected Behavior |
+| :--- | :--- | :--- | :--- |
+| FE-001 | LoginForm | Validation Error on Empty Submit | Show error message "Required" |
+
+### 4.2 E2E Testing (User Flows)
+
+| ID | Flow Name | Steps | Expected Outcome |
+| :--- | :--- | :--- | :--- |
+| E2E-001 | User Login Success | 1. Go to Login Page<br>2. Fill Email/Pass<br>3. Click Login | Redirect to Dashboard |
+
+---
+
+## 5. Manual Testing Scenarios
+
+> Skenario pengujian manual untuk aspek UX dan usability.
+
+| ID | Scenario | Steps | Expected Result | Pass/Fail |
+| :--- | :--- | :--- | :--- | :--- |
+| MAN-001 | Responsive Design | Resize browser to mobile view | Layout adapts correctly | |
+
+---
+
+## 6. Security Testing
 
 - **Authentication/Authorization Checks:**
 - **Input Validation (SQL Injection, XSS):**
@@ -58,21 +85,21 @@
 
 ---
 
-## 5. Performance Testing (Optional)
+## 7. Performance Testing (Optional)
 
 - **Load Testing Targets:**
 - **Stress Testing Limits:**
 
 ---
 
-## 6. Test Data
+## 8. Test Data
 
 - **Sample Data Requirements:**
 - **Mock Data Strategy:**
 
 ---
 
-## 7. Known Issues & Limitations
+## 9. Known Issues & Limitations
 
 - **Deferred Bugs:**
 - **Testing Constraints:**

@@ -73,7 +73,7 @@ sequenceDiagram
     participant DB as Database
 
     User->>Client: Input Email & Password
-    Client->>API: POST /tokens (Login)
+    Client->>API: POST /auth/login (Login)
     API->>DB: Find User by Email
     alt User Not Found
         API-->>Client: 401 Unauthorized (Error Object)
@@ -186,7 +186,7 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model) untuk diagram lengkap.
 | :--- | :--- | :--- | :--- |
 | AUTH-01 | Backend | Todo | Implement `POST /users` (Register) |
 | AUTH-02 | Frontend | Todo | Implement Register Page with validation |
-| AUTH-03 | Backend | Todo | Implement `POST /tokens` (Login) |
+| AUTH-03 | Backend | Todo | Implement `POST /auth/login` (Login) |
 | AUTH-04 | Frontend | Todo | Implement Login Page with token storage |
 | AUTH-05 | Backend | Todo | Implement Password Reset Logic |
 | AUTH-06 | Frontend | Todo | Implement Forgot Password & Reset Password Pages |
