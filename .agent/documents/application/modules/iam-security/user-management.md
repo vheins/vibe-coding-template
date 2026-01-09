@@ -7,7 +7,7 @@
 ## Header & Navigation
 
 - [Back to IAM Overview](./overview.md)
-- [Link ke All Modules](../../README.md)
+- [Link ke All Modules](../../../README.md)
 
 ---
 
@@ -48,11 +48,11 @@
 
 ## 4. User Stories
 
-| ID | Role | Goal | Benefit |
-| :--- | :--- | :--- | :--- |
+| ID    | Role  | Goal                               | Benefit                                      |
+| :---- | :---- | :--------------------------------- | :------------------------------------------- |
 | US-06 | Admin | Mengelola User (Edit/Delete/Block) | Menjaga keamanan dan validitas data pengguna |
-| US-09 | Admin | Melihat daftar user | Memantau pertumbuhan pengguna |
-| US-10 | User | Mengupdate profil sendiri | Menjaga data diri tetap akurat |
+| US-09 | Admin | Melihat daftar user                | Memantau pertumbuhan pengguna                |
+| US-10 | User  | Mengupdate profil sendiri          | Menjaga data diri tetap akurat               |
 
 ---
 
@@ -131,11 +131,11 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model).
 
 **Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
 
-| Task ID | Platform | Status | Description |
-| :--- | :--- | :--- | :--- |
-| USR-01 | Backend | Todo | Implement `GET /users` with filters |
-| USR-02 | Frontend | Todo | Implement Admin User List Page with search/filter |
-| USR-03 | Backend | Todo | Implement `PATCH /users/:id` |
-| USR-04 | Frontend | Todo | Implement Edit User Modal/Page |
-| USR-05 | Backend | Todo | Implement `DELETE /users/:id` |
-| USR-06 | Frontend | Todo | Implement Delete User Confirmation |
+| Task ID | Platform | Status | Description                                       |
+| :------ | :------- | :----- | :------------------------------------------------ |
+| USR-01  | Backend  | Todo   | Implement `GET /users` with filters               |
+| USR-02  | Frontend | Todo   | Implement Admin User List Page with search/filter |
+| USR-03  | Backend  | Todo   | Implement `PATCH /users/:id`                      |
+| USR-04  | Frontend | Todo   | Implement Edit User Modal/Page                    |
+| USR-05  | Backend  | Todo   | Implement `DELETE /users/:id`                     |
+| USR-06  | Frontend | Todo   | Implement Delete User Confirmation                |

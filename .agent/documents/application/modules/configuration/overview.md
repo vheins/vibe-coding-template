@@ -1,8 +1,8 @@
 # Module Overview: Configuration System
 
 - [Back to Module Overview](#)
-- [Link ke All Modules](../../README.md)
-- [Link ke Scenario Testing](../../testing/configuration/overview.md)
+- [Link ke All Modules](../../../README.md)
+- [Link ke Scenario Testing](../../../testing/configuration/overview.md)
 
 ---
 
@@ -46,12 +46,12 @@
 
 ## 4. User Stories
 
-| ID | Role | Goal | Benefit |
-| :--- | :--- | :--- | :--- |
-| US-CFG-01 | Admin | Mengaktifkan "Maintenance Mode" | Mencegah akses user saat perbaikan database. |
-| US-CFG-02 | Product Owner | Menyalakan fitur baru untuk 50% user | A/B testing fitur baru. |
-| US-CFG-03 | Frontend App | Mengambil list support contact number | Contact center bisa diubah tanpa update aplikasi di store. |
-| US-CFG-04 | System | Cache konfigurasi di memory | Mengurangi load database pada high traffic. |
+| ID        | Role          | Goal                                  | Benefit                                                    |
+| :-------- | :------------ | :------------------------------------ | :--------------------------------------------------------- |
+| US-CFG-01 | Admin         | Mengaktifkan "Maintenance Mode"       | Mencegah akses user saat perbaikan database.               |
+| US-CFG-02 | Product Owner | Menyalakan fitur baru untuk 50% user  | A/B testing fitur baru.                                    |
+| US-CFG-03 | Frontend App  | Mengambil list support contact number | Contact center bisa diubah tanpa update aplikasi di store. |
+| US-CFG-04 | System        | Cache konfigurasi di memory           | Mengurangi load database pada high traffic.                |
 
 ---
 
@@ -187,10 +187,10 @@ erDiagram
 
 **Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
 
-| Task ID | Platform | Status | Description |
-| :--- | :--- | :--- | :--- |
-| CFG-BE-01 | Backend | Todo | Create Configuration Table & CRUD API |
-| CFG-BE-02 | Backend | Todo | Implement Caching Layer (Redis) |
-| CFG-BE-03 | Backend | Todo | Implement Public Endpoint for FE |
-| CFG-FE-01 | Frontend | Todo | Create Admin Config Management Page |
-| CFG-FE-02 | Frontend | Todo | Integrate Global State with Public Config API |
+| Task ID   | Platform | Status | Description                                   |
+| :-------- | :------- | :----- | :-------------------------------------------- |
+| CFG-BE-01 | Backend  | Todo   | Create Configuration Table & CRUD API         |
+| CFG-BE-02 | Backend  | Todo   | Implement Caching Layer (Redis)               |
+| CFG-BE-03 | Backend  | Todo   | Implement Public Endpoint for FE              |
+| CFG-FE-01 | Frontend | Todo   | Create Admin Config Management Page           |
+| CFG-FE-02 | Frontend | Todo   | Integrate Global State with Public Config API |

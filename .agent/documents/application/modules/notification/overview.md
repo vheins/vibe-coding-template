@@ -1,8 +1,8 @@
 # Module Overview: Notification System
 
 - [Back to Module Overview](#)
-- [Link ke All Modules](../../README.md)
-- [Link ke Scenario Testing](../../testing/notification/overview.md)
+- [Link ke All Modules](../../../README.md)
+- [Link ke Scenario Testing](../../../testing/notification/overview.md)
 
 ---
 
@@ -50,13 +50,13 @@
 
 ## 4. User Stories
 
-| ID | Role | Goal | Benefit |
-| :--- | :--- | :--- | :--- |
-| US-NOT-01 | System | Mengirim OTP via Email/SMS | User dapat memverifikasi identitas. |
-| US-NOT-02 | User | Menerima notifikasi status pesanan | User mengetahui update transaksi mereka. |
-| US-NOT-03 | Admin | Membuat template email baru | Pesan keluar konsisten dengan branding. |
-| US-NOT-04 | User | Melihat riwayat notifikasi di aplikasi | User tidak ketinggalan informasi penting. |
-| US-NOT-05 | System | Retry pengiriman jika gagal | Memastikan pesan sampai meski ada gangguan jaringan sesaat. |
+| ID        | Role   | Goal                                   | Benefit                                                     |
+| :-------- | :----- | :------------------------------------- | :---------------------------------------------------------- |
+| US-NOT-01 | System | Mengirim OTP via Email/SMS             | User dapat memverifikasi identitas.                         |
+| US-NOT-02 | User   | Menerima notifikasi status pesanan     | User mengetahui update transaksi mereka.                    |
+| US-NOT-03 | Admin  | Membuat template email baru            | Pesan keluar konsisten dengan branding.                     |
+| US-NOT-04 | User   | Melihat riwayat notifikasi di aplikasi | User tidak ketinggalan informasi penting.                   |
+| US-NOT-05 | System | Retry pengiriman jika gagal            | Memastikan pesan sampai meski ada gangguan jaringan sesaat. |
 
 ---
 
@@ -233,11 +233,11 @@ erDiagram
 
 **Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
 
-| Task ID | Platform | Status | Description |
-| :--- | :--- | :--- | :--- |
-| NOT-BE-01 | Backend | Todo | Setup Notification Service & Queue (Redis/Bull) |
-| NOT-BE-02 | Backend | Todo | Implement Provider Adapters (Email, Push) |
-| NOT-BE-03 | Backend | Todo | Implement API `POST /send` & `GET /list` |
-| NOT-FE-01 | Frontend | Todo | Implement Notification Bell & Badge |
-| NOT-FE-02 | Frontend | Todo | Implement Notification List Page |
-| NOT-FE-03 | Frontend | Todo | Implement Admin Template Editor |
+| Task ID   | Platform | Status | Description                                     |
+| :-------- | :------- | :----- | :---------------------------------------------- |
+| NOT-BE-01 | Backend  | Todo   | Setup Notification Service & Queue (Redis/Bull) |
+| NOT-BE-02 | Backend  | Todo   | Implement Provider Adapters (Email, Push)       |
+| NOT-BE-03 | Backend  | Todo   | Implement API `POST /send` & `GET /list`        |
+| NOT-FE-01 | Frontend | Todo   | Implement Notification Bell & Badge             |
+| NOT-FE-02 | Frontend | Todo   | Implement Notification List Page                |
+| NOT-FE-03 | Frontend | Todo   | Implement Admin Template Editor                 |

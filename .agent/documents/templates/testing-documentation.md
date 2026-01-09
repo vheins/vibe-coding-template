@@ -6,8 +6,8 @@
 
 ## Header & Navigation
 
-- [Back to Module Overview](../modules/<module-name>/overview.md)
-- [Link ke API Specification](../api/<module-name>/)
+- [Back to Module Overview](../../application/modules/<module-name>/overview.md)
+- [Link ke API Specification](../../application/api/<module-name>/)
 
 ---
 
@@ -38,15 +38,15 @@
 
 ### 3.1 <Feature Name 1>
 
-| ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| API-001 | Deskripsi test case | Kondisi awal | Data input | Hasil yang diharapkan | High/Medium/Low |
+| ID      | Test Case           | Pre-condition | Input Data | Expected Result       | Priority        |
+| :------ | :------------------ | :------------ | :--------- | :-------------------- | :-------------- |
+| API-001 | Deskripsi test case | Kondisi awal  | Data input | Hasil yang diharapkan | High/Medium/Low |
 
 ### 3.2 <Feature Name 2>
 
-| ID | Test Case | Pre-condition | Input Data | Expected Result | Priority |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| API-001 | | | | | |
+| ID      | Test Case | Pre-condition | Input Data | Expected Result | Priority |
+| :------ | :-------- | :------------ | :--------- | :-------------- | :------- |
+| API-001 |           |               |            |                 |          |
 
 ---
 
@@ -55,14 +55,14 @@
 ### 4.1 Component / Unit Testing
 - **Scope:** Validasi form, state management, UI rendering.
 
-| ID | Component | Test Case | Expected Behavior |
-| :--- | :--- | :--- | :--- |
+| ID     | Component | Test Case                        | Expected Behavior             |
+| :----- | :-------- | :------------------------------- | :---------------------------- |
 | FE-001 | LoginForm | Validation Error on Empty Submit | Show error message "Required" |
 
 ### 4.2 E2E Testing (User Flows)
 
-| ID | Flow Name | Steps | Expected Outcome |
-| :--- | :--- | :--- | :--- |
+| ID      | Flow Name          | Steps                                                       | Expected Outcome      |
+| :------ | :----------------- | :---------------------------------------------------------- | :-------------------- |
 | E2E-001 | User Login Success | 1. Go to Login Page<br>2. Fill Email/Pass<br>3. Click Login | Redirect to Dashboard |
 
 ---
@@ -71,9 +71,9 @@
 
 > Skenario pengujian manual untuk aspek UX dan usability.
 
-| ID | Scenario | Steps | Expected Result | Pass/Fail |
-| :--- | :--- | :--- | :--- | :--- |
-| MAN-001 | Responsive Design | Resize browser to mobile view | Layout adapts correctly | |
+| ID      | Scenario          | Steps                         | Expected Result         | Pass/Fail |
+| :------ | :---------------- | :---------------------------- | :---------------------- | :-------- |
+| MAN-001 | Responsive Design | Resize browser to mobile view | Layout adapts correctly |           |
 
 ---
 

@@ -7,7 +7,7 @@
 ## Header & Navigation
 
 - [Back to IAM Overview](./overview.md)
-- [Link ke All Modules](../../README.md)
+- [Link ke All Modules](../../../README.md)
 
 ---
 
@@ -47,11 +47,11 @@
 
 ## 4. User Stories
 
-| ID | Role | Goal | Benefit |
-| :--- | :--- | :--- | :--- |
-| US-04 | Admin | Membuat Role baru | Mengelompokkan hak akses pengguna |
+| ID    | Role  | Goal                          | Benefit                                             |
+| :---- | :---- | :---------------------------- | :-------------------------------------------------- |
+| US-04 | Admin | Membuat Role baru             | Mengelompokkan hak akses pengguna                   |
 | US-05 | Admin | Menetapkan Permission ke Role | Mengatur apa yang bisa dilakukan oleh Role tertentu |
-| US-11 | Admin | Assign Role ke User | Memberikan wewenang kepada user |
+| US-11 | Admin | Assign Role ke User           | Memberikan wewenang kepada user                     |
 
 ---
 
@@ -127,10 +127,10 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model).
 
 **Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
 
-| Task ID | Platform | Status | Description |
-| :--- | :--- | :--- | :--- |
-| RBAC-01 | Backend | Todo | Implement CRUD Roles |
-| RBAC-02 | Frontend | Todo | Implement Role Management Page (List, Create, Edit) |
-| RBAC-03 | Backend | Todo | Implement `PATCH /relationships` endpoints |
-| RBAC-04 | Frontend | Todo | Implement Permission Assignment UI (Checkbox list/Transfer component) |
-| RBAC-05 | Backend | Todo | Implement Permission Seeder |
+| Task ID | Platform | Status | Description                                                           |
+| :------ | :------- | :----- | :-------------------------------------------------------------------- |
+| RBAC-01 | Backend  | Todo   | Implement CRUD Roles                                                  |
+| RBAC-02 | Frontend | Todo   | Implement Role Management Page (List, Create, Edit)                   |
+| RBAC-03 | Backend  | Todo   | Implement `PATCH /relationships` endpoints                            |
+| RBAC-04 | Frontend | Todo   | Implement Permission Assignment UI (Checkbox list/Transfer component) |
+| RBAC-05 | Backend  | Todo   | Implement Permission Seeder                                           |

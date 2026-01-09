@@ -7,7 +7,7 @@
 ## Header & Navigation
 
 - [Back to IAM Overview](./overview.md)
-- [Link ke All Modules](../../README.md)
+- [Link ke All Modules](../../../README.md)
 
 ---
 
@@ -50,13 +50,13 @@
 
 ## 4. User Stories
 
-| ID | Role | Goal | Benefit |
-| :--- | :--- | :--- | :--- |
-| US-01 | Guest | Mendaftar akun baru | Dapat mengakses fitur sistem |
-| US-02 | Guest | Melakukan login | Mendapatkan akses ke akun pribadi |
-| US-03 | Guest | Mereset password yang lupa | Memulihkan akses ke akun |
-| US-07 | User | Melakukan logout | Mengamankan akun saat selesai menggunakan |
-| US-08 | User | Refresh Token | Memperpanjang sesi tanpa login ulang |
+| ID    | Role  | Goal                       | Benefit                                   |
+| :---- | :---- | :------------------------- | :---------------------------------------- |
+| US-01 | Guest | Mendaftar akun baru        | Dapat mengakses fitur sistem              |
+| US-02 | Guest | Melakukan login            | Mendapatkan akses ke akun pribadi         |
+| US-03 | Guest | Mereset password yang lupa | Memulihkan akses ke akun                  |
+| US-07 | User  | Melakukan logout           | Mengamankan akun saat selesai menggunakan |
+| US-08 | User  | Refresh Token              | Memperpanjang sesi tanpa login ulang      |
 
 ---
 
@@ -204,11 +204,11 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model) untuk diagram lengkap.
 
 **Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
 
-| Task ID | Platform | Status | Description |
-| :--- | :--- | :--- | :--- |
-| AUTH-01 | Backend | Todo | Implement `POST /auth/register` (Register) |
-| AUTH-02 | Frontend | Todo | Implement Register Page with validation |
-| AUTH-03 | Backend | Todo | Implement `POST /auth/login` (Login) |
-| AUTH-04 | Frontend | Todo | Implement Login Page with token storage |
-| AUTH-05 | Backend | Todo | Implement Password Reset Logic |
-| AUTH-06 | Frontend | Todo | Implement Forgot Password & Reset Password Pages |
+| Task ID | Platform | Status | Description                                      |
+| :------ | :------- | :----- | :----------------------------------------------- |
+| AUTH-01 | Backend  | Todo   | Implement `POST /auth/register` (Register)       |
+| AUTH-02 | Frontend | Todo   | Implement Register Page with validation          |
+| AUTH-03 | Backend  | Todo   | Implement `POST /auth/login` (Login)             |
+| AUTH-04 | Frontend | Todo   | Implement Login Page with token storage          |
+| AUTH-05 | Backend  | Todo   | Implement Password Reset Logic                   |
+| AUTH-06 | Frontend | Todo   | Implement Forgot Password & Reset Password Pages |

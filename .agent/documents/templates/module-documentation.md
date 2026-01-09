@@ -8,7 +8,7 @@
 
 - [Back to Module Overview](#)
 - [Link ke All Modules](#)
-- [Link ke Scenario Testing](../../testing/<module-name>/overview.md)
+- [Link ke Scenario Testing](../../../testing/<module-name>/overview.md)
 
 ---
 
@@ -51,9 +51,9 @@
 
 Daftar kebutuhan berbasis role.
 
-| ID | Role | Goal | Benefit |
-| :--- | :--- | :--- | :--- |
-| | | | |
+| ID   | Role | Goal | Benefit |
+| :--- | :--- | :--- | :------ |
+|      |      |      |         |
 
 ---
 
@@ -209,9 +209,9 @@ Daftar kebutuhan berbasis role.
 **Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
 
 | Task ID | Platform | Status | Description |
-| :--- | :--- | :--- | :--- |
-| | Backend | | |
-| | Frontend | | |
+| :------ | :------- | :----- | :---------- |
+|         | Backend  |        |             |
+|         | Frontend |        |             |
 
 ---
 

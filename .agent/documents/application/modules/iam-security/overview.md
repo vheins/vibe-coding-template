@@ -6,8 +6,8 @@
 
 ## Header & Navigation
 
-- [Back to Module Overview](../README.md)
-- [Link ke All Modules](../../README.md)
+- [Back to Module Overview](../../../README.md)
+- [Link ke All Modules](../../../README.md)
 
 ---
 
@@ -54,19 +54,19 @@
 
 Daftar kebutuhan berbasis role.
 
-| ID | Role | Goal | Benefit |
-| :--- | :--- | :--- | :--- |
-| US-01 | Guest | Mendaftar akun baru | Dapat mengakses fitur sistem |
-| US-02 | Guest | Melakukan login | Mendapatkan akses ke akun pribadi |
-| US-03 | Guest | Mereset password yang lupa | Memulihkan akses ke akun |
-| US-04 | Admin | Membuat Role baru | Mengelompokkan hak akses pengguna |
-| US-05 | Admin | Menetapkan Permission ke Role | Mengatur apa yang bisa dilakukan oleh Role tertentu |
-| US-06 | Admin | Mengelola User (Edit/Delete/Block) | Menjaga keamanan dan validitas data pengguna |
-| US-07 | User | Melakukan logout | Mengamankan akun saat selesai menggunakan |
-| US-08 | User | Refresh Token | Memperpanjang sesi tanpa login ulang |
-| US-09 | Admin | Melihat daftar user | Memantau pertumbuhan pengguna |
-| US-10 | User | Mengupdate profil sendiri | Menjaga data diri tetap akurat |
-| US-11 | Admin | Assign Role ke User | Memberikan wewenang kepada user |
+| ID    | Role  | Goal                               | Benefit                                             |
+| :---- | :---- | :--------------------------------- | :-------------------------------------------------- |
+| US-01 | Guest | Mendaftar akun baru                | Dapat mengakses fitur sistem                        |
+| US-02 | Guest | Melakukan login                    | Mendapatkan akses ke akun pribadi                   |
+| US-03 | Guest | Mereset password yang lupa         | Memulihkan akses ke akun                            |
+| US-04 | Admin | Membuat Role baru                  | Mengelompokkan hak akses pengguna                   |
+| US-05 | Admin | Menetapkan Permission ke Role      | Mengatur apa yang bisa dilakukan oleh Role tertentu |
+| US-06 | Admin | Mengelola User (Edit/Delete/Block) | Menjaga keamanan dan validitas data pengguna        |
+| US-07 | User  | Melakukan logout                   | Mengamankan akun saat selesai menggunakan           |
+| US-08 | User  | Refresh Token                      | Memperpanjang sesi tanpa login ulang                |
+| US-09 | Admin | Melihat daftar user                | Memantau pertumbuhan pengguna                       |
+| US-10 | User  | Mengupdate profil sendiri          | Menjaga data diri tetap akurat                      |
+| US-11 | Admin | Assign Role ke User                | Memberikan wewenang kepada user                     |
 
 ---
 
@@ -294,12 +294,12 @@ Silakan merujuk ke dokumen spesifikasi detail berikut:
 
 **Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
 
-| Task ID | Platform | Status | Description |
-| :--- | :--- | :--- | :--- |
-| IAM-01 | Backend | Todo | Setup database schema (Users, Roles, Permissions). |
-| IAM-02 | Backend | Todo | Implement JSON:API compliant Authentication endpoints. |
-| IAM-03 | Frontend | Todo | Implement Login, Register, Forgot Password Pages. |
-| IAM-04 | Backend | Todo | Implement JSON:API compliant User Management endpoints. |
-| IAM-05 | Frontend | Todo | Implement User Management Dashboard (List, Create, Edit, Delete). |
-| IAM-06 | Backend | Todo | Implement JSON:API compliant Role & Permission endpoints. |
-| IAM-07 | Frontend | Todo | Implement Role & Permission Management UI. |
+| Task ID | Platform | Status | Description                                                       |
+| :------ | :------- | :----- | :---------------------------------------------------------------- |
+| IAM-01  | Backend  | Todo   | Setup database schema (Users, Roles, Permissions).                |
+| IAM-02  | Backend  | Todo   | Implement JSON:API compliant Authentication endpoints.            |
+| IAM-03  | Frontend | Todo   | Implement Login, Register, Forgot Password Pages.                 |
+| IAM-04  | Backend  | Todo   | Implement JSON:API compliant User Management endpoints.           |
+| IAM-05  | Frontend | Todo   | Implement User Management Dashboard (List, Create, Edit, Delete). |
+| IAM-06  | Backend  | Todo   | Implement JSON:API compliant Role & Permission endpoints.         |
+| IAM-07  | Frontend | Todo   | Implement Role & Permission Management UI.                        |
