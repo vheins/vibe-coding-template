@@ -15,8 +15,8 @@
 ## 1. Test Overview
 
 - **Module Name:** IAM & Security - Authentication
-- **Scope of Testing:** Unit Testing (Services), Integration Testing (API Endpoints), E2E (Login/Register Flows), Security Testing.
-- **Test Tools:** Jest (Unit/Integration), Supertest (API), Playwright (E2E).
+- **Scope of Testing:** Unit Testing (Services), Integration Testing (API Endpoints), E2E (Login/Register Flows), Security Testing, Monkey Testing.
+- **Test Tools:** Jest (Unit/Integration), Supertest (API), Playwright (E2E), Faker.js/Gremlins.js (Monkey).
 
 ---
 
@@ -43,42 +43,50 @@
   - User Registration -> Login -> Access Protected Route
   - Forgot Password -> Email Link -> Reset Password -> Login
 
+### 2.4 Monkey Testing
+- **Objective:** Test system stability under chaotic/random inputs.
+- **Approach:** Fuzz testing API endpoints and random UI interactions.
+
 ---
 
 ## 3. Test Scenarios (Backend / API)
 
-### 3.1 Login (POST /auth/login)
+### 3.1 Positive Cases (Happy Paths)
+> Skenario sukses sesuai dengan alur bisnis yang diharapkan.
 
-| ID           | Test Case                     | Pre-condition       | Input Data                       | Expected Result                         | Priority |
-| :----------- | :---------------------------- | :------------------ | :------------------------------- | :-------------------------------------- | :------- |
-| AUTH-API-001 | Login with valid credentials  | User exists, active | Valid Email, Valid Password      | 200 OK, Access & Refresh Token returned | High     |
-| AUTH-API-002 | Login with invalid password   | User exists         | Valid Email, Invalid Password    | 401 Unauthorized                        | High     |
-| AUTH-API-003 | Login with non-existent email | -                   | Unregistered Email, Any Password | 401 Unauthorized (Generic Message)      | High     |
-| AUTH-API-004 | Login with missing fields     | -                   | Empty Email or Password          | 400 Bad Request (Validation Error)      | Medium   |
+| ID           | Test Case                        | Pre-condition          | Input Data                                           | Expected Result                         | Priority |
+| :----------- | :------------------------------- | :--------------------- | :--------------------------------------------------- | :-------------------------------------- | :------- |
+| AUTH-POS-001 | **Register New User**            | Email belum terdaftar  | Valid Name, Email, Password (>8 chars, alphanumeric) | 201 Created, User Data returned         | High     |
+| AUTH-POS-002 | **Login with Valid Credentials** | User terdaftar & aktif | Valid Email & Correct Password                       | 200 OK, Access + Refresh Token returned | High     |
+| AUTH-POS-003 | **Token Refresh**                | Refresh Token valid    | Valid Refresh Token                                  | 200 OK, New Access Token returned       | High     |
+| AUTH-POS-004 | **Forgot Password Request**      | User terdaftar         | Valid Registered Email                               | 202 Accepted, Reset Email sent          | High     |
+| AUTH-POS-005 | **Reset Password Success**       | Token reset valid      | Valid Token, New Password                            | 200 OK, Password Updated                | High     |
+| AUTH-POS-006 | **Logout Success**               | Login & punya token    | Valid Refresh Token                                  | 200 OK, Refesh Token di-revoke          | Medium   |
 
-### 3.2 Register (POST /auth/register)
+### 3.2 Negative Cases (Validation Rules)
+> Skenario gagal untuk memvalidasi penanganan error dan input tidak valid.
 
-| ID           | Test Case                          | Pre-condition | Input Data                  | Expected Result                 | Priority |
-| :----------- | :--------------------------------- | :------------ | :-------------------------- | :------------------------------ | :------- |
-| AUTH-API-011 | Register new user                  | Email unique  | Valid Name, Email, Password | 201 Created, User Data returned | High     |
-| AUTH-API-012 | Register with existing email       | User exists   | Existing Email              | 409 Conflict                    | High     |
-| AUTH-API-013 | Register with weak password        | -             | Password < 8 chars          | 422 Unprocessable Entity        | Medium   |
-| AUTH-API-014 | Register with invalid email format | -             | Invalid Email               | 422 Unprocessable Entity        | Medium   |
+| ID           | Test Case                         | Pre-condition         | Input Data                      | Expected Result                                            | Priority |
+| :----------- | :-------------------------------- | :-------------------- | :------------------------------ | :--------------------------------------------------------- | :------- |
+| AUTH-NEG-001 | **Register Existing Email**       | Email sudah terdaftar | Valid Data, Existing Email      | 409 Conflict, Error "Email already exists"                 | High     |
+| AUTH-NEG-002 | **Register Weak Password**        | -                     | Password "12345" (short/simple) | 422 Unprocessable Entity, Error validation                 | Medium   |
+| AUTH-NEG-003 | **Register Invalid Email Format** | -                     | Email "user.com" (no @)         | 422 Unprocessable Entity, Error validation                 | Medium   |
+| AUTH-NEG-004 | **Login Wrong Password**          | User terdaftar        | Valid Email, Wrong Password     | 401 Unauthorized, Error "Invalid credentials"              | High     |
+| AUTH-NEG-005 | **Login Unregistered Email**      | -                     | Random Email, Random Password   | 401 Unauthorized, Error "Invalid credentials" (No leakage) | High     |
+| AUTH-NEG-006 | **Reset Password Expired Token**  | Token expired         | Expired Token, New Password     | 400 Bad Request, Error "Token expired"                     | High     |
+| AUTH-NEG-007 | **Reset Password Invalid Token**  | -                     | Random String Token             | 400 Bad Request, Error "Invalid token"                     | Medium   |
+| AUTH-NEG-008 | **Login Missing Fields**          | -                     | Empty Body / Partial Fields     | 400 Bad Request, Validation Error                          | Medium   |
 
-### 3.3 Forgot Password
+### 3.3 Monkey Tests (Chaos & Stability)
+> Pengujian dengan input acak/kacau untuk menguji ketahanan sistem (Crash Free Users).
 
-| ID           | Test Case                       | Pre-condition | Input Data         | Expected Result                  | Priority |
-| :----------- | :------------------------------ | :------------ | :----------------- | :------------------------------- | :------- |
-| AUTH-API-021 | Request reset for valid email   | User exists   | Valid Email        | 202 Accepted, Email sent         | High     |
-| AUTH-API-022 | Request reset for invalid email | -             | Unregistered Email | 202 Accepted (Security practice) | Medium   |
-
-### 3.4 Reset Password (POST /auth/reset-password)
-
-| ID           | Test Case                | Pre-condition      | Input Data          | Expected Result          | Priority |
-| :----------- | :----------------------- | :----------------- | :------------------ | :----------------------- | :------- |
-| AUTH-API-031 | Reset with valid token   | Valid Token exists | Token, New Password | 200 OK, Password Updated | High     |
-| AUTH-API-032 | Reset with expired token | Token Expired      | Token, New Password | 400 Bad Request          | High     |
-| AUTH-API-033 | Reset with invalid token | -                  | Random String       | 400 Bad Request          | Medium   |
+| ID           | Test Case                   | Approach                                        | Input Data                                 | Expected Result                                      | Priority |
+| :----------- | :-------------------------- | :---------------------------------------------- | :----------------------------------------- | :--------------------------------------------------- | :------- |
+| AUTH-MNK-001 | **Fuzzing Register Fields** | Kirim random byte/string panjang di semua field | Name: 10k chars, Email: Emojis, Pass: Null | 400/422 Error, Tidak 500/Crash                       | Low      |
+| AUTH-MNK-002 | **Rapid Fire Login (Spam)** | Hit endpoint login 100x dalam 1 detik           | Valid & Invalid Creds concurrently         | 429 Too Many Requests (Rate Limit)                   | Medium   |
+| AUTH-MNK-003 | **Token Tampering**         | Ubah 1 karakter di JWT string                   | Malformed JWT Token                        | 401/403 Unauthorized, Signature verification failure | High     |
+| AUTH-MNK-004 | **SQL Injection Probe**     | Coba payload SQLi di field login                | Email: `' OR 1=1;--`                       | 400/401/422, Query tidak tereksekusi                 | Critical |
+| AUTH-MNK-005 | **Payload Type Mismatch**   | Kirim tipe data salah                           | Email: `123` (int), Password: `{}` (obj)   | 400 Bad Request, Validation Error                    | Low      |
 
 ---
 
@@ -86,63 +94,31 @@
 
 ### 4.1 Component / Unit Testing
 
-| ID          | Component      | Test Case                   | Expected Behavior                                   |
-| :---------- | :------------- | :-------------------------- | :-------------------------------------------------- |
-| AUTH-FE-001 | LoginForm      | Submit empty form           | Display "Email is required", "Password is required" |
-| AUTH-FE-002 | LoginForm      | Submit invalid email format | Display "Invalid email format"                      |
-| AUTH-FE-003 | RegisterForm   | Password mismatch           | Display "Passwords do not match"                    |
-| AUTH-FE-004 | ForgotPassword | Submit success              | Show success toast/message "Reset link sent"        |
+| ID          | Component    | Test Case            | Expected Behavior                       |
+| :---------- | :----------- | :------------------- | :-------------------------------------- |
+| AUTH-FE-001 | LoginForm    | Submit empty form    | Display "Email/Password required" error |
+| AUTH-FE-002 | LoginForm    | Submit invalid email | Display "Invalid email format" error    |
+| AUTH-FE-003 | RegisterForm | Password mismatch    | Display "Passwords do not match" error  |
 
 ### 4.2 E2E Testing (User Flows)
 
-| ID           | Flow Name                | Steps                                                                               | Expected Outcome                                           |
-| :----------- | :----------------------- | :---------------------------------------------------------------------------------- | :--------------------------------------------------------- |
-| AUTH-E2E-001 | Login Success & Redirect | 1. Open Login<br>2. Fill Valid Creds<br>3. Submit                                   | Redirect to Dashboard, Token stored in LocalStorage/Cookie |
-| AUTH-E2E-002 | Register & Auto Login    | 1. Open Register<br>2. Fill Data<br>3. Submit                                       | Account created, Redirect to Dashboard                     |
-| AUTH-E2E-003 | Logout                   | 1. Click Logout Button                                                              | Redirect to Login, Token cleared                           |
-| AUTH-E2E-004 | Full Password Reset      | 1. Request Reset<br>2. (Mock) Get Token<br>3. Open Reset Page<br>4. Submit New Pass | Password updated, Redirect to Login, New Pass works        |
+| ID           | Flow Name                  | Steps                                                   | Expected Outcome                          |
+| :----------- | :------------------------- | :------------------------------------------------------ | :---------------------------------------- |
+| AUTH-E2E-001 | **Login Success Flow**     | 1. Go to Login<br>2. Fill Valid Email/Pass<br>3. Submit | Redirect to Dashboard, Token saved        |
+| AUTH-E2E-002 | **Error Handling Display** | 1. Go to Login<br>2. Fill Wrong Pass<br>3. Submit       | Show "Invalid email or password" snackbar |
 
 ---
 
-## 5. Manual Testing Scenarios
+## 5. Security Testing
 
-> Pengujian manual untuk UX dan penanganan kasus edge yang sulit diotomatisasi.
-
-| ID           | Scenario                                | Steps                                                     | Expected Result                                                     |
-| :----------- | :-------------------------------------- | :-------------------------------------------------------- | :------------------------------------------------------------------ |
-| AUTH-MAN-001 | Login with slow internet                | Throttle network to 3G, attempt login                     | Loading spinner appears, no timeout error immediately               |
-| AUTH-MAN-002 | Password visibility toggle              | Type password, click "eye" icon                           | Password text becomes visible/hidden                                |
-| AUTH-MAN-003 | Copy-paste disabled in password confirm | Try to paste password in confirm field                    | (Optional) Paste might be blocked or allowed depending on UX policy |
-| AUTH-MAN-004 | Email case sensitivity                  | Login with `USER@Example.com`                             | Should accept and treat as `user@example.com`                       |
-| AUTH-MAN-005 | Email Link Validation                   | 1. Request Reset<br>2. Check Email Inbox<br>3. Click Link | Link opens correct app page with token param, no 404 error          |
-
+- **Password Storage:** Verify Database stores Hashed Password (not Plaintext).
+- **No Sensitive Data Leaks:** Endpoint responses never contain password/hash.
+- **Rate Limit:** 5 gagal login -> Block IP sementara (jika ada fitur ini).
 
 ---
 
-## 6. Security Testing
+## 6. Test Data References
 
-- **Authentication Checks:** Ensure password is never returned in response.
-- **Token Security:** Verify JWT signature and expiration.
-- **Rate Limiting:** Test login endpoint for brute force protection (e.g., 5 failed attempts).
-- **SQL Injection:** Test input fields with SQL payloads.
-
----
-
-## 7. Performance Testing (Optional)
-
-- **Load Testing:** Simulate 100 concurrent logins.
-- **Latency:** Ensure login response time < 500ms.
-
----
-
-## 8. Test Data
-
-- **Sample Data:**
-  - Valid User: `user@example.com` / `Password123!`
-- **Mock Data:** Email service should be mocked for integration tests.
-
----
-
-## 9. Known Issues & Limitations
-
-- **Deferred:** Lockout mechanism not yet implemented (Test Case AUTH-TC-005 Skipped).
+- **Valid User:** `testuser@example.com` / `P@ssw0rd123`
+- **Locked User:** `locked@example.com`
+- **Expired Token:** `eyJhbGc...` (pre-generated expired JWT)

@@ -14,7 +14,7 @@
 ## 1. Test Overview
 
 - **Module Name:**
-- **Scope of Testing:** (Unit, Integration, E2E, Security, Performance)
+- **Scope of Testing:** (Unit, Integration, E2E, Security, Performance, Monkey Testing)
 - **Test Tools:** (Jest, Supertest, Playwright, k6, etc.)
 
 ---
@@ -32,21 +32,35 @@
 ### 2.3 End-to-End (E2E) Testing
 - **Key User Flows:**
 
+### 2.4 Monkey Testing
+- **Objective:** Menguji ketahanan sistem terhadap input acak/kacau.
+- **Approach:** Fuzzing input fields, random UI interactions.
+
 ---
 
 ## 3. Test Scenarios (Backend / API)
 
-### 3.1 <Feature Name 1>
+### 3.1 Positive Cases (Happy Paths)
+> Skenario sukses sesuai dengan alur bisnis yang diharapkan.
 
-| ID      | Test Case           | Pre-condition | Input Data | Expected Result       | Priority        |
-| :------ | :------------------ | :------------ | :--------- | :-------------------- | :-------------- |
-| API-001 | Deskripsi test case | Kondisi awal  | Data input | Hasil yang diharapkan | High/Medium/Low |
+| ID          | Test Case                  | Pre-condition | Input Data       | Expected Result           | Priority |
+| :---------- | :------------------------- | :------------ | :--------------- | :------------------------ | :------- |
+| MOD-POS-001 | Deskripsi test case sukses | Kondisi awal  | Data input valid | 200/201 OK, Data returned | High     |
 
-### 3.2 <Feature Name 2>
+### 3.2 Negative Cases (Validation Rules)
+> Skenario gagal untuk memvalidasi penanganan error dan input tidak valid.
 
-| ID      | Test Case | Pre-condition | Input Data | Expected Result | Priority |
-| :------ | :-------- | :------------ | :--------- | :-------------- | :------- |
-| API-001 |           |               |            |                 |          |
+| ID          | Test Case                 | Pre-condition | Input Data             | Expected Result           | Priority |
+| :---------- | :------------------------ | :------------ | :--------------------- | :------------------------ | :------- |
+| MOD-NEG-001 | Deskripsi test case gagal | -             | Data input tidak valid | 400/409/422 Error Message | High     |
+
+### 3.3 Monkey Tests (Chaos & Stability)
+> Pengujian dengan input acak/kacau untuk menguji ketahanan sistem.
+
+| ID          | Test Case                 | Approach                         | Input Data                  | Expected Result                        | Priority |
+| :---------- | :------------------------ | :------------------------------- | :-------------------------- | :------------------------------------- | :------- |
+| MOD-MNK-001 | **Fuzzing Fields**        | Kirim random byte/string panjang | Random Chars / Emoji / Null | 4xx Error (Handled), Tidak Crash (500) | Low      |
+| MOD-MNK-002 | **Payload Type Mismatch** | Kirim tipe data salah            | Int instead of String       | 400 Bad Request                        | Low      |
 
 ---
 
