@@ -149,7 +149,7 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model) untuk diagram lengkap.
 ## 7. API Specification
 
 > Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri.
-> Silakan rujuk ke file [API Authentication](./api-authentication.md).
+> Silakan rujuk ke file [API Authentication](../../api/iam-security/api-authentication.md).
 
 ---
 

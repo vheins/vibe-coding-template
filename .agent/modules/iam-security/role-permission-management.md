@@ -99,7 +99,7 @@ Lihat [IAM Overview - ERD](./overview.md#6-data-model).
 ## 7. API Specification
 
 > Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri.
-> Silakan rujuk ke file [API Role & Permission Management](./api-role-permission-management.md).
+> Silakan rujuk ke file [API Role & Permission Management](../../api/iam-security/api-role-permission-management.md).
 
 ---
 

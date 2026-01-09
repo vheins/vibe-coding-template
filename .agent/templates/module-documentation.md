@@ -89,10 +89,10 @@ Daftar kebutuhan berbasis role.
 
 ## 7. API Specification
 
-> Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri untuk menjaga kebersihan dokumen ini.
+> Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri di folder `.agent/api/<module-name>/`.
 > Silakan rujuk ke file API Specification terkait.
 
-- [Link ke API Specification](#)
+- [Link ke API Specification](../../api/<module-name>/api-<feature>.md)
 
 ---
 
