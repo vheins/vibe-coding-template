@@ -6,9 +6,9 @@
 
 ## Header & Navigation
 
-- [Back to Module Overview](../../application/modules/iam-security/overview.md)
-- [Link to Feature Specification](../../application/modules/iam-security/user-management.md)
-- [Link to API Specification](../../application/api/iam-security/api-user-management.md)
+- [Back to Module Overview](../../modules/iam-security/overview.md)
+- [Link to Feature Specification](../../modules/iam-security/user-management.md)
+- [Link to API Specification](../../api/iam-security/api-user-management.md)
 
 ---
 

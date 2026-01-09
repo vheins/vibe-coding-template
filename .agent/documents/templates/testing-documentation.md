@@ -6,8 +6,8 @@
 
 ## Header & Navigation
 
-- [Back to Module Overview](../../application/modules/<module-name>/overview.md)
-- [Link ke API Specification](../../application/api/<module-name>/)
+- [Back to Module Overview](../../modules/<module-name>/overview.md)
+- [Link ke API Specification](../../api/<module-name>/)
 
 ---
 

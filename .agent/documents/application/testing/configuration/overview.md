@@ -1,6 +1,6 @@
 # Testing Overview: Configuration Module
 
-- [Back to Module Overview](../../application/modules/configuration/overview.md)
+- [Back to Module Overview](../../modules/configuration/overview.md)
 
 ---
 

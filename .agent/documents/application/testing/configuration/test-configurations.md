@@ -6,8 +6,8 @@
 
 ## Header & Navigation
 
-- [Back to Module Overview](../../application/modules/configuration/overview.md)
-- [Link to API Specification](../../application/api/configuration/api-configurations.md)
+- [Back to Module Overview](../../modules/configuration/overview.md)
+- [Link to API Specification](../../api/configuration/api-configurations.md)
 
 ---
 

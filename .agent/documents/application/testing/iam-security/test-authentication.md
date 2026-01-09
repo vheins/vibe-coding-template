@@ -6,9 +6,9 @@
 
 ## Header & Navigation
 
-- [Back to Module Overview](../../application/modules/iam-security/overview.md)
-- [Link ke Feature Specification](../../application/modules/iam-security/authentication.md)
-- [Link ke API Specification](../../application/api/iam-security/api-authentication.md)
+- [Back to Module Overview](../../modules/iam-security/overview.md)
+- [Link ke Feature Specification](../../modules/iam-security/authentication.md)
+- [Link ke API Specification](../../api/iam-security/api-authentication.md)
 
 ---
 

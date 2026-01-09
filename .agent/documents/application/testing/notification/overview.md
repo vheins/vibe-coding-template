@@ -1,6 +1,6 @@
 # Testing Overview: Notification Module
 
-- [Back to Module Overview](../../application/modules/notification/overview.md)
+- [Back to Module Overview](../../modules/notification/overview.md)
 
 ---
 

@@ -6,8 +6,8 @@
 
 ## Header & Navigation
 
-- [Back to Module Overview](../../application/modules/notification/overview.md)
-- [Link to API Specification](../../application/api/notification/api-notifications.md)
+- [Back to Module Overview](../../modules/notification/overview.md)
+- [Link to API Specification](../../api/notification/api-notifications.md)
 
 ---
 

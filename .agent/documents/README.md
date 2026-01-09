@@ -29,14 +29,14 @@ Contoh:
 - `.agent/documents/application/api/payment/api-gateway.md`
 
 ### 3. Dokumentasi Testing
-Dokumentasi pengujian (testing) ditempatkan secara terpisah dalam direktori `.agent/documents/testing/` dengan struktur per modul.
+Dokumentasi pengujian (testing) ditempatkan secara terpisah dalam direktori `.agent/documents/application/testing/` dengan struktur per modul.
 
 ```
-.agent/documents/testing/<nama-module>/testing.md
+.agent/documents/application/testing/<nama-module>/testing.md
 ```
 atau spesifik per resource:
 ```
-.agent/documents/testing/<nama-module>/test-(resource).md
+.agent/documents/application/testing/<nama-module>/test-(resource).md
 ```
 
 Pastikan semua dokumentasi teknis, API, dan pengujian tersentralisasi dengan rapi untuk memudahkan pemeliharaan dan navigasi.
