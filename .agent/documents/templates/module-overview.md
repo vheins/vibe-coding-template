@@ -1,4 +1,4 @@
-# TEMPLATE IKHTISAR MODUL (Module Overview)
+# [Nama Modul]
 
 > Gunakan template ini sebagai halaman depan (landing page) untuk setiap Modul. Berisi ringkasan level tinggi dan daftar fitur.
 

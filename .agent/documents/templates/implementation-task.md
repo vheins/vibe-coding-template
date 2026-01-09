@@ -1,4 +1,4 @@
-# Daftar Tugas Implementasi (Implementation Tasks)
+# Implementation Task List
 
 > Gunakan dokumen ini sebagai backlog utama pengembangan proyek.
 
