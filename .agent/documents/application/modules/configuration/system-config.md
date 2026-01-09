@@ -1,57 +1,85 @@
-# Feature Specification: Configuration System
+# System Configuration
 
-> Dokumen ini merinci logika dan spesifikasi fitur Configuration.
-
----
-
-## Header & Navigation
-
-- [Back to Configuration Overview](./overview.md)
-- [Link ke API Specification](../../api/configuration/api-configurations.md)
+> Fitur untuk mengelola pengaturan sistem terpusat, feature flags, dan parameter aplikasi dinamis.
 
 ---
 
-## 1. Feature: Dynamic Configuration
+## Header & Navigasi
 
-### 1.1 Description
-Kemampuan mengubah perilaku sistem secara real-time.
-
-### 1.2 Business Logic
-1.  **Retrieve:**
-    - Cek Redis Cache.
-    - Jika ada, kembalikan.
-    - Jika tidak, query DB -> convert type -> simpan Redis -> kembalikan.
-    
-    ```mermaid
-    flowchart TD
-        Start[Request Config] --> CheckCache{Cache Exists?}
-        CheckCache -- Yes --> ReturnCache[Return Value]
-        CheckCache -- No --> QueryDB[Query Database]
-        QueryDB --> Convert[Convert Type]
-        Convert --> SaveCache[Save to Redis]
-        SaveCache --> ReturnDB[Return Value]
-    ```
-
-2.  **Update:**
-    - Update DB.
-    - **Invalidate Cache:** Hapus key terkait di Redis agar fetch selanjutnya mengambil data baru.
-    - Kirim webhook/event (opsional) jika ada service lain yang perlu tahu perubahan ini secara instan.
-
-### 1.3 Data Types Handling
-- `BOOLEAN`: String "true"/"false" -> Native boolean.
-- `NUMBER`: String "123" -> Native integer/float.
-- `JSON`: String "{...}" -> Parsed Object.
+- [Kembali ke Ikhtisar Modul](./overview.md)
+- [Link ke Spesifikasi API](../../api/configuration/api-configurations.md)
+- [Link ke Skenario Pengujian](../../testing/configuration/test-configuration.md)
 
 ---
 
-## 2. Feature: Feature Flags
+## 1. Ikhtisar Fitur (Feature Overview)
 
-### 2.1 Description
-Toggle sederhana untuk menyalakan/mematikan fitur.
-
-### 2.2 Logic
-- Flags biasanya bertipe `BOOLEAN`.
-- Frontend mengecek flags saat inisialisasi aplikasi untuk menyembunyikan/menampilkan menu.
-- Backend mengecek flags di Middleware untuk menolak request ke fitur yang dimatikan.
+- **Deskripsi singkat fitur:** Manajemen Key-Value pair statis dan dinamis dengan dukungan caching.
+- **Peran dalam modul:** Inti dari fleksibilitas operasional aplikasi.
+- **Nilai bisnis:** Memungkinkan perubahan perilaku sistem tanpa deployment dan mendukung A/B Testing via Feature Flags.
 
 ---
+
+## 2. Cerita Pengguna (User Stories)
+
+| ID        | Peran (Role)  | Tujuan (Goal)                         | Manfaat (Benefit)                                          |
+| :-------- | :------------ | :------------------------------------ | :--------------------------------------------------------- |
+| US-CFG-01 | Admin         | Mengaktifkan "Maintenance Mode"       | Mencegah akses user saat perbaikan database.               |
+| US-CFG-02 | Product Owner | Menyalakan fitur baru untuk 50% user  | A/B testing fitur baru.                                    |
+| US-CFG-03 | Frontend App  | Mengambil list support contact number | Contact center bisa diubah tanpa update aplikasi di store. |
+| US-CFG-04 | System        | Cache konfigurasi di memory           | Mengurangi load database pada high traffic.                |
+
+---
+
+## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+
+### 3.1 Alur Bisnis
+
+#### Fetch Configuration Flow
+```mermaid
+sequenceDiagram
+    participant Client as Frontend
+    participant API as Config API
+    participant Cache as Redis
+    participant DB as Database
+
+    Client->>API: GET /configurations
+    API->>Cache: Check Cache
+    alt Hit
+        Cache-->>API: Data
+    else Miss
+        API->>DB: Query DB
+        DB-->>API: Data
+        API->>Cache: Save (TTL 1h)
+    end
+    API-->>Client: 200 OK
+```
+
+### 3.2 Aturan Bisnis
+- **Immutability:** Key tidak boleh diubah namanya setelah dibuat.
+- **Data Types:** Supports String, Boolean, Number, JSON.
+- **Cache Invalidation:** Update DB -> Hapus Cache Key.
+
+---
+
+## 4. Model Data (Data Model)
+
+- **Configuration:** Key (Unique), Value, Type (String/Bool/JSON/Number), IsPublic, Group.
+
+*(Lihat ERD lengkap di Module Overview jika ada)*
+
+---
+
+## 5. Kepatuhan & Audit (Compliance & Audit)
+
+- **Audit Trail:** Mencatat `old_value`, `new_value`, `actor` saat update konfigurasi.
+
+---
+
+## 6. Tugas Implementasi (Implementation Tasks)
+
+| ID     | Platform | Status | Deskripsi                             |
+| :----- | :------- | :----- | :------------------------------------ |
+| CFG-01 | Backend  | Todo   | Create Configuration Table & CRUD API |
+| CFG-02 | Backend  | Todo   | Implement Caching Layer (Redis)       |
+| CFG-03 | Frontend | Todo   | Create Admin Config Management Page   |

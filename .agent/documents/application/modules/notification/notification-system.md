@@ -1,74 +1,97 @@
-# Feature Specification: Notification System
+# Notification System
 
-> Dokumen ini merinci logika dan spesifikasi fitur Notification.
-
----
-
-## Header & Navigation
-
-- [Back to Notification Overview](./overview.md)
-- [Link ke API Specification](../../api/notification/api-notifications.md)
+> Fitur pengelolaan dan pengiriman notifikasi multi-channel.
 
 ---
 
-## 1. Feature: Sending Notification
+## Header & Navigasi
 
-### 1.1 Description
-Mekanisme standar untuk mengirim notifikasi ke user via berbagai channel.
+- [Kembali ke Ikhtisar Modul](./overview.md)
+- [Link ke Spesifikasi API](../../api/notification/api-notifications.md)
+- [Link ke Skenario Pengujian](../../testing/notification/test-notification.md)
 
-### 1.2 User Stories
-- Sebagai **System**, saya ingin mengirim email konfirmasi pendaftaran agar user memvalidasi akunnya.
-- Sebagai **Admin**, saya ingin mengirim push notification promo agar user membuka aplikasi.
+---
 
-### 1.3 Business Logic
-1.  **Validasi Request:** Cek apakah `user_id` valid dan `template_code` ada.
-2.  **Check Preference:** Cek apakah user mematikan notifikasi tipe tersebut.
-3.  **Render Template:** Menggabungkan template dengan variable data.
-4.  **Queueing:** Masukkan ke antrian agar response API cepat.
-5.  **Dispatch:** Worker mengambil job dan mengirim ke 3rd party provider.
+## 1. Ikhtisar Fitur (Feature Overview)
+
+- **Deskripsi singkat fitur:** Pengiriman Email, Push, SMS, dan In-App Notification.
+- **Peran dalam modul:** Hub komunikasi sistem.
+- **Nilai bisnis:** User Engagement & Transactional Reliability.
+
+---
+
+## 2. Cerita Pengguna (User Stories)
+
+| ID        | Peran (Role) | Tujuan (Goal)                          | Manfaat (Benefit)                           |
+| :-------- | :----------- | :------------------------------------- | :------------------------------------------ |
+| US-NOT-01 | System       | Mengirim OTP via Email/SMS             | User dapat memverifikasi identitas.         |
+| US-NOT-02 | User         | Menerima notifikasi status pesanan     | User mengetahui update transaksi mereka.    |
+| US-NOT-04 | User         | Melihat riwayat notifikasi di aplikasi | User tidak ketinggalan informasi penting.   |
+| US-NOT-05 | System       | Retry pengiriman jika gagal            | Memastikan pesan sampai walau ada gangguan. |
+
+---
+
+## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+
+### 3.1 Alur Bisnis
+
+#### Sending Notification Flow
+```mermaid
+sequenceDiagram
+    participant Client as Client Module
+    participant API as Notification API
+    participant Queue as Job Queue
+    participant Worker as Notification Worker
+    participant Provider as Email/Push Provider
+    participant DB as Database
+
+    Client->>API: POST /notifications/send
+    API->>DB: Validate & Store (Status: Pending)
+    API->>Queue: Enqueue Job
+    API-->>Client: 202 Accepted
+
+    Queue->>Worker: Process Job
+    Worker->>DB: Get Template & Data
+    Worker->>Provider: Send Request (SMTP/FCM)
     
-    ```mermaid
-    flowchart TD
-        Req[Request Send] --> Validate{Valid?}
-        Validate -- No --> Err[Return Error]
-        Validate -- Yes --> Pref{User Opt-in?}
-        Pref -- No --> Skip[Skip / Log]
-        Pref -- Yes --> Render[Render Template]
-        Render --> Queue[Enqueue Job]
-        Queue --> Worker[Worker Process]
-        Worker --> Provider[External Provider]
-    ```
+    alt Success
+        Provider-->>Worker: OK
+        Worker->>DB: Update Status: Sent
+    else Failure
+        Worker->>Queue: Retry
+    end
+```
 
-
-### 1.4 Constraints
-- Ukuran payload maksimal 10KB.
-- Attachment email maksimal 5MB.
+### 3.2 Aturan Bisnis
+- **User Preference:** Jangan kirim jika user Opt-Out.
+- **Rate Limit:** Limit OTP (misal 10/jam).
+- **Retention:** Log disimpan 1 tahun.
 
 ---
 
-## 2. Feature: In-App Notification Center
+## 4. Model Data (Data Model)
 
-### 2.1 Description
-Fitur bagi user untuk melihat riwayat notifikasi di dalam aplikasi.
+- **Notification:** Log pesan (Type, Channel, Status).
+- **Template:** Blueprint pesan (`Hello {{name}}`).
+- **UserPreference:** Opt-in/out settings.
 
-### 2.2 User Stories
-- Sebagai **User**, saya ingin melihat daftar notifikasi saya.
-- Sebagai **User**, saya ingin menandai notifikasi sebagai "sudah dibaca".
-
-### 2.3 Business Logic
-- **List:** Menampilkan notifikasi terurut dari yang terbaru.
-- **Pagination:** Menggunakan cursor-based pagination.
-- **Unread Count:** Menghitung jumlah notifikasi dengan status `SENT`.
+*(Lihat ERD lengkap di Module Overview jika diperlukan)*
 
 ---
 
-## 3. Feature: Template Management
+## 5. Kepatuhan & Audit (Compliance & Audit)
 
-### 3.1 Description
-CRUD Template notifikasi agar pesan dinamis dan mudah diubah.
-
-### 3.2 Business Logic
-- Template mendukung syntax Mustache/Handlebars: `Halo {{name}}, kode Anda {{code}}`.
-- Template memiliki versi (audit trail).
+- **Anti-Spam:** Hormati Unsubscribe.
+- **Security:** Masking OTP di log.
 
 ---
+
+## 6. Tugas Implementasi (Implementation Tasks)
+
+| ID        | Platform | Status | Deskripsi                                       |
+| :-------- | :------- | :----- | :---------------------------------------------- |
+| NOT-BE-01 | Backend  | Todo   | Setup Notification Service & Queue (Redis/Bull) |
+| NOT-BE-02 | Backend  | Todo   | Implement Provider Adapters (Email, Push)       |
+| NOT-BE-03 | Backend  | Todo   | Implement API `POST /send` & `GET /list`        |
+| NOT-FE-01 | Frontend | Todo   | Implement Notification Bell & Badge             |
+| NOT-FE-02 | Frontend | Todo   | Implement Notification List Page                |

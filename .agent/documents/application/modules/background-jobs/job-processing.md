@@ -1,26 +1,40 @@
-# Feature Specification: Job Processing & Scheduling
+# Job Processing & Scheduling
 
-> Dokumen ini merinci logika dan spesifikasi sistem Background Jobs (Queue & Scheduler).
-
----
-
-## Header & Navigation
-
-- [Back to Module Overview](./overview.md)
-- [Link ke API Specification](../../api/background-jobs/api-background-jobs.md)
+> Fitur sistem Background Jobs untuk pemrosesan asinkron dan penjadwalan.
 
 ---
 
-## 1. Feature: Queue Processing
+## Header & Navigasi
 
-### 1.1 Description
-Mekanisme pemrosesan tugas asinkron untuk menjaga responsivitas API.
+- [Kembali ke Ikhtisar Modul](./overview.md)
+- [Link ke Spesifikasi API](../../api/background-jobs/api-background-jobs.md)
+- [Link ke Skenario Pengujian](../../testing/background-jobs/test-background-jobs.md)
 
-### 1.2 Business Logic
-1.  **Enqueue:** Producer (API) mengirim job ke Redis.
-2.  **Process:** Worker mengambil job dari Redis.
-3.  **Ack/Fail:** Worker menandai job selesai atau gagal.
+---
 
+## 1. Ikhtisar Fitur (Feature Overview)
+
+- **Deskripsi singkat fitur:** Mekanisme queue (Redis) dan cron scheduling.
+- **Peran dalam modul:** Engine utama modul.
+- **Nilai bisnis:** Skalabilitas dan Keandalan proses berat.
+
+---
+
+## 2. Cerita Pengguna (User Stories)
+
+| ID        | Peran (Role) | Tujuan (Goal)                       | Manfaat (Benefit)                                                      |
+| :-------- | :----------- | :---------------------------------- | :--------------------------------------------------------------------- |
+| US-JOB-01 | Sistem       | Menjalankan report bulanan otomatis | Report tersedia tepat waktu tanpa intervensi manual.                   |
+| US-JOB-02 | Developer    | Inspect fail jobs di dashboard      | Memudahkan debugging root cause kegagalan proses background.           |
+| US-JOB-03 | User         | Request export data besar           | Tidak perlu menunggu loading browser, notifikasi dikirim saat selesai. |
+
+---
+
+## 3. Alur & Aturan Bisnis (Business Flow & Rules)
+
+### 3.1 Alur Bisnis
+
+#### Queue Processing
 ```mermaid
 flowchart LR
     API[Producer] -->|Push| Redis[(Redis Queue)]
@@ -29,20 +43,35 @@ flowchart LR
     Task -->|Result| DB[(Job Log)]
 ```
 
-### 1.3 Retry Mechanism
-- Exponential Backoff: Delay bertingkat (1s, 2s, 4s...) untuk retry.
-- Dead Letter Queue (DLQ): Job yang gagal N kali dipindah ke DLQ untuk inspeksi manual.
+#### Task Scheduling Logic
+Utilizes Cron Expressions (e.g., `0 0 * * *`) for periodic execution with Distributed Lock to prevent duplicate runs.
+
+### 3.2 Aturan Bisnis
+- **Idempotency:** Job harus aman jika di-retry.
+- **Retry Mechanism:** Exponential Backoff + DLQ (Dead Letter Queue) setelah N kali gagal.
+- **Timeout:** Batas waktu eksekusi wajib ada.
 
 ---
 
-## 2. Feature: Task Scheduling
+## 4. Model Data (Data Model)
 
-### 2.1 Description
-Penjadwalan tugas berulang (Cron Jobs).
+- **Job Log:** Mencatat riwayat eksekusi (ID, Status, Result, Error).
+- **Redis Keys:** Disimpan sebagai Hash/List di Redis.
 
-### 2.2 Logic
-- Menggunakan library scheduler (cth: Bull/Agenda).
-- Job didefinisikan dengan Cron Expression (misal: `0 0 * * *` untuk daily midnight).
-- Menjamin *single execution* (lock mechanism) agar tidak duplikat jika multiple instances berjalan.
+*(Lihat ERD lengkap di Module Overview jika diperlukan)*
 
 ---
+
+## 5. Kepatuhan & Audit (Compliance & Audit)
+
+- **Failed Jobs:** Wajib di-log dan di-retain untuk investigasi.
+
+---
+
+## 6. Tugas Implementasi (Implementation Tasks)
+
+| ID        | Platform | Status | Deskripsi                                          |
+| :-------- | :------- | :----- | :------------------------------------------------- |
+| JOB-BE-01 | Backend  | Todo   | Setup Infrastruktur Queue (Redis/Bull)             |
+| JOB-BE-02 | Backend  | Todo   | Implementasi Base Worker Class                     |
+| JOB-BE-03 | Backend  | Todo   | Setup Dashboard UI untuk Queue (misal: Bull Board) |
