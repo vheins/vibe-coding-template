@@ -1,136 +1,61 @@
-# Role & Permission Management Specification
+# Feature Specification: Role & Permission Management
 
-> Dokumen ini menjelaskan detail spesifikasi teknis untuk fitur Role dan Permission Management.
+> Dokumen ini merinci logika dan spesifikasi fitur RBAC (Role-Based Access Control).
 
 ---
 
 ## Header & Navigation
 
-- [Back to IAM Overview](./overview.md)
-- [Link ke All Modules](../../../README.md)
+- [Back to Module Overview](./overview.md)
+- [Link ke API Specification](../../api/iam-security/api-role-permission-management.md)
 
 ---
 
-## 1. Feature Overview
+## 1. Feature Description
 
-- **Deskripsi singkat:** Fitur untuk mengelola Role-Based Access Control (RBAC).
-- **Posisi dalam modul:** Komponen inti dari IAM & Security.
-- **Hubungan dengan domain bisnis utama:** Menentukan siapa boleh melakukan apa.
+### 1.1 Description
+Mekanisme kontrol akses granular di mana hak akses (Permission) dikelompokkan ke dalam Peran (Role), dan Role diberikan kepada User.
 
----
+### 1.2 Business Logic
+1.  **Define Roles:** Admin membuat role (e.g., Editor, Viewer).
+2.  **Assign Permissions:** Admin memilih permission apa saja yang dimiliki Role tersebut.
+3.  **Check Access:** Middleware mengecek `User -> Roles -> Permissions` saat request masuk.
 
-## 2. Purpose & Business Value
-
-### 2.1 Tanggung Jawab Utama
-- Membuat dan mendefinisikan Role (Peran).
-- Menetapkan Permission (Hak Akses) ke Role.
-- Menetapkan Role ke User.
-
-### 2.2 Nilai Bisnis
-- **Security:** Granular access control meminimalkan risiko privilege escalation.
-- **Flexibility:** Mudah menyesuaikan hak akses tanpa mengubah kode (konfigurasi data).
-
----
-
-## 3. Scope
-
-### 3.1 In-Scope
-- CRUD Roles.
-- List Permissions (Read-only from code/seed).
-- Assign Permissions to Role.
-- Assign Roles to User.
-
-### 3.2 Out-of-Scope
-- Dynamic Permission Creation (Permission biasanya hardcoded di level aplikasi dan di-seed ke DB).
-
----
-
-## 4. User Stories
-
-| ID    | Role  | Goal                          | Benefit                                             |
-| :---- | :---- | :---------------------------- | :-------------------------------------------------- |
-| US-04 | Admin | Membuat Role baru             | Mengelompokkan hak akses pengguna                   |
-| US-05 | Admin | Menetapkan Permission ke Role | Mengatur apa yang bisa dilakukan oleh Role tertentu |
-| US-11 | Admin | Assign Role ke User           | Memberikan wewenang kepada user                     |
-
----
-
-## 5. Business Flow & Rules
-
-### 5.1 Business Flow
-
-#### Role & Permission Assignment Flow
 ```mermaid
 sequenceDiagram
     participant Admin
-    participant Client
     participant API as IAM Service
     participant DB as Database
 
-    Admin->>Client: Create New Role (e.g. Editor)
-    Client->>API: POST /roles
+    Admin->>API: POST /roles (Create Role)
     API->>DB: Insert Role
-    API-->>Client: 201 Created
-
-    Admin->>Client: Assign Permissions to Role
-    Client->>API: PATCH /roles/{id}/relationships/permissions
-    API->>DB: Update Role-Permission Table
-    API-->>Client: 204 No Content (or 200 with data)
-
-    Admin->>Client: Assign Role to User
-    Client->>API: PATCH /users/{id}/relationships/roles
-    API->>DB: Update User-Role Table
-    API-->>Client: 204 No Content
+    Admin->>API: PATCH /roles/{id}/permissions
+    API->>DB: Update Role_Permissions Relation
+    API-->>Admin: 204 No Content
 ```
 
-### 5.2 Business Rules
-- **Super Admin:** Role `SUPER_ADMIN` memiliki semua permission secara default dan tidak bisa dihapus.
-- **Unique Name:** Nama Role harus unik.
+### 1.3 Data Handling
+- **Super Admin:** Role spesial yang memiliki akses `*` (wildcard) atau bypass check.
+- **Immutability:** Permission code (misal `USER:CREATE`) didefinisikan di kode/seed database dan tidak dapat diubah via UI Admin.
 
 ---
 
-## 6. Data Model
+## 2. Technical Details
 
-Referensi ke entitas: `Roles`, `Permissions`, `RolePermissions`, `UserRoles`.
-Lihat [IAM Overview - ERD](./overview.md#6-data-model).
+### 2.1 Dependencies
+- **Database:** Tabel `roles`, `permissions`, `role_permissions`, `user_roles`.
+- **Middleware:** `AuthMiddleware` untuk intercept request dan validasi scope.
 
----
-
-## 7. API Specification
-
-> Detail spesifikasi API dipisahkan ke dalam dokumen tersendiri.
-> Silakan rujuk ke file [API Role & Permission Management](../../api/iam-security/api-role-permission-management.md).
+### 2.2 Configuration
+- `SUPER_ADMIN_ROLE_NAME`: Nama role super admin (default: `SUPER_ADMIN`).
 
 ---
 
-## 8. Dependencies
+## 3. Implementation Tasks Summary
 
-### 8.1 Required Modules
-- **Database:** Akses tabel RBAC.
+> Tugas detail telah diagregasi di `tasks/implementation-tasks.md`.
 
----
-
-## 9. Integration Points
-
-### 9.1 Inbound
-- **Middleware:** Authorization middleware akan mengecek permission user berdasarkan role yang dimiliki.
-
----
-
-## 10. Compliance & Audit
-
-- **Audit:** Setiap perubahan role atau permission assignment harus dicatat.
-
----
-
-## 11. Implementation Tasks
-
-**Strict Rule:** Every backend task that involves a user interface must have a corresponding frontend task.
-
-| Task ID | Platform | Status | Description                                                           |
-| :------ | :------- | :----- | :-------------------------------------------------------------------- |
-| RBAC-01 | Backend  | Todo   | Implement CRUD Roles                                                  |
-| RBAC-02 | Frontend | Todo   | Implement Role Management Page (List, Create, Edit)                   |
-| RBAC-03 | Backend  | Todo   | Implement `PATCH /relationships` endpoints                            |
-| RBAC-04 | Frontend | Todo   | Implement Permission Assignment UI (Checkbox list/Transfer component) |
-| RBAC-05 | Backend  | Todo   | Implement Permission Seeder                                           |
+- [Backend] CRUD Roles & Permissions endpoints.
+- [Backend] Implementation of Relationship endpoints (Assign Perms to Role).
+- [Frontend] Role Management UI & Permission Assignment Checkbox.
+- [Backend] Permission Seeder logic.
