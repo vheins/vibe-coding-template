@@ -119,7 +119,7 @@ sequenceDiagram
     participant Email as Email Service
 
     User->>Client: Request Password Reset (Email)
-    Client->>API: POST /password-reset-requests
+    Client->>API: POST /auth/forgot-password
     API->>DB: Find User by Email
     alt User Found
         API->>API: Generate Reset Token

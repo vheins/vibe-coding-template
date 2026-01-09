@@ -116,7 +116,7 @@ Accept: application/vnd.api+json
 ---
 
 ### 2.3 Forgot Password (Request Reset)
-- **URL:** `POST /password-reset-requests`
+- **URL:** `POST /auth/forgot-password`
 - **Description:** Meminta link reset password via email.
 - **Access Control:** Public
 
@@ -132,7 +132,7 @@ Accept: application/vnd.api+json
 ```json
 {
   "data": {
-    "type": "password-reset-requests",
+    "type": "auth_forgot_password",
     "attributes": {
       "email": "user@example.com"
     }
@@ -155,7 +155,7 @@ Accept: application/vnd.api+json
 ---
 
 ### 2.4 Reset Password (Execute Reset)
-- **URL:** `POST /password-resets`
+- **URL:** `POST /auth/reset-password`
 - **Description:** Mengatur ulang password menggunakan token reset.
 - **Access Control:** Public
 
@@ -171,7 +171,7 @@ Accept: application/vnd.api+json
 ```json
 {
   "data": {
-    "type": "password-resets",
+    "type": "auth_reset_password",
     "attributes": {
       "token": "reset-token-xyz",
       "new_password": "newSecurePassword1"

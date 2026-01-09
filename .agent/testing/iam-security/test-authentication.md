@@ -33,7 +33,7 @@
 - **API Endpoints:**
   - `POST /auth/login` (Login)
   - `POST /auth/register` (Register)
-  - `POST /password-reset-requests` (Forgot Password)
+  - `POST /auth/forgot-password` (Forgot Password)
 - **Database Interactions:**
   - Verify user creation
   - Verify token storage (refresh tokens)
