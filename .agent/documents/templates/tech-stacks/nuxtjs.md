@@ -1,7 +1,7 @@
 # Tech Stack: Nuxt.js (Modular)
 
 ## 1. Core Stack
-- **Framework**: Nuxt 3.10+
+- **Framework**: Nuxt 4.x
 - **Language**: TypeScript
 - **State**: Pinia (Setup Store Standard)
 - **UI**: Nuxt UI (Tailwind CSS)

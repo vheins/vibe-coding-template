@@ -1,4 +1,4 @@
-# Tech Stack: React.js (Vite)
+# Tech Stack: React 19 (Vite)
 
 ## 1. Core Stack
 - **Build Tool**: Vite

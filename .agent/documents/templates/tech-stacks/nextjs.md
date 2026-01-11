@@ -1,7 +1,7 @@
 # Tech Stack: Next.js (App Router)
 
 ## 1. Core Stack
-- **Framework**: Next.js 14+ (App Router)
+- **Framework**: Next.js 16+ (App Router)
 - **Language**: TypeScript 5.x
 - **Styling**: Tailwind CSS
 - **State**: Server State (TanStack Query) + Client State (Zustand)

@@ -2,7 +2,7 @@
 
 ## 1. Core Stack
 - **Framework**: FastAPI
-- **Language**: Python 3.10+
+- **Language**: Python 3.13+
 - **ORM**: SQLAlchemy (Async) + Pydantic v2
 - **Server**: Uvicorn
 

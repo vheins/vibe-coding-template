@@ -1,8 +1,8 @@
 # Tech Stack: Spring Boot (Java)
 
 ## 1. Core Stack
-- **Framework**: Spring Boot 3.x
-- **Language**: Java 17+ or Kotlin
+- **Framework**: Spring Boot 3.5+
+- **Language**: Java 25 (LTS) or Kotlin
 - **Build**: Gradle or Maven
 - **DB**: JPA / Hibernate (Postgres)
 

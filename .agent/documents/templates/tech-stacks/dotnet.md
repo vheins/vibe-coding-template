@@ -1,11 +1,11 @@
 # Tech Stack: .NET (Enterprise)
 
 ## 1. Core Stack
-- **Framework**: .NET 8.0+
-- **Language**: C# 12+
+- **Framework**: .NET 10 (LTS)
+- **Language**: C# 14+
 - **Web Framework**: ASP.NET Core Web API
 - **ORM**: Entity Framework Core
-- **Database**: SQL Server / PostgreSQL
+- **Database**: SQL Server 2022+ / PostgreSQL 17+
 
 ## 2. Coding Rules
 - **Async/Await**: Use `async Task<T>` for all I/O operations.

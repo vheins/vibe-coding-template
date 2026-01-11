@@ -1,9 +1,9 @@
 # Tech Stack: Laravel Filament (TALL Stack)
 
 ## 1. Core Stack
-- **Framework**: Laravel 11.x
-- **Admin Panel**: Filament 3.x
-- **Frontend**: Livewire 3.x + Alpine.js
+- **Framework**: Laravel 12.x
+- **Admin Panel**: Filament 4.x
+- **Frontend**: Livewire 4.x + Alpine.js
 - **Styling**: Tailwind CSS (Filament Theme)
 - **Database**: PostgreSQL / MySQL 8.0+
 

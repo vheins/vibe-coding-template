@@ -1,7 +1,7 @@
 # Tech Stack: Flutter (Modular)
 
 ## 1. Core Stack
-- **Framework**: Flutter 3.19+
+- **Framework**: Flutter 3.27+
 - **Language**: Dart 3.0+
 - **State Management**: Riverpod (Generator)
 - **Architecture**: Clean Architecture (Feature-first)

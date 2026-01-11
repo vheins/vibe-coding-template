@@ -1,7 +1,7 @@
 # Tech Stack: Golang (Clean Arch)
 
 ## 1. Core Stack
-- **Language**: Go 1.22+
+- **Language**: Go 1.25+
 - **Web Framework**: Echo / Gin
 - **Database**: PostgreSQL (pgx) or GORM
 - **Config**: Viper

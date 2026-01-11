@@ -1,7 +1,7 @@
 # Tech Stack: Laravel (Modular Monolith)
 
 ## 1. Core Stack
-- **Framework**: Laravel 11.x
+- **Framework**: Laravel 12.x
 - **Language**: PHP 8.4+
 - **Architecture**: Modular Monolith (Custom `modules/` directory)
 - **Database**: PostgreSQL / MySQL 8.0+

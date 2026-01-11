@@ -1,8 +1,8 @@
 # Tech Stack: Express.js (Node.js)
 
 ## 1. Core Stack
-- **Runtime**: Node.js LTS
-- **Framework**: Express.js 4/5
+- **Runtime**: Node.js 24 (LTS)
+- **Framework**: Express.js 5.x
 - **Language**: TypeScript
 - **ORM**: Prisma or TypeORM
 

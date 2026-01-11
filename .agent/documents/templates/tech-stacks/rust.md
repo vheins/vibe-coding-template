@@ -1,7 +1,7 @@
 # Tech Stack: Rust (System/Web)
 
 ## 1. Core Stack
-- **Language**: Rust 2021 Edition
+- **Language**: Rust 2024 Edition
 - **Web Framework**: Axum or Actix-web
 - **Database**: SQLx (Compile-time checked queries)
 - **Serialization**: Serde
