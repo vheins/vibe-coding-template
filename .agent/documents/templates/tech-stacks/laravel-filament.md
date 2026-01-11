@@ -10,7 +10,9 @@
 
 ## 2. Architectural Guidelines
 - **Structure**:
-  - `/app/Filament`: All Admin Logic (Resources, Pages, Widgets, Clusters).
+  - `/app/Filament`: All Admin Logic.
+  - `/app/Filament/Clusters`: Group related Resources (e.g. `Finance`, `HR`).
+  - `/app/Filament/Resources`: Standalone Resources.
   - `/app/Models`: Eloquent Models.
   - `/app/Providers`: App Service Providers (FilamentPanelProvider).
   - `/app/Policies`: Authorization Policies (Strict).
