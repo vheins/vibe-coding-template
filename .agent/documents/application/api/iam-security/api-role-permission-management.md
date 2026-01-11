@@ -63,6 +63,58 @@ Authorization: Bearer <token>
 ```
 
 ---
+ 
+ ### 2.2 Update Role
+ - **URL:** `PATCH /roles/:id`
+ - **Description:** Mengubah nama atau deskripsi role.
+ - **Access Control:** Authenticated (Admin)
+ 
+ #### Request
+ 
+ **Body:**
+ ```json
+ {
+   "data": {
+     "type": "roles",
+     "id": "role-uuid-1",
+     "attributes": {
+       "name": "EDITOR_LEAD",
+       "description": "Lead Editor with publish rights"
+     }
+   }
+ }
+ ```
+ 
+ #### Response
+ 
+ **Success (200 OK):**
+ ```json
+ {
+   "data": {
+     "type": "roles",
+     "id": "role-uuid-1",
+     "attributes": {
+       "name": "EDITOR_LEAD",
+       "description": "Lead Editor with publish rights"
+     },
+     "links": { "self": "/api/v1/roles/role-uuid-1" }
+   }
+ }
+ ```
+ 
+ ---
+ 
+ ### 2.3 Delete Role
+ - **URL:** `DELETE /roles/:id`
+ - **Description:** Menghapus role (Soft/Hard delete).
+ - **Access Control:** Authenticated (Admin)
+ 
+ #### Response
+ 
+ **Success (204 No Content):**
+ *(Empty Body)*
+ 
+ ---
 
 ### 2.2 List Roles
 - **URL:** `GET /roles`

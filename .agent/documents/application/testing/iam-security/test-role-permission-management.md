@@ -56,6 +56,8 @@
 | RBAC-POS-003 | **Access Endpoint as Authorized** | User assigned Role X           | -                        | 200 OK / Success      | High     |
 | RBAC-POS-004 | **List All Roles**                | Admin Token                    | -                        | 200 OK, List Returned | Medium   |
 | RBAC-POS-005 | **Unassign Permission**           | Permission currently assigned  | RoleID, PermissionID     | 200 OK, Removed       | Medium   |
+| RBAC-POS-006 | **Update Role**                   | Role Exists                    | Different Name/Desc      | 200 OK, Updated       | Medium   |
+| RBAC-POS-007 | **Delete Role**                   | Role Unused                    | Target RoleID            | 204 No Content        | High     |
 
 ### 3.2 Negative Cases (Validation Rules)
 > Skenario gagal untuk memvalidasi penanganan error dan input tidak valid.

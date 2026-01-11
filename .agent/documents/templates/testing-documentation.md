@@ -60,6 +60,7 @@
  | :---------- | :------------------------ | :------------------------------- | :-------------------------- | :------------------------------------- | :------- |
  | MOD-MNK-001 | **Fuzzing Fields**        | Kirim random byte/string panjang | Random Chars / Emoji / Null | 4xx Error (Handled), Tidak Crash (500) | Low      |
  | MOD-MNK-002 | **Payload Type Mismatch** | Kirim tipe data salah            | Int instead of String       | 400 Bad Request                        | Low      |
+ | MOD-MNK-003 | **ID Enumeration**        | Probing Random IDs               | Random UUID / Int           | 404 Not Found                          | Low      |
  
  ---
  

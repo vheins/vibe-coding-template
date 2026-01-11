@@ -108,4 +108,31 @@
  
  ### 2.2 [Nama Endpoint 2]
  
- ...
+ ---
+
+ ### 2.x Change Password (Example Action)
+ - **URL:** `POST /resource/change-password`
+ - **Description:** Mengganti password pengguna.
+ - **Access Control:** Authenticated
+ 
+ #### Request
+ 
+ **Body:**
+ ```json
+ {
+   "data": {
+     "type": "resource_change_password",
+     "attributes": {
+       "current_password": "oldPassword123",
+       "new_password": "newSecurePassword1"
+     }
+   }
+ }
+ ```
+ 
+ #### Response
+ 
+ **Success (204 No Content):**
+ *(Empty Body)*
+ 
+ ---

@@ -16,56 +16,70 @@
 
 ## 2. Endpoints
 
-### 2.1 List Users
-- **URL:** `GET /users`
-- **Description:** Mendapatkan daftar pengguna dengan paginasi dan filter.
+### 2.1 Create User (Register by Admin)
+- **URL:** `POST /users`
+- **Description:** Admin membuat user baru.
 - **Access Control:** Authenticated (Admin)
 
 #### Request
 
 **Headers:**
 ```http
+Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 Authorization: Bearer <token>
 ```
 
-**Query Parameters:**
-- `page[number]`: 1
-- `page[size]`: 10
-- `filter[search]`: John
+**Body:**
+```json
+{
+  "data": {
+    "type": "users",
+    "attributes": {
+      "email": "employee@company.com",
+      "full_name": "New Employee",
+      "password": "initialPassword123",
+      "role_id": 2
+    }
+  }
+}
+```
 
 #### Response
 
-**Success (200 OK):**
+**Success (201 Created):**
 ```json
 {
-  "data": [
-    {
-      "type": "users",
-      "id": "uuid-1",
-      "attributes": {
-        "email": "john@example.com",
-        "full_name": "John Doe",
-        "status": "ACTIVE"
-      },
-      "links": {
-        "self": "/api/v1/users/uuid-1"
-      }
+  "data": {
+    "type": "users",
+    "id": "uuid-new",
+    "attributes": {
+      "email": "employee@company.com",
+      "status": "PENDING_ACTIVATION"
     }
-  ],
-  "meta": {
-    "total_pages": 10,
-    "total_items": 100
-  },
-  "links": {
-    "self": "/api/v1/users?page[number]=1&page[size]=10",
-    "next": "/api/v1/users?page[number]=2&page[size]=10",
-    "last": "/api/v1/users?page[number]=10&page[size]=10"
   }
 }
 ```
 
 ---
+
+### 2.2 List Users (Audit Log)
+- **URL:** `GET /users`
+- **Description:** Mendapatkan daftar pengguna dengan filter canggih untuk audit.
+- **Access Control:** Authenticated (Admin)
+
+#### Request
+
+**Query Parameters:**
+- `filter[status]`: ACTIVE, SUSPENDED
+- `filter[role]`: EDITOR
+- `sort`: -created_at
+
+#### Response
+
+*(Standar JSON:API Collection)*
+
+
 
 ### 2.2 Get Single User
 - **URL:** `GET /users/:id`

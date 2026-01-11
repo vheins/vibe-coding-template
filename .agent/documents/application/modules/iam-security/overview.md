@@ -23,24 +23,39 @@ Modul IAM & Security bertanggung jawab atas manajemen identitas pengguna, otenti
 ---
 
 ## 2. Feature List
-
-| Fitur                                                | Deskripsi                                    | Status |
-| :--------------------------------------------------- | :------------------------------------------- | :----- |
-| [Authentication](./authentication.md)                | Login, Register, Forgot Password, Token Mgmt | Stable |
-| [User Management](./user-management.md)              | CRUD User, Suspend/Activate                  | Stable |
-| [Role & Permission](./role-permission-management.md) | RBAC Management (Roles, Permissions)         | Stable |
-
----
-
-## 3. High-Level Architecture
-
-```mermaid
-graph LR
-    User -->|Auth Request| IAM[IAM Service]
-    IAM -->|Token Issue| User
-    IAM -->|Validate Token| OtherModules[Other Modules]
-    IAM --> Database[(IAM DB)]
-```
+ 
+ | Fitur               | Deskripsi                                                                                         | Sub-Modul                                            |
+ | :------------------ | :------------------------------------------------------------------------------------------------ | :--------------------------------------------------- |
+ | **Authentication**  | Layanan identitas lengkap mencakup Login, Register, MFA, dan manajemen sesi berbasis Token (JWT). | [Authentication](./authentication.md)                |
+ | **User Management** | Manajemen lifecycle pengguna (Onboarding sampai Offboarding), profil, dan audit aktivitas akun.   | [User Management](./user-management.md)              |
+ | **RBAC Engine**     | Kontrol akses granular berbasis Peran (*Role*) dan Izin (*Permission*) yang dinamis.              | [Role & Permission](./role-permission-management.md) |
+ 
+ ---
+ 
+ ## 3. High-Level Architecture
+ 
+ ```mermaid
+ flowchart TB
+     User["User / Client"]
+     
+     subgraph IAM_Module ["IAM & Security Module"]
+         direction TB
+         Auth["Auth Service<br>(Login, Token Issue)"]
+         UserDir["User Directory<br>(Profile, Credential Store)"]
+         RBAC["RBAC Engine<br>(Policy Enforcement)"]
+         
+         Auth -->|Verify Creds| UserDir
+         Auth -->|Get Permissions| RBAC
+     end
+ 
+     DB[(IAM Database)]
+     
+     User -->|1. Login| Auth
+     UserDir --> DB
+     RBAC --> DB
+     
+     Other["Other Modules"] -->|2. Validate Token| Auth
+ ```
 
 ---
 

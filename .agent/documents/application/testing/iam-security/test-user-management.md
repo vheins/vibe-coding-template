@@ -55,7 +55,9 @@
 | USR-POS-002 | **Get User Profile (Self)** | User Token    | -                                | 200 OK, Own details returned | High     |
 | USR-POS-003 | **Update Own Profile**      | User Token    | Bio: "New Bio", Name: "New Name" | 200 OK, Details updated      | Medium   |
 | USR-POS-004 | **Delete User (Admin)**     | Admin Token   | Target User ID                   | 204 No Content / 200 OK      | High     |
-| USR-POS-005 | **Search User**             | Admin Token   | `filter[email]=xyz`              | 200 OK, Correct results      | Medium   |
+| USR-POS-005 | **Search User (Audit)**     | Admin Token   | `filter[status]=SUSPENDED`       | 200 OK, Only Suspended users | Medium   |
+| USR-POS-006 | **Block User (Suspend)**    | Admin Token   | Update Status -> SUSPENDED       | 200 OK, User cannot login    | High     |
+| USR-POS-007 | **Re-activate User**        | Admin Token   | Update Status -> ACTIVE          | 200 OK, User can login       | High     |
 
 ### 3.2 Negative Cases (Validation Rules)
 > Skenario gagal untuk memvalidasi penanganan error dan input tidak valid.
@@ -67,6 +69,7 @@
 | USR-NEG-003 | **Update Invalid Email Format** | User Token             | Email: "invalid_format"    | 422 Unprocessable Entity          | Medium   |
 | USR-NEG-004 | **Delete Self (Admin)**         | Admin Token            | ID: Own_Admin_ID           | 400 Bad Request (Prevent suicide) | Low      |
 | USR-NEG-005 | **Get Non-existent User**       | Admin Token            | ID: Random UUID            | 404 Not Found                     | Medium   |
+| USR-NEG-006 | **Blocked User Login**          | User Suspended         | Valid Credentials          | 403 Forbidden (Account Suspended) | High     |
 
 ### 3.3 Monkey Tests (Chaos & Stability)
 > Pengujian dengan input acak/kacau untuk menguji ketahanan sistem.

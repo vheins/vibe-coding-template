@@ -62,6 +62,8 @@
 | AUTH-POS-004 | **Forgot Password Request**      | User terdaftar         | Valid Registered Email                               | 202 Accepted, Reset Email sent          | High     |
 | AUTH-POS-005 | **Reset Password Success**       | Token reset valid      | Valid Token, New Password                            | 200 OK, Password Updated                | High     |
 | AUTH-POS-006 | **Logout Success**               | Login & punya token    | Valid Refresh Token                                  | 200 OK, Refesh Token di-revoke          | Medium   |
+| AUTH-POS-007 | **Activate Account**             | Token email valid      | Valid Activation Token                               | 200 OK, User Status -> ACTIVE           | High     |
+| AUTH-POS-008 | **Change Password**              | User Login             | Old Pass & New Pass                                  | 204 No Content, Password Updated        | High     |
 
 ### 3.2 Negative Cases (Validation Rules)
 > Skenario gagal untuk memvalidasi penanganan error dan input tidak valid.
@@ -76,6 +78,9 @@
 | AUTH-NEG-006 | **Reset Password Expired Token**  | Token expired         | Expired Token, New Password     | 400 Bad Request, Error "Token expired"                     | High     |
 | AUTH-NEG-007 | **Reset Password Invalid Token**  | -                     | Random String Token             | 400 Bad Request, Error "Invalid token"                     | Medium   |
 | AUTH-NEG-008 | **Login Missing Fields**          | -                     | Empty Body / Partial Fields     | 400 Bad Request, Validation Error                          | Medium   |
+| AUTH-NEG-009 | **Activate Invalid Token**        | -                     | Random/Expired Token            | 400 Bad Request / 404 Not Found                            | High     |
+| AUTH-NEG-010 | **Change Pass Wrong Old Pass**    | User Login            | Wrong Old Pass                  | 401 Unauthorized / 400 Bad Request                         | High     |
+| AUTH-NEG-011 | **Change Pass Same as Old**       | User Login            | New Pass = Old Pass             | 400 Bad Request (Security Best Practice)                   | Low      |
 
 ### 3.3 Monkey Tests (Chaos & Stability)
 > Pengujian dengan input acak/kacau untuk menguji ketahanan sistem (Crash Free Users).

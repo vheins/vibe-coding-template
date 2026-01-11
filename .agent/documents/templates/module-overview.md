@@ -23,26 +23,39 @@
 ---
 
 ## 2. Feature List
-
-Modul ini terdiri dari fitur-fitur berikut. Silakan klik untuk melihat spesifikasi detail.
-
-| Feature                                 | Description                   | Status      |
-| :-------------------------------------- | :---------------------------- | :---------- |
-| [Feature Name](./feature-file.md)       | Penjelasan singkat fitur      | Stable/Beta |
-| [User Management](./user-management.md) | CRUD user dan role assignment | Stable      |
-
----
-
-## 3. High-Level Architecture
-
-Gambaran bagaimana modul ini berinteraksi dengan modul lain secara global.
-
-```mermaid
-graph LR
-    User --> ThisModule
-    ThisModule --> Database
-    ThisModule --> ExternalService
-```
+ 
+ Modul ini terdiri dari fitur-fitur berikut. Silakan klik nama fitur untuk melihat spesifikasi detail ("User Stories" dan "Acceptance Criteria").
+ 
+ | Fitur               | Deskripsi                                    | Sub-Modul                         |
+ | :------------------ | :------------------------------------------- | :-------------------------------- |
+ | **[Feature Name]**  | Penjelasan singkat fitur dan value utamanya. | [Feature File](./feature-file.md) |
+ | **User Management** | CRUD user, aktivasi, dan assignment role.    | [User Mgmt](./user-management.md) |
+ 
+ ---
+ 
+ ## 3. High-Level Architecture
+ 
+ Gambaran bagaimana modul ini berinteraksi dengan modul lain secara global, serta interaksi internal antar komponen.
+ 
+ ```mermaid
+ flowchart TB
+     User["User / Client"]
+     
+     subgraph This_Module ["This Module (Scope)"]
+         direction TB
+         Service["Core Service<br>(Business Logic)"]
+         Store["Data Store<br>(State Mgmt)"]
+         
+         Service -->|Process| Store
+     end
+ 
+     DB[(Module Database)]
+     extService["External Service"]
+     
+     User -->|1. Request| Service
+     Store --> DB
+     Service -->|2. Sync| extService
+ ```
 
 ---
 

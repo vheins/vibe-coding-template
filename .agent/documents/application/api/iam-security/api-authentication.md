@@ -114,6 +114,116 @@ Accept: application/vnd.api+json
 ```
 
 ---
+ 
+ ### 2.3 Get Profile (Me)
+ - **URL:** `GET /auth/me`
+ - **Description:** Mendapatkan profil user yang sedang login.
+ - **Access Control:** Authenticated
+ 
+ #### Request
+ 
+ **Headers:**
+ ```http
+ Authorization: Bearer <token>
+ ```
+ 
+ #### Response
+ 
+ **Success (200 OK):**
+ ```json
+ {
+   "data": {
+     "type": "users",
+     "id": "uuid-me",
+     "attributes": {
+       "email": "user@example.com",
+       "full_name": "John Doe",
+       "role": "EDITOR"
+     },
+     "links": {
+       "self": "/api/v1/users/uuid-me"
+     }
+   }
+ }
+ ```
+ 
+ ---
+ 
+ ### 2.3 Logout (Revoke Session)
+ - **URL:** `POST /auth/logout`
+ - **Description:** Mengakhiri sesi pengguna (Revoke Token).
+ - **Access Control:** Authenticated
+ 
+ #### Request
+ 
+ **Headers:**
+ ```http
+ Authorization: Bearer <token>
+ ```
+ 
+ #### Response
+ 
+ **Success (204 No Content):**
+ *(Empty Body)*
+ 
+ ---
+ 
+ ### 2.4 Activate Account
+ - **URL:** `POST /auth/activate`
+ - **Description:** Mengaktifkan akun pengguna baru via token email.
+ - **Access Control:** Public
+ 
+ #### Request
+ 
+ **Body:**
+ ```json
+ {
+   "data": {
+     "type": "auth_activate",
+     "attributes": {
+       "token": "activation-token-xyz"
+     }
+   }
+ }
+ ```
+ 
+ #### Response
+ 
+ **Success (200 OK):**
+ ```json
+ {
+   "meta": { "message": "Account activated successfully." }
+ }
+ ```
+ 
+ ---
+ 
+ ### 2.5 Change Password
+ - **URL:** `POST /auth/change-password`
+ - **Description:** Mengganti password saat user sedang login.
+ - **Access Control:** Authenticated
+ 
+ #### Request
+ 
+ **Body:**
+ ```json
+ {
+   "data": {
+     "type": "auth_change_password",
+     "attributes": {
+       "current_password": "oldPassword123",
+       "new_password": "newSecurePassword1"
+     }
+   }
+ }
+ ```
+ 
+ #### Response
+ 
+ **Success (204 No Content):**
+ *(Empty Body)*
+ 
+ ---
 
 ### 2.3 Forgot Password (Request Reset)
 - **URL:** `POST /auth/forgot-password`
