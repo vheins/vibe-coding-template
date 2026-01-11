@@ -1,28 +1,28 @@
-# Tech Stack: Flutter (Modular)
+# Tech Stack: Flutter (GetX)
 
 ## 1. Core Stack
 - **Framework**: Flutter 3.27+
 - **Language**: Dart 3.0+
-- **State Management**: Riverpod (Generator)
-- **Architecture**: Clean Architecture (Feature-first)
+- **State Management**: GetX
+- **Navigation**: GetX (Route Management)
+- **Dependency Injection**: GetX (Bindings)
 
 ## 2. Coding Rules
-- **Immutability**: Use `freezed` for all Data Classes and State.
-- **Async**: Use `Future` and `Stream` with `AsyncValue` in Riverpod.
-- **Widgets**: Split large widgets into smaller, private extracted widgets.
-- **Null Safety**: Strict null safety compliant.
+- **State**: Use `.obs` for reactive variables and `Obx()` in UI.
+- **Controllers**: Extend `GetxController`. Use `onInit()` for startup logic.
+- **Bindings**: Always use Bindings for dependency injection. avoid `Get.put` in UI.
+- **Widgets**: Extend `GetView<T>` for pages/views to auto-inject controller.
+- **Navigation**: Use named routes `Get.toNamed()`.
 
 ## 3. Architecture
+- **Pattern**: MVC or MVVM (Clean Architecture friendly).
 - **Structure**:
-  - `/lib/src/features`: Feature modules (Auth, Product, etc).
-  - `/lib/src/common_widgets`: Shared UI components.
-  - `/lib/src/utils`: Helpers and extensions.
-- **Layering**:
-  - *Presentation*: Widgets & Controllers.
-  - *Domain*: Entities (Pure Dart).
-  - *Data*: Repositories & Data Sources.
+  - `/lib/app/routes`: AppPages and AppRoutes.
+  - `/lib/app/modules`: Feature modules (Binding, Controller, View).
+  - `/lib/app/data`: Providers (API) and Models.
+  - `/lib/app/core`: Utils, Constants, Translations.
 
 ## 4. Testing
-- **Unit**: `mocktail` for mocking repositories.
-- **Widget**: Test UI logic and interactions.
-- **Integration**: `integration_test` package for E2E.
+- **Unit**: `test` package + `mocktail`.
+- **Widget**: Standard widget testing.
+
