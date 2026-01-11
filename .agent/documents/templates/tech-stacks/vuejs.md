@@ -6,7 +6,7 @@
 - **Language**: TypeScript
 - **State**: Pinia (Setup Store standard)
 - **Routing**: Vue Router 4.x
-- **UI**: UIkit, SweetAlert2, Tabler Icons
+- **UI**: Tailwind CSS, SweetAlert2, Tabler Icons
 
 ## 2. Architectural Guidelines
 - **Modular Aliases**:
