@@ -165,6 +165,8 @@ Dokumen ini berisi gabungan seluruh tugas implementasi dari modul-modul sistem. 
 
 ---
 
+## Modul: Notification (`notification`)
+
 **Deskripsi:** Modul Notification mengelola dan mengirimkan pesan kepada pengguna melalui berbagai saluran (Email, Push, SMS, In-App) dengan pengelolaan template terpusat.
 
 **Dokumentasi:**
