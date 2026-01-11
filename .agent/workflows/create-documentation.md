@@ -2,48 +2,60 @@
 description: create documentation
 ---
 
-Ikuti langkah-langkah berikut untuk membuat set dokumentasi baru untuk sebuah modul:
+Workflow ini digunakan untuk membuat set dokumentasi lengkap (Overview, Feature, API, Testing) untuk modul baru atau yang sudah ada. Workflow ini cerdas dan akan melakukan riset terlebih dahulu sebelum menulis.
 
-1.  **Identifikasi Nama Modul**:
-    *   Tentukan nama modul dari permintaan pengguna (misal: "Payment", "Order", "Inventory").
-    *   Sebut ini sebagai `<module-slug>` (format kebab-case, misal: `payment-gateway`).
+# Langkah 1: Analisis & Riset
+1. **Identifikasi Modul**:
+   - Tentukan nama modul dari input user (misal: `user-management`, `payment`, `inventory`).
+2. **Tentukan Konteks**:
+   - Apakah ini modul **Global/Umum** (contoh: "User Management", "Authentication")?
+   - Atau modul **Spesifik/Custom** (contoh: "Gojek Driver Allocation", "Tokopedia Promo")?
+3. **Lakukan Riset**:
+   - **Jika Global**: Gunakan pengetahuan umum industri (Best Practices) untuk fitur, endpoint, dan testing standar. Jangan ragu menambahkan fitur best-practice meskipun user tidak meminta spesifik (misal: "Audit Log" untuk User Management).
+   - **Jika Spesifik**: Lakukan pencarian di codebase (`find_by_name`, `grep_search`) untuk menemukan model, controller, atau file terkait yang sudah ada. Pahami logika bisnisnya.
 
-2.  **Buat Struktur Direktori**:
-    *   Buat folder berikut jika belum ada:
-        *   `.agent/documents/application/modules/<module-slug>/`
-        *   `.agent/documents/application/api/<module-slug>/`
-        *   `.agent/documents/application/testing/<module-slug>/`
+# Langkah 2: Perencanaan Konten (Breakdown)
+Sebelum membuat file, susun rencana konten di memori atau scratchpad:
+1. **Fitur Utama**: Apa saja fitur kuncinya? (misal: Login, Register, Forgot Password).
+2. **API Endpoints**: Endpoint apa yang dibutuhkan untuk mendukung fitur tersebut? (Method, URL, Request/Response body). Sesuaikan dengan standar JSON:API.
+3. **Skenario Testing**:
+   - Positif (Happy Path).
+   - Negatif (Validation, Error Handling).
+   - Security & Monkey Testing.
 
-3.  **Baca Template Standard**:
-    *   Baca konten dari file template berikut untuk memahami strukturnya:
-        *   `.agent/documents/templates/module-overview.md` (Untuk landing page modul)
-        *   `.agent/documents/templates/feature-documentation.md` (Untuk detail fitur)
-        *   `.agent/documents/templates/api-documentation.md`
-        *   `.agent/documents/templates/testing-documentation.md`
+# Langkah 3: Pembuatan Dokumentasi (Execution)
+Gunakan template yang ada di `.agent/documents/templates/` sebagai dasar. Jangan menulis dari nol, selalu isi template.
 
-4.  **Buat File Dokumentasi**:
-    *   **Module Overview** (`overview.md`):
-        *   Buat file `.agent/documents/application/modules/<module-slug>/overview.md`.
-        *   Gunakan konten dari `module-overview.md`.
-        *   Isi ringkasan level tinggi.
-        *   Link ke All Modules: `../../../README.md`.
-    
-    *   **Feature Documentation** (Opsional untuk fitur kompleks):
-        *   Jika modul memiliki fitur kompleks (misal: "Payment Processing", "Refund Logic"), buat file terpisah `.agent/documents/application/modules/<module-slug>/<feature-name>.md`.
-        *   Gunakan konten dari `feature-documentation.md`.
-        *   Move detail teknis, alur bisnis, dan user stories yang panjang ke sini.
-        *   Tambahkan link fitur ini di table "Feature List" pada `overview.md`.
-    
-    *   **API Specification**:
-        *   Buat file `.agent/documents/application/api/<module-slug>/api-<module-slug>.md`.
-        *   Gunakan konten dari `api-documentation.md`.
-        *   Link kembali ke Modul: `../../modules/<module-slug>/overview.md`.
+## 3.1 Buat Struktur Folder
+Pastikan folder berikut ada (buat jika belum):
+- `.agent/documents/application/modules/<module-name>/`
+- `.agent/documents/application/api/<module-name>/`
+- `.agent/documents/application/testing/<module-name>/`
 
-    *   **Test Scenarios**:
-        *   Buat file `.agent/documents/application/testing/<module-slug>/test-<module-slug>.md`.
-        *   Gunakan konten dari `testing-documentation.md`.
-        *   Link kembali ke Modul: `../../modules/<module-slug>/overview.md`.
+## 3.2 Tulis Feature Documentation
+Untuk setiap fitur kompleks, buat file spesifik (opsional jika modul sederhana, bisa digabung di overview):
+- **File**: `.agent/documents/application/modules/<module-name>/<feature-name>.md`
+- **Template**: `.agent/documents/templates/feature-documentation.md`
+- **Isi**: Detail User Stories, Acceptance Criteria, dan Data Model.
 
-5.  **Review dan Finalisasi**:
-    *   Beritahu pengguna bahwa kerangka dokumentasi telah dibuat.
-    *   Sebutkan file-file yang telah dibuat.
+## 3.3 Tulis API Specification
+- **File**: `.agent/documents/application/api/<module-name>/api-<module-name>.md`
+- **Template**: `.agent/documents/templates/api-documentation.md`
+- **Isi**: Definisikan semua endpoint yang direncanakan di Langkah 2. Pastikan contoh JSON Request/Response lengkap.
+
+## 3.4 Tulis Testing Scenarios
+- **File**: `.agent/documents/application/testing/<module-name>/test-<module-name>.md`
+- **Template**: `.agent/documents/templates/testing-documentation.md`
+- **Isi**: Masukkan semua skenario test (Positif, Negatif, Security, Monkey) lengkap dengan Priority.
+
+## 3.5 Rangkum dalam Module Overview
+- **File**: `.agent/documents/application/modules/<module-name>/overview.md`
+- **Template**: `.agent/documents/templates/module-overview.md`
+- **Isi**:
+  - Hapus bagian instruksi template.
+  - Isi "Feature List" dengan link ke file feature/API/testing yang baru dibuat.
+  - Buat diagram arsitektur sederhana (Mermaid) jika perlu.
+
+# Langkah 4: Finalisasi
+1. **Review**: Pastikan semua link antar dokumen berfungsi (bisa diklik).
+2. **Lapor**: Beritahu user bahwa dokumentasi untuk modul `<module-name>` siap direview.
