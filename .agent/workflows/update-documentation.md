@@ -1,42 +1,48 @@
 ---
-description: Memastikan seluruh dokumentasi (Modul, API, Testing) tetap sinkron dan up-to-date saat terjadi perubahan.
+description: Memastikan sinkronisasi total dokumentasi (Overlap Check).
 ---
 
-Gunakan workflow ini setiap kali ada perubahan fitur, perbaikan bug signifikan, atau penambahan flows baru untuk mencegah "documentation gap".
+Workflow ini **WAJIB** dijalankan setiap kali ada perubahan pada salah satu dari: Logika Bisnis, API, atau Testing. Tujuannya adalah menghilangkan "Documentation Gap".
 
-1.  **Identifikasi Perubahan**:
-    *   Apakah ada perubahan logika bisnis? -> **Update Feature Documentation**.
-    *   Apakah ini fitur baru? -> **Buat Feature baru & Update Overview**.
-    *   Apakah ada endpoint baru? -> **Update API Spec**.
-    *   Apakah ada alur baru? -> **Update Testing**.
+# Prinsip: "Change One, Check All"
+Setiap perubahan pada satu dokumen **HARUS** memicu pemeriksaan pada dokumen lain yang terkait.
 
-2.  **Langkah 1: Update Modul Documentation** (`modules/<slug>/`)
-    *   **Jika Fitur Baru:**
-        *   Buat file `<feature-name>.md` baru menggunakan template `templates/feature-documentation.md`.
-        *   Tambahkan link fitur tersebut ke `overview.md` di bagian "Feature List".
-    *   **Jika Update Fitur:**
-        *   Edit file spesifik fitur tersebut (misal: `job-processing.md`).
-        *   Update User Stories, Business Flow, dan Rules.
-    *   **Jika Global Module change:**
-        *   Edit `overview.md` (hanya untuk arsitektur level tinggi atau dependensi global).
+# Langkah 1: Identifikasi Sumber Perubahan
+Tentukan apa yang memicu update ini:
+- **A. Perubahan Fitur/Bisnis**: (misal: "User perlu email verifikasi saat register")
+- **B. Perubahan API**: (misal: "Tambah field `phone_number` di response `/users`")
+- **C. Perubahan Testing**: (misal: "Menambah skenario negatif untuk validasi password")
 
-3.  **Langkah 2: Update Spesifikasi API** (`api/<slug>/api-<slug>.md`)
-    *   Update Endpoint URL, Request Body, Response.
-    *   Pastikan sesuai standar JSON:API.
-    *   Pastikan referensi ke Feature Docs benar.
+# Langkah 2: Eksekusi Sinkronisasi (Wajib Berurutan)
 
-4.  **Langkah 3: Update Skenario Pengujian** (`testing/<slug>/test-<slug>.md`)
-    *   Update Test Case untuk mencakup aturan bisnis baru yang ditulis di Feature Doc.
-    *   Tambahkan Monkey Testing jika perlu.
+## 2.1 Update Module Documentation (`modules/<slug>/`)
+- [ ] **Jika Sumber A**: Update User Stories, Flow, dan Rules di file fitur terkait.
+- [ ] **Jika Sumber B/C**: Cek apakah perubahan teknis ini sesuai dengan bisnis rules yang ada? Jika tidak, **UPDATE Module Doc** dulu agar sesuai realita.
 
-5.  **Langkah 4: Cek Konsistensi**
-    *   Pastikan HEADER semua dokumen menggunakan Bahasa Inggris (misal: `# Feature Name`, `## Business Flow`).
-    *   Pastikan tidak ada tautan buntu (broken links).
+## 2.2 Update API Specification (`api/<slug>/`)
+- [ ] **Sinkronisasi**: Cek apakah perubahan di 2.1 mengubah request/response?
+- [ ] **Aksi**: Tambah/Hapus/Edit endpoint di `api-<slug>.md`.
+- [ ] **Validasi**: Pastikan setiap field baru di module doc ada di API spec.
 
-6.  **Verifikasi & Commit**:
-    *   Jalankan: `git add .agent/documents/`
-    *   Commit: `docs: update documentation for <feature> (module, api, testing)`
+## 2.3 Update Testing Scenarios (`testing/<slug>/`)
+- [ ] **Sinkronisasi**: Cek apakah perubahan di 2.1 atau 2.2 butuh test case baru?
+- [ ] **Aksi**:
+    - Update Happy Path (Positif).
+    - Update Validation Rules (Negatif).
+    - Update Security/Monkey Test jika endpoint publik berubah.
 
-// turbo
-7.  **Cek Status Git**:
-    *   Jalankan: `git status`.
+## 2.4 Update Module Overview (`modules/<slug>/overview.md`)
+- [ ] **Cek**: Apakah ada fitur baru yang belum masuk "Feature List"?
+- [ ] **Aksi**: Update daftar fitur dan link file-nya.
+
+# Langkah 3: Final Verification (The Gap Check)
+Jawab pertanyaan berikut sebelum commit. Jika ada "TIDAK", ulangi langkah terkait.
+
+1. Apakah User Story di Module Doc sudah ter-cover di API Endpoint? (Ya/Tidak)
+2. Apakah setiap API Endpoint punya minimal 1 Test Case Positif & 1 Negatif? (Ya/Tidak)
+3. Apakah Overview mencantumkan semua fitur terbaru? (Ya/Tidak)
+
+# Langkah 4: Commit
+Jika semua "Ya":
+- Jalankan: `git add .agent/documents/`
+- Commit: `docs: sync documentation for <module-name> (feature, api, testing)`
