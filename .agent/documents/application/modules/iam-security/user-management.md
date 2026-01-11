@@ -1,6 +1,6 @@
 # User Management
 
-> Fitur administratif untuk mengelola daur hidup dan data pengguna.
+> Fitur administratif untuk mengelola akun dan data pengguna.
 
 ---
 
@@ -14,19 +14,19 @@
 
 ## 1. Feature Overview
 
-- **Deskripsi singkat fitur:** CRUD User, Aktivasi, dan Blokir User.
-- **Peran dalam modul:** Administrasi data pengguna.
-- **Nilai bisnis:** Kontrol penuh admin terhadap siapa yang bisa mengakses sistem.
+- **Deskripsi singkat fitur:** Menyediakan kapabilitas manajemen *lifecycle* pengguna *end-to-end* (CRUD), termasuk mekanisme aktivasi, penangguhan akun (*suspend*), dan pemulihan akses (account recovery).
+- **Peran dalam modul:** Bertindak sebagai *authoritative source* untuk identitas dan status pengguna di dalam ekosistem IAM Security.
+- **Nilai bisnis:** Memberikan kontrol terpusat kepada administrator untuk memastikan keamanan akses sistem melalui manajemen identitas yang ketat dan *auditable*.
 
 ---
 
 ## 2. User Stories
 
-| ID    | Peran (Role) | Tujuan (Goal)                      | Manfaat (Benefit)                            |
-| :---- | :----------- | :--------------------------------- | :------------------------------------------- |
-| US-06 | Admin        | Mengelola User (Edit/Delete/Block) | Menjaga keamanan dan validitas data pengguna |
-| US-09 | Admin        | Melihat daftar user                | Memantau pertumbuhan pengguna                |
-| US-10 | User         | Mengupdate profil sendiri          | Menjaga data diri tetap akurat               |
+| ID    | Peran (Role) | Tujuan (Goal)                                                                               | Manfaat (Benefit)                                                                                    |
+| :---- | :----------- | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------- |
+| US-06 | Admin        | Melakukan manajemen *lifecycle* akun pengguna (*Modify, Suspend, Revoke*)                   | Memastikan integritas data, kepatuhan keamanan, dan mitigasi risiko akses tidak sah segera.          |
+| US-09 | Admin        | Mengakses direktori pengguna terpusat dengan kapabilitas *filtering* dan *searching* lanjut | Meningkatkan efisiensi operasional dalam audit, pemantauan, dan pelaporan basis pengguna organisasi. |
+| US-10 | User         | Mengelola informasi profil akun, preferensi, dan kredensial keamanan secara mandiri         | Mengurangi beban operasional tim support melalui *self-service* dan menjamin akurasi data personal.  |
 
 ---
 
@@ -60,6 +60,28 @@ sequenceDiagram
 ## 4. Data Model
 
 - **Users:** Entitas utama.
+
+```mermaid
+erDiagram
+    Users {
+        int id PK
+        string username
+        string email
+        string password
+        string status "active, suspended"
+        int role_id FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Roles {
+        int id PK
+        string name
+        string permissions
+    }
+
+    Users }o--|| Roles : "assigned to"
+```
 
 ---
 
