@@ -1,9 +1,10 @@
-# Tech Stack: Nuxt.js (FIMS Modular)
+# Tech Stack: Nuxt.js (Modular)
 
 ## 1. Core Stack
 - **Framework**: Nuxt 3.10+
 - **Language**: TypeScript
 - **State**: Pinia (Setup Store Standard)
+- **UI**: Nuxt UI (Tailwind CSS)
 - **Architecture**: Modular (Nuxt Layers / Local Modules)
 
 ## 2. Architectural Guidelines
