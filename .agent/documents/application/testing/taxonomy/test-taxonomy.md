@@ -36,31 +36,31 @@
  
  ---
  
- ## 3. Skenario Pengujian (Backend / API)
+ ## 3. Test Scenarios (Backend / API)
  
- ### 3.1 Kasus Positif (Happy Paths)
+ ### 3.1 Positive Cases (Happy Paths)
  
- | ID          | Kasus Uji (Test Case)       | Kondisi Awal       | Data Input                         | Hasil yang Diharapkan | Prioritas |
- | :---------- | :-------------------------- | :----------------- | :--------------------------------- | :-------------------- | :-------- |
- | TAX-POS-001 | **Buat Taxonomy**           | Token Admin        | Code: `skill`, Name: `Skill`       | 201 Created           | High      |
- | TAX-POS-002 | **Buat Term**               | Taxonomy ada       | Code: `backend`, Taxonomy: `skill` | 201 Created           | High      |
- | TAX-POS-003 | **Lampirkan Term**          | Entity & Term ada  | Entity: `User-1`, Term: `backend`  | 201 Created / 200 OK  | High      |
- | TAX-POS-004 | **Ambil Terms (Hierarkis)** | Struktur pohon ada | GET /terms?hierarchy=true          | 200 OK, Nested JSON   | Medium    |
+ | ID          | Test Case                   | Pre-condition      | Input Data                         | Expected Result      | Priority |
+ | :---------- | :-------------------------- | :----------------- | :--------------------------------- | :------------------- | :------- |
+ | TAX-POS-001 | **Buat Taxonomy**           | Token Admin        | Code: `skill`, Name: `Skill`       | 201 Created          | High     |
+ | TAX-POS-002 | **Buat Term**               | Taxonomy ada       | Code: `backend`, Taxonomy: `skill` | 201 Created          | High     |
+ | TAX-POS-003 | **Lampirkan Term**          | Entity & Term ada  | Entity: `User-1`, Term: `backend`  | 201 Created / 200 OK | High     |
+ | TAX-POS-004 | **Ambil Terms (Hierarkis)** | Struktur pohon ada | GET /terms?hierarchy=true          | 200 OK, Nested JSON  | Medium   |
  
- ### 3.2 Kasus Negatif (Validation Rules)
+ ### 3.2 Negative Cases (Validation Rules)
  
- | ID          | Kasus Uji (Test Case)      | Kondisi Awal      | Data Input             | Hasil yang Diharapkan | Prioritas |
- | :---------- | :------------------------- | :---------------- | :--------------------- | :-------------------- | :-------- |
- | TAX-NEG-001 | **Duplikat Kode Taxonomy** | Code `skill` ada  | Buat `skill`           | 409 Conflict          | High      |
- | TAX-NEG-002 | **Circular Parent**        | A adalah parent B | Set B sebagai parent A | 400 Bad Request / 422 | Medium    |
- | TAX-NEG-003 | **Lampirkan Term Invalid** | -                 | Term: `unknown_code`   | 404 Not Found         | High      |
+ | ID          | Test Case                  | Pre-condition     | Input Data             | Expected Result       | Priority |
+ | :---------- | :------------------------- | :---------------- | :--------------------- | :-------------------- | :------- |
+ | TAX-NEG-001 | **Duplikat Kode Taxonomy** | Code `skill` ada  | Buat `skill`           | 409 Conflict          | High     |
+ | TAX-NEG-002 | **Circular Parent**        | A adalah parent B | Set B sebagai parent A | 400 Bad Request / 422 | Medium   |
+ | TAX-NEG-003 | **Lampirkan Term Invalid** | -                 | Term: `unknown_code`   | 404 Not Found         | High     |
  
  ### 3.3 Monkey Tests (Chaos & Stability)
  
- | ID          | Kasus Uji (Test Case)  | Pendekatan                        | Data Input   | Hasil yang Diharapkan           | Prioritas |
- | :---------- | :--------------------- | :-------------------------------- | :----------- | :------------------------------ | :-------- |
- | TAX-MNK-001 | **Deep Nesting**       | Buat Term dengan 100 level parent | -            | DB menangani atau API menolak   | Low       |
- | TAX-MNK-002 | **Massive Attachment** | Lampirkan 10k terms ke 1 entity   | Loop request | Cek Performa (Penggunaan Index) | Medium    |
+ | ID          | Test Case              | Approach                          | Input Data   | Expected Result                 | Priority |
+ | :---------- | :--------------------- | :-------------------------------- | :----------- | :------------------------------ | :------- |
+ | TAX-MNK-001 | **Deep Nesting**       | Buat Term dengan 100 level parent | -            | DB menangani atau API menolak   | Low      |
+ | TAX-MNK-002 | **Massive Attachment** | Lampirkan 10k terms ke 1 entity   | Loop request | Cek Performa (Penggunaan Index) | Medium   |
  
  ---
  

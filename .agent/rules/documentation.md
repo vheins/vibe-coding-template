@@ -40,10 +40,16 @@ All modules must follow this structure:
     - **Security**: IDOR, XSS, Permission checks.
 - **Priority**: Mark every case as `High`, `Medium`, or `Low`.
 
-## 4. Templates
+## 4. Implementation Tasks
+- **Granularity**: Do NOT write single line tasks like "Implement Authentication". Break it down into:
+    - **Backend**: Migration, Seeder, Model, Repository, Service, Controller, Route, Tests.
+    - **Frontend**: State, API Service, Components, Pages, Integration.
+- **Traceability**: Task IDs must follow `[MOD]-BE-[XX]` and `[MOD]-FE-[XX]`.
+
+## 5. Templates
 ALWAYS use the templates located in `.agent/documents/templates/` as your base. Do not invent new formats.
 
-## 5. Workflows
+## 6. Workflows
 - To create new docs: Use the logic from `workflows/create-documentation.md`.
 - To update docs: Use the logic from `workflows/update-documentation.md`.
 

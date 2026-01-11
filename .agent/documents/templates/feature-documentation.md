@@ -64,8 +64,28 @@
 
 ## 6. Implementation Tasks
 
-| Task ID | Platform | Status | Description |
-| :------ | :------- | :----- | :---------- |
-|         |          |        |             |
+> **Must Include:** Granular tasks for Migration, Seeder, Model, Service, Controller, Tests, and UI Components.
+
+### 6.1 Backend
+
+| Task ID     | Component  | Status | Description                           |
+| :---------- | :--------- | :----- | :------------------------------------ |
+| [MOD]-BE-01 | Migration  | Todo   | Create tables.                        |
+| [MOD]-BE-02 | Seeder     | Todo   | Create seeders.                       |
+| [MOD]-BE-03 | Model      | Todo   | Setup Model & Relations.              |
+| [MOD]-BE-04 | Repository | Todo   | Implement Repository Pattern (files). |
+| [MOD]-BE-05 | Service    | Todo   | Implement Business Logic.             |
+| [MOD]-BE-06 | Controller | Todo   | Implement JSON:API Controller.        |
+| [MOD]-BE-07 | Tests      | Todo   | Create Feature Tests (100% Coverage). |
+
+### 6.2 Frontend
+
+| Task ID     | Component   | Status | Description                        |
+| :---------- | :---------- | :----- | :--------------------------------- |
+| [MOD]-FE-01 | State       | Todo   | Setup Store.                       |
+| [MOD]-FE-02 | API         | Todo   | Create Service/Axios Wrapper.      |
+| [MOD]-FE-03 | Components  | Todo   | Create UI Components (Form/Table). |
+| [MOD]-FE-04 | Pages       | Todo   | Assemble Pages.                    |
+| [MOD]-FE-05 | Integration | Todo   | Connect & Handle Errors.           |
 
 ---

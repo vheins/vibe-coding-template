@@ -22,6 +22,9 @@ Sebelum membuat file, susun rencana konten di memori atau scratchpad:
    - Positif (Happy Path).
    - Negatif (Validation, Error Handling).
    - Security & Monkey Testing.
+4. **Implementation Tasks Breakdown**:
+   - **Backend**: Migration, Seeder, Model, Service, Controller, Route, Tests.
+   - **Frontend**: State, Service, Components, Pages, Integration.
 
 # Langkah 3: Pembuatan Dokumentasi (Execution)
 Gunakan template yang ada di `.agent/documents/templates/` sebagai dasar. Jangan menulis dari nol, selalu isi template.

@@ -20,7 +20,15 @@
  - **URL:** `GET /taxonomies`
  - **Deskripsi:** Mengambil daftar namespace taxonomy yang tersedia.
  
- #### Respons
+ #### Request
+
+**Headers:**
+```http
+Accept: application/vnd.api+json
+Authorization: Bearer <token>
+```
+
+#### Respons
  
  **Sukses (200):**
  ```json
@@ -46,7 +54,15 @@
  - **URL:** `GET /taxonomies/:code/terms`
  - **Deskripsi:** Mengambil daftar terms untuk taxonomy tertentu (struktur pohon jika hierarkis).
  
- #### Respons
+ #### Request
+
+**Headers:**
+```http
+Accept: application/vnd.api+json
+Authorization: Bearer <token>
+```
+
+#### Respons
  
  **Sukses (200):**
  ```json
@@ -72,7 +88,14 @@
  - **URL:** `POST /attachments`
  - **Deskripsi:** Menghubungkan sebuah term ke entity arbitrer (Polymorphic).
  
- #### Body Permintaan (Request Body)
+ #### Request Body
+
+**Headers:**
+```http
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Authorization: Bearer <token>
+```
  
  ```json
  {

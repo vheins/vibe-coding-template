@@ -160,7 +160,26 @@ erDiagram
 
 ## 6. Implementation Tasks
 
-| ID     | Platform | Status | Deskripsi                                                         |
-| :----- | :------- | :----- | :---------------------------------------------------------------- |
-| IAM-04 | Backend  | Todo   | Implement JSON:API compliant User Management endpoints.           |
-| IAM-05 | Frontend | Todo   | Implement User Management Dashboard (List, Create, Edit, Delete). |
+### 6.1 Backend
+
+| Task ID   | Component  | Status | Description                                                     |
+| :-------- | :--------- | :----- | :-------------------------------------------------------------- |
+| IAM-BE-01 | Migration  | Todo   | Create `users` table with standard timestamps & soft deletes.   |
+| IAM-BE-02 | Seeder     | Todo   | Create `UserSeeder` for Admin & Public role.                    |
+| IAM-BE-03 | Model      | Todo   | Setup `User` model arguments (fillable, cast, relations).       |
+| IAM-BE-04 | Repository | Todo   | Implement `UserRepository` (Interface & Implementation).        |
+| IAM-BE-05 | Service    | Todo   | Implement `UserService` (Business Logic for Suspend/Activate).  |
+| IAM-BE-06 | Controller | Todo   | Implement `UserController` (Resource Controller) with JSON:API. |
+| IAM-BE-07 | Routes     | Todo   | Register routes in `api.php`.                                   |
+| IAM-BE-08 | Tests      | Todo   | Create Feature Test (Positive/Negative/Permission).             |
+
+### 6.2 Frontend
+
+| Task ID   | Component   | Status | Description                                            |
+| :-------- | :---------- | :----- | :----------------------------------------------------- |
+| IAM-FE-01 | State       | Todo   | Setup Pinia Store / Context for User.                  |
+| IAM-FE-02 | API Service | Todo   | Create `UserService` (Axios wrapper).                  |
+| IAM-FE-03 | Component   | Todo   | Create `UserListTable` component.                      |
+| IAM-FE-04 | Component   | Todo   | Create `UserForm` component (Add/Edit).                |
+| IAM-FE-05 | Page        | Todo   | Implement `UserIndex`, `UserCreate`, `UserEdit` pages. |
+| IAM-FE-06 | Integration | Todo   | Connect UI to API & Handle errors.                     |

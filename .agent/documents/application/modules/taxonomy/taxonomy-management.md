@@ -104,6 +104,8 @@ sequenceDiagram
 
 ## 4. Data Model
 
+> Diagram Entity Relationship untuk Taxonomy Management.
+
 - **Taxonomy:** Namespace (misal `product_category`, `tags`).
 - **Term:** Nilai (misal `electronics`, `fashion`).
 - **EntityTerm:** Pivot table.
@@ -153,10 +155,24 @@ erDiagram
 
 ## 6. Implementation Tasks
 
-| ID        | Platform | Status | Deskripsi                                              |
-| :-------- | :------- | :----- | :----------------------------------------------------- |
-| TAX-BE-01 | Backend  | Todo   | Buat API CRUD Taxonomy & Terms                         |
-| TAX-BE-02 | Backend  | Todo   | Implementasi Logika Pelampiran Polimorfik              |
-| TAX-BE-03 | Backend  | Todo   | Optimasi Query (N+1 Problem)                           |
-| TAX-FE-01 | Frontend | Todo   | Buat Manajer Taxonomy (UI Admin)                       |
-| TAX-FE-02 | Frontend | Todo   | Buat Komponen "Tag Input" yang dapat digunakan kembali |
+### 6.1 Backend
+
+| Task ID   | Component  | Status | Description                                             |
+| :-------- | :--------- | :----- | :------------------------------------------------------ |
+| TAX-BE-01 | Migration  | Todo   | Create `taxonomies` and `terms` tables with indices.    |
+| TAX-BE-02 | Migration  | Todo   | Create `entity_terms` polymorphic pivot table.          |
+| TAX-BE-03 | Model      | Todo   | Setup `Taxonomy` & `Term` models with relations.        |
+| TAX-BE-04 | Service    | Todo   | Implement `TaxonomyService` (CRUD & Attachment Logic).  |
+| TAX-BE-05 | Controller | Todo   | Implement `TaxonomyController` with JSON:API standards. |
+| TAX-BE-06 | Routes     | Todo   | Register API routes.                                    |
+| TAX-BE-07 | Tests      | Todo   | Create Unit & Feature tests for Taxonomy ops.           |
+
+### 6.2 Frontend
+
+| Task ID   | Component   | Status | Description                               |
+| :-------- | :---------- | :----- | :---------------------------------------- |
+| TAX-FE-01 | State       | Todo   | Setup Taxonomy Store (Pinia/Context).     |
+| TAX-FE-02 | API         | Todo   | Create `TaxonomyService` wrapper.         |
+| TAX-FE-03 | Component   | Todo   | Create `TaxonomyManager` UI for Admin.    |
+| TAX-FE-04 | Component   | Todo   | Create reusable `TagInput` component.     |
+| TAX-FE-05 | Integration | Todo   | Integrate `TagInput` into existing forms. |
