@@ -22,12 +22,17 @@
 
 ## 2. User Stories
 
-Daftar kebutuhan berbasis peran (role) untuk fitur ini. Gunakan format yang menekankan pada **Goal** yang spesifik dan **Benefit** bisnis yang nyata.
+### US-[ID] — [Title]
 
-| ID    | Peran (Role) | Tujuan (Goal)                                                                      | Manfaat (Benefit)                                                   |
-| :---- | :----------- | :--------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
-| US-01 | Admin        | Melakukan manajemen *lifecycle* entitas [Nama Entitas] (*Modify, Suspend, Revoke*) | Memastikan integritas data dan kepatuhan terhadap standar keamanan. |
-| US-02 | User         | Mengakses data history secara mandiri                                              | Mengurangi beban operasional tim support.                           |
+**Sebagai** [Role]
+**Saya ingin** [Goal]
+**Sehingga** [Benefit]
+
+**Acceptance Criteria:**
+
+* [Criteria 1]
+* [Criteria 2]
+* [Criteria 3]
 
 ---
 

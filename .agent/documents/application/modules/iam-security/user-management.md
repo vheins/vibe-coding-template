@@ -22,11 +22,78 @@
 
 ## 2. User Stories
 
-| ID    | Peran (Role) | Tujuan (Goal)                                                                               | Manfaat (Benefit)                                                                                    |
-| :---- | :----------- | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------- |
-| US-06 | Admin        | Melakukan manajemen *lifecycle* akun pengguna (*Modify, Suspend, Revoke*)                   | Memastikan integritas data, kepatuhan keamanan, dan mitigasi risiko akses tidak sah segera.          |
-| US-09 | Admin        | Mengakses direktori pengguna terpusat dengan kapabilitas *filtering* dan *searching* lanjut | Meningkatkan efisiensi operasional dalam audit, pemantauan, dan pelaporan basis pengguna organisasi. |
-| US-10 | User         | Mengelola informasi profil akun, preferensi, dan kredensial keamanan secara mandiri         | Mengurangi beban operasional tim support melalui *self-service* dan menjamin akurasi data personal.  |
+### US-UM-03 — Membuat Akun User Baru
+
+**Sebagai** Admin
+**Saya ingin** membuat akun user baru
+**Sehingga** user dapat menggunakan sistem
+
+**Acceptance Criteria:**
+
+* Admin dapat mengisi data user (nama, email, role)
+* Email harus unik
+* Password awal digenerate otomatis / di-set admin
+* Status awal user: *inactive / pending*
+
+### US-UM-09 — Melihat & Update Profil
+
+**Sebagai** User
+**Saya ingin** melihat dan memperbarui profil saya
+**Sehingga** data saya tetap akurat
+
+**Acceptance Criteria:**
+
+* User dapat update nama, foto, kontak
+* Email tidak bisa diubah tanpa verifikasi
+* Validasi input diterapkan
+
+### US-UM-12 — Blokir User
+
+**Sebagai** Admin
+**Saya ingin** memblokir user
+**Sehingga** user tersebut tidak dapat mengakses sistem
+
+**Acceptance Criteria:**
+
+* Status user menjadi suspended
+* User tidak bisa login
+* Riwayat login tetap tersimpan
+
+### US-UM-13 — Audit Log Aktivitas User
+
+**Sebagai** Admin
+**Saya ingin** melihat aktivitas user
+**Sehingga** saya dapat memantau keamanan sistem
+
+**Acceptance Criteria:**
+
+* Tercatat login, logout, update data, perubahan role
+* Audit log tidak bisa diedit
+* Bisa difilter berdasarkan user & waktu
+
+### US-UM-14 — Skalabilitas User
+
+**Sebagai** Sistem
+**Saya ingin** mendukung ribuan user aktif
+**Sehingga** performa tetap stabil
+
+**Acceptance Criteria:**
+
+* Query user dioptimalkan
+* Pagination diterapkan
+* Response time < 500ms untuk list user
+
+### US-UM-15 — Keamanan Data User
+
+**Sebagai** Sistem
+**Saya ingin** menyimpan data user secara aman
+**Sehingga** data tidak bocor
+
+**Acceptance Criteria:**
+
+* Password di-hash (bcrypt/argon2)
+* Data sensitif dienkripsi
+* Akses API menggunakan token
 
 ---
 

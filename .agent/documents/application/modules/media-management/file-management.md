@@ -22,12 +22,56 @@
 
 ## 2. User Stories
 
-| ID        | Peran (Role) | Tujuan (Goal)                                                              | Manfaat (Benefit)                                                                             |
-| :-------- | :----------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
-| US-MED-01 | User         | Mengunggah foto profil (*avatar*) untuk personalisasi akun                 | Membangun identitas visual pengguna di dalam ekosistem aplikasi.                              |
-| US-MED-02 | Admin        | Mengelola galeri gambar produk untuk katalog penjualan                     | Meningkatkan konversi penjualan melalui representasi visual produk yang berkualitas tinggi.   |
-| US-MED-03 | Sistem       | Melakukan *resizing* dan pembuatan *thumbnail* secara otomatis saat upload | Meningkatkan kinerja muat halaman (*load time*) dengan menyajikan ukuran gambar yang optimal. |
-| US-MED-04 | User         | Melampirkan dokumen pendukung (PDF/Doc) pada transaksi                     | Memungkinkan verifikasi manual dan audit trail kepatuhan transaksi.                           |
+### US-MED-01 — Upload Avatar Pengguna
+
+**Sebagai** User
+**Saya ingin** mengunggah foto profil (*avatar*)
+**Sehingga** akun saya lebih personal dan mudah dikenali
+
+**Acceptance Criteria:**
+
+* Format yang didukung: JPG, PNG, WEBP
+* Maksimal ukuran file: 2MB
+* Gambar otomatis di-crop menjadi rasio 1:1
+* Validasi magic bytes untuk mencegah upload script berbahaya
+
+### US-MED-02 — Kelola Galeri Produk
+
+**Sebagai** Admin
+**Saya ingin** mengelola galeri gambar produk
+**Sehingga** katalog penjualan terlihat menarik
+
+**Acceptance Criteria:**
+
+* Admin dapat upload multiple images sekaligus
+* Fitur reorder (drag & drop) urutan gambar
+* Set gambar utama (featured image)
+* Hapus gambar yang usang
+
+### US-MED-03 — Auto Resize & Thumbnail
+
+**Sebagai** Sistem
+**Saya ingin** membuat thumbnail otomatis saat upload
+**Sehingga** loading halaman lebih cepat dengan ukuran gambar optimal
+
+**Acceptance Criteria:**
+
+* Generate varian ukuran: original, medium (800px), thumb (200px)
+* Kompresi otomatis tanpa mengurangi kualitas visual secara signifikan
+* Nama file output distandarisasi dan unik
+
+### US-MED-04 — Lampiran Dokumen Transaksi
+
+**Sebagai** User
+**Saya ingin** melampirkan dokumen pendukung (PDF) pada transaksi
+**Sehingga** administrasi transaksi valid dan audit-able
+
+**Acceptance Criteria:**
+
+* Format yang didukung: PDF, DOCX
+* Preview dokumen tersedia di browser
+* Link download secure (signed URL)
+* Scan antivirus berjalan saat upload
 
 ---
 

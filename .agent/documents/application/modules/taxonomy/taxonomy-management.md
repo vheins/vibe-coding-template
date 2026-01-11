@@ -22,12 +22,53 @@
 
 ## 2. User Stories
 
-| ID        | Peran (Role) | Tujuan (Goal)                                                       | Manfaat (Benefit)                                                                                         |
-| :-------- | :----------- | :------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------- |
-| US-TAX-01 | Admin        | Membuat definisi Taksonomi baru (misal: "Skill", "Kategori Produk") | Mempersiapkan struktur klasifikasi yang relevan untuk kebutuhan fitur baru tanpa mengubah skema database. |
-| US-TAX-02 | Admin        | Menambah *Terms* baru ke dalam Taksonomi yang sudah ada             | Memperkaya opsi klasifikasi yang tersedia bagi pengguna akhir.                                            |
-| US-TAX-03 | Sistem       | Melampirkan *Term* ke entitas bisnis secara polimorfik              | Mengklasifikasikan data (misal: memberikan skill ke karyawan) tanpa membuat tabel relasi khusus.          |
-| US-TAX-04 | Pengguna     | Melakukan filter data berdasarkan *Term* spesifik                   | Menemukan item yang relevan dengan cepat melalui navigasi berbasis aspek (*faceted search*).              |
+### US-TAX-01 — Definisi Taksonomi Baru
+
+**Sebagai** Admin
+**Saya ingin** membuat jenis taksonomi baru (misal: Skill, Kategori)
+**Sehingga** saya bisa mengelompokkan data tanpa ubah kode
+
+**Acceptance Criteria:**
+
+* Input nama taksonomi dan slug unik
+* Opsi hierarki (apakah taksonomi ini bertingkat atau flat)
+* Opsi public/private visibility
+
+### US-TAX-02 — Manajemen Terms
+
+**Sebagai** Admin
+**Saya ingin** menambah dan mengedit terms dalam taksonomi
+**Sehingga** pilihan klasifikasi tersedia untuk user
+
+**Acceptance Criteria:**
+
+* CRUD Terms (Create, Read, Update, Delete)
+* Support parent-child relationship untuk hierarki
+* Bulk import terms (opsional)
+
+### US-TAX-03 — Attach Term ke Entitas
+
+**Sebagai** Sistem
+**Saya ingin** menempelkan term ke entitas (assign tag/category)
+**Sehingga** data terorganisir dengan baik
+
+**Acceptance Criteria:**
+
+* Support polymorphic relation (bisa attach ke User, Product, Article, dll)
+* Validasi term harus ada di database
+* Optimasi query untuk retrieving relation
+
+### US-TAX-04 — Filter Data by Term
+
+**Sebagai** Pengguna
+**Saya ingin** memfilter data berdasarkan kategori/tag
+**Sehingga** saya menemukan item yang relevan
+
+**Acceptance Criteria:**
+
+* API support filter query `?tag=php,laravel`
+* Performance index yang cepat untuk filtering
+* Support kombinasi filter (AND/OR logic)
 
 ---
 

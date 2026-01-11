@@ -22,12 +22,56 @@
 
 ## 2. User Stories
 
-| ID        | Peran (Role)  | Tujuan (Goal)                                                                      | Manfaat (Benefit)                                                                                           |
-| :-------- | :------------ | :--------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------- |
-| US-CFG-01 | Admin         | Mengaktifkan "Maintenance Mode" secara global melalui dashboard admin              | Membatasi akses pengguna selama jendela pemeliharaan kritis untuk mencegah korupsi data.                    |
-| US-CFG-02 | Product Owner | Mengelola peluncuran fitur baru secara bertahap (*canary release*) ke 50% pengguna | Meminimalkan risiko dampak negatif peluncuran fitur baru melalui validasi pasar yang terkontrol.            |
-| US-CFG-03 | Frontend App  | Mengambil daftar kontak bantuan terbaru secara dinamis saat aplikasi dibuka        | Memastikan pengguna selalu mendapatkan informasi layanan pelanggan yang akurat tanpa perlu update aplikasi. |
-| US-CFG-04 | System        | Menyimpan konfigurasi aktif di memori (*cache*) untuk akses latensi rendah         | Mengurangi beban I/O database secara signifikan pada kondisi *high traffic*.                                |
+### US-CFG-01 — Maintenance Mode
+
+**Sebagai** Admin
+**Saya ingin** mengaktifkan "Maintenance Mode" secara global
+**Sehingga** user tidak mengakses sistem saat perbaikan database
+
+**Acceptance Criteria:**
+
+* Switch On/Off tersedia di Admin Panel
+* Semua request API (kecuali whitelist IP) mengembalikan 503 Service Unavailable
+* Halaman maintenance informatif ditampilkan ke user
+* Perubahan status dicatat di audit log
+
+### US-CFG-02 — Feature Flag (Canary/A-B Testing)
+
+**Sebagai** Product Owner
+**Saya ingin** menyalakan fitur baru hanya untuk sebagian user
+**Sehingga** saya dapat memvalidasi fitur sebelum rilis global
+
+**Acceptance Criteria:**
+
+* Konfigurasi rollout percentage (misal: 50%)
+* Konfigurasi whitelist user ID spesifik
+* Fitur otomatis aktif/nonaktif sesuai logic flag di runtime
+* Tidak perlu redeploy untuk mengubah toggle
+
+### US-CFG-03 — Dynamic Contact Info
+
+**Sebagai** Frontend App
+**Saya ingin** mengambil daftar kontak bantuan terbaru dari server
+**Sehingga** informasi layanan pelanggan selalu akurat
+
+**Acceptance Criteria:**
+
+* API endpoint mengembalikan JSON konfigurasi kontak
+* Data di-cache di sisi client untuk performa
+* Perubahan di server terefleksi di client tanpa update aplikasi
+
+### US-CFG-04 — Configuration Caching
+
+**Sebagai** Sistem
+**Saya ingin** menyimpan konfigurasi aktif di memori (cache)
+**Sehingga** beban database berkurang saat trafik tinggi
+
+**Acceptance Criteria:**
+
+* Read-through caching strategy (Redis)
+* Cache invalidation otomatis saat config di-update di DB
+* TTL (Time To Live) yang wajar sebagai fallback
+* Response time API config < 50ms
 
 ---
 

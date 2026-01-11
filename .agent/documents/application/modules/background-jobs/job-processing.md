@@ -22,11 +22,44 @@
 
 ## 2. User Stories
 
-| ID        | Role      | Goal                                                                                    | Benefit                                                                                                      |
-| :-------- | :-------- | :-------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
-| US-JOB-01 | Sistem    | Menjalankan proses agregasi laporan bulanan secara otomatis pada jadwal yang ditentukan | Memastikan ketersediaan data analitik tepat waktu tanpa intervensi manual, mengurangi risiko *human error*.  |
-| US-JOB-02 | Developer | Memantau status eksekusi *job* gagal dan melakukan inspeksi *payload* melalui dashboard | Mempercepat *mean-time-to-resolution* (MTTR) untuk insiden di layer pemrosesan background.                   |
-| US-JOB-03 | User      | Melakukan permintaan ekspor data volume besar secara asinkron                           | Meningkatkan *user experience* dengan menghindari *blocking* pada UI, memberikan notifikasi saat hasil siap. |
+### US-JOB-01 — Menjalankan Report Bulanan Otomatis
+
+**Sebagai** Sistem
+**Saya ingin** menjalankan proses agregasi laporan bulanan secara otomatis
+**Sehingga** data tersedia tepat waktu tanpa intervensi manual
+
+**Acceptance Criteria:**
+
+* Job berjalan sesuai jadwal cron yang ditentukan (misal: tanggal 1 jam 00:00)
+* Retry otomatis jika terjadi kegagalan transient
+* Notifikasi dikirim ke admin jika job gagal total setelah max retries
+* Data agregasi tersimpan valid di database report
+
+### US-JOB-02 — Inspect Fail Jobs
+
+**Sebagai** Developer
+**Saya ingin** memantau status eksekusi job yang gagal di dashboard
+**Sehingga** saya dapat melakukan debugging dan perbaikan root cause
+
+**Acceptance Criteria:**
+
+* Dashboard menampilkan list job yang masuk Dead Letter Queue (DLQ)
+* Payload dan Stack Trace error dapat dilihat detail
+* Opsi untuk me-retry job secara manual dari dashboard
+* Filtering berdasarkan tipe job dan waktu kejadian
+
+### US-JOB-03 — Request Export Data Besar
+
+**Sebagai** User
+**Saya ingin** melakukan permintaan ekspor data volume besar secara asinkron
+**Sehingga** saya tidak perlu menunggu loading browser yang lama
+
+**Acceptance Criteria:**
+
+* User menerima notifikasi sukses/gagal via email/in-app
+* UI tidak blocking saat proses berjalan di background
+* Link download valid untuk durasi tertentu (misal: 24 jam)
+* Format file sesuai permintaan (PDF/Excel)
 
 ---
 

@@ -22,9 +22,53 @@
 
 ## 2. User Stories
 
-| US-04 | Admin | Mendefinisikan peran sistem baru (Role Definition) | Mengelompokkan set izin yang standar untuk fungsionalitas kerja tertentu. |
-| US-05 | Admin | Mengkonfigurasi *permissions* untuk peran tertentu | Mengontrol secara granular tindakan apa saja yang diizinkan untuk setiap peran. |
-| US-11 | Admin | Menetapkan peran ke pengguna (*Role Assignment*) | Memberikan otoritas kerja kepada pengguna sesuai dengan tanggung jawab jabatannya. |
+### US-UM-05 — Manajemen Role
+
+**Sebagai** Admin
+**Saya ingin** membuat dan mengelola role
+**Sehingga** hak akses user dapat diatur dengan fleksibel
+
+**Acceptance Criteria:**
+
+* Admin dapat create, update, delete role
+* Role memiliki nama dan deskripsi
+* Role tidak bisa dihapus jika masih digunakan user
+
+### US-UM-06 — Assign Role ke User
+
+**Sebagai** Admin
+**Saya ingin** menetapkan role ke user
+**Sehingga** user hanya bisa mengakses fitur tertentu
+
+**Acceptance Criteria:**
+
+* Satu user bisa memiliki satu atau lebih role
+* Perubahan role langsung berlaku
+* Sistem mencatat audit log perubahan role
+
+### US-UM-07 — Manajemen Permission
+
+**Sebagai** Admin
+**Saya ingin** mengatur permission per role
+**Sehingga** kontrol akses lebih granular
+
+**Acceptance Criteria:**
+
+* Permission berbasis action (create, read, update, delete)
+* Permission bisa diaktifkan / dinonaktifkan
+* Permission berlaku real-time
+
+### US-UM-08 — Validasi Hak Akses
+
+**Sebagai** Sistem
+**Saya ingin** memvalidasi permission setiap request
+**Sehingga** user tidak bisa mengakses fitur tanpa izin
+
+**Acceptance Criteria:**
+
+* API menolak request tanpa permission
+* UI menyembunyikan menu yang tidak diizinkan
+* Error code 403 untuk akses ilegal
 
 ---
 
@@ -51,7 +95,9 @@ sequenceDiagram
 
 ## 4. Data Model
 
-- **Roles, Permissions, RolePermissions, UserRoles.**
+- **Roles & Permissions:** Entitas utama.
+- **RoleHasPermissions:** Tabel pivot untuk relasi Many-to-Many antara Role dan Permission.
+- **ModelHasRoles:** Tabel polimorfik untuk assign Role ke User (atau model lain).
 
 ```mermaid
 erDiagram
@@ -82,8 +128,9 @@ erDiagram
         int model_id
     }
 
-    Roles }o--o{ Permissions : "RoleHasPermissions"
-    Roles }o--o{ ModelHasRoles : "Assigned to Users"
+    Roles ||--o{ RoleHasPermissions : "contains"
+    Permissions ||--o{ RoleHasPermissions : "belongs to"
+    Roles ||--o{ ModelHasRoles : "assigned via"
 ```
 
 ## 5. Compliance & Audit

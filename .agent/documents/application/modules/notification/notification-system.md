@@ -22,12 +22,56 @@
 
 ## 2. User Stories
 
-| ID        | Peran (Role) | Tujuan (Goal)                                                                    | Manfaat (Benefit)                                                                                                  |
-| :-------- | :----------- | :------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| US-NOT-01 | System       | Mengirimkan kode OTP melalui Email/SMS untuk verifikasi 2FA                      | Menjamin keamanan akses akun pengguna melalui verifikasi kepemilikan kontak yang valid.                            |
-| US-NOT-02 | User         | Menerima pembaruan status pesanan secara *real-time*                             | Memberikan kepastian informasi dan transparansi proses kepada pengguna.                                            |
-| US-NOT-04 | User         | Mengakses riwayat notifikasi terdahulu melalui pusat notifikasi (*in-app*)       | Memungkinkan pengguna meninjau kembali informasi penting yang mungkin terlewat.                                    |
-| US-NOT-05 | System       | Melakukan percobaan pengiriman ulang (*retry*) otomatis pada kegagalan sementara | Memastikan reliabilitas penyampaian pesan kritis (*delivery guarantee*) meskipun terjadi gangguan jaringan sesaat. |
+### US-NOT-01 — Kirim Kode OTP (2FA)
+
+**Sebagai** Sistem
+**Saya ingin** mengirimkan kode OTP via Email/SMS
+**Sehingga** user dapat memverifikasi identitasnya
+
+**Acceptance Criteria:**
+
+* Support multi-channel (Email, WhatsApp, SMS)
+* Kode OTP berlaku singkat (misal: 2 menit)
+* Rate limiting diterapkan untuk mencegah spam
+* Template pesan dapat dikonfigurasi
+
+### US-NOT-02 — Update Status Pesanan Real-time
+
+**Sebagai** User
+**Saya ingin** menerima notifikasi saat status pesanan berubah
+**Sehingga** saya mengetahui progres pembelian saya
+
+**Acceptance Criteria:**
+
+* Notifikasi Push / WebSocket ke aplikasi client
+* Trigger otomatis saat event perubahan status terjadi di backend
+* Notifikasi tersimpan di inbox aplikasi
+
+### US-NOT-04 — Riwayat Notifikasi (Inbox)
+
+**Sebagai** User
+**Saya ingin** melihat riwayat notifikasi saya
+**Sehingga** saya tidak ketinggalan info penting
+
+**Acceptance Criteria:**
+
+* List notifikasi dengan status read/unread
+* Fitur "Mark as Read"
+* Pagination untuk list notifikasi
+* Grouping notifikasi berdasarkan kategori (Promo, Transaksi, System)
+
+### US-NOT-05 — Auto Retry Delivery
+
+**Sebagai** Sistem
+**Saya ingin** mencoba kirim ulang notifikasi jika gagal
+**Sehingga** pesan kritis tetap tersampaikan meski jaringan gangguan
+
+**Acceptance Criteria:**
+
+* Exponential backoff strategy untuk retry
+* Maksimal percobaan: 3 kali
+* Log error detail jika gagal permanen
+* Mekanisme fallback channel (misal: WA gagal -> kirim SMS)
 
 ---
 

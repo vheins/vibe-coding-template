@@ -22,11 +22,66 @@
 
 ## 2. User Stories
 
-| US-01 | Guest | Mendaftarkan identitas digital baru (Registrasi) | Mendapatkan kredensial akses yang sah untuk memanfaatkan fitur platform. |
-| US-02 | Guest | Melakukan verifikasi kredensial (Login) untuk mendapatkan akses sesi | Mengakses data pribadi dan fitur terlindungi sesuai hak akses. |
-| US-03 | Guest | Menginisiasi prosedur pemulihan akun saat kehilangan kredensial | Memulihkan akses ke akun tanpa harus menghubungi layanan pelanggan manual. |
-| US-07 | User | Mengakhiri sesi aktif secara aman (Logout) | Mencegah penyalahgunaan sesi oleh pihak ketiga setelah selesai penggunaan. |
-| US-08 | User | Memperbarui otorisasi sesi (*Refresh Token*) tanpa intervensi manual | Menjaga kontinuitas pengalaman pengguna (*UX*) tanpa mengurangi postur keamanan. |
+### US-UM-01 — Login Pengguna
+
+**Sebagai** User
+**Saya ingin** login ke sistem menggunakan email dan password
+**Sehingga** saya dapat mengakses fitur sesuai hak akses saya
+
+**Acceptance Criteria:**
+
+* User dapat login dengan email & password valid
+* Jika kredensial salah, sistem menampilkan pesan error
+* Jika akun tidak aktif, login ditolak
+* Session dibuat setelah login berhasil
+
+### US-UM-02 — Logout Pengguna
+
+**Sebagai** User
+**Saya ingin** logout dari sistem
+**Sehingga** akun saya tetap aman saat selesai digunakan
+
+**Acceptance Criteria:**
+
+* Session dihapus saat logout
+* User diarahkan ke halaman login
+* Token/API key (jika ada) dinonaktifkan
+
+### US-UM-04 — Aktivasi Akun User
+
+**Sebagai** User
+**Saya ingin** mengaktifkan akun melalui email
+**Sehingga** saya bisa login ke sistem
+
+**Acceptance Criteria:**
+
+* User menerima email aktivasi
+* Link aktivasi memiliki masa berlaku
+* Setelah aktivasi, status user menjadi aktif
+
+### US-UM-10 — Ganti Password
+
+**Sebagai** User
+**Saya ingin** mengganti password
+**Sehingga** akun saya tetap aman
+
+**Acceptance Criteria:**
+
+* Password lama harus valid
+* Password baru memenuhi policy keamanan
+* User otomatis logout setelah ganti password
+
+### US-UM-11 — Reset Password
+
+**Sebagai** User
+**Saya ingin** reset password jika lupa
+**Sehingga** saya bisa kembali login
+
+**Acceptance Criteria:**
+
+* Email reset password dikirim
+* Token reset memiliki expiry
+* Password lama tidak berlaku setelah reset
 
 ---
 
