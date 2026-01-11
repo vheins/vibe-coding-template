@@ -14,20 +14,20 @@
 
 ## 1. Feature Overview
 
-- **Deskripsi singkat fitur:** Pengiriman Email, Push, SMS, dan In-App Notification.
-- **Peran dalam modul:** Hub komunikasi sistem.
-- **Nilai bisnis:** User Engagement & Transactional Reliability.
+- **Deskripsi singkat fitur:** Orkestra pengiriman notifikasi *omni-channel* (Email, Push, SMS, WebSocket) dengan manajemen antrian dan templat terpusat.
+- **Peran dalam modul:** Bertindak sebagai *Communication Hub* yang menjembatani sistem dengan pengguna akhir.
+- **Nilai bisnis:** Meningkatkan *retention* dan *engagement* pengguna melalui komunikasi transaksional dan promosi yang tepat waktu dan relevan.
 
 ---
 
 ## 2. User Stories
 
-| ID        | Peran (Role) | Tujuan (Goal)                          | Manfaat (Benefit)                           |
-| :-------- | :----------- | :------------------------------------- | :------------------------------------------ |
-| US-NOT-01 | System       | Mengirim OTP via Email/SMS             | User dapat memverifikasi identitas.         |
-| US-NOT-02 | User         | Menerima notifikasi status pesanan     | User mengetahui update transaksi mereka.    |
-| US-NOT-04 | User         | Melihat riwayat notifikasi di aplikasi | User tidak ketinggalan informasi penting.   |
-| US-NOT-05 | System       | Retry pengiriman jika gagal            | Memastikan pesan sampai walau ada gangguan. |
+| ID        | Peran (Role) | Tujuan (Goal)                                                                    | Manfaat (Benefit)                                                                                                  |
+| :-------- | :----------- | :------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| US-NOT-01 | System       | Mengirimkan kode OTP melalui Email/SMS untuk verifikasi 2FA                      | Menjamin keamanan akses akun pengguna melalui verifikasi kepemilikan kontak yang valid.                            |
+| US-NOT-02 | User         | Menerima pembaruan status pesanan secara *real-time*                             | Memberikan kepastian informasi dan transparansi proses kepada pengguna.                                            |
+| US-NOT-04 | User         | Mengakses riwayat notifikasi terdahulu melalui pusat notifikasi (*in-app*)       | Memungkinkan pengguna meninjau kembali informasi penting yang mungkin terlewat.                                    |
+| US-NOT-05 | System       | Melakukan percobaan pengiriman ulang (*retry*) otomatis pada kegagalan sementara | Memastikan reliabilitas penyampaian pesan kritis (*delivery guarantee*) meskipun terjadi gangguan jaringan sesaat. |
 
 ---
 
@@ -75,7 +75,34 @@ sequenceDiagram
 - **Template:** Blueprint pesan (`Hello {{name}}`).
 - **UserPreference:** Opt-in/out settings.
 
-*(Lihat ERD lengkap di Module Overview jika diperlukan)*
+```mermaid
+erDiagram
+    Notifications {
+        uuid id PK
+        string type
+        string notifiable_type
+        int notifiable_id
+        text data
+        timestamp read_at
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    NotificationTemplates {
+        string code PK
+        string channel "mail, database, broadcast"
+        text content
+        boolean is_active
+    }
+
+    UserPreferences {
+        int user_id FK
+        string channel
+        boolean is_enabled
+    }
+
+    Notifications }o--|| NotificationTemplates : "uses"
+```
 
 ---
 

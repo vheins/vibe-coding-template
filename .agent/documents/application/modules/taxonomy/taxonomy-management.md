@@ -14,20 +14,20 @@
 
 ## 1. Feature Overview
 
-- **Deskripsi singkat fitur:** Manajemen namespace taksonomi (Hierarkis/Flat) dan assignment ke entitas lain.
-- **Peran dalam modul:** Single Source of Truth klasifikasi.
-- **Nilai bisnis:** Eliminasi redundansi tabel kategori dan konsistensi data.
+- **Deskripsi singkat fitur:** Menyediakan mekanisme klasifikasi entitas yang fleksibel melalui struktur taksonomi (Hierarkis/Flat) dan *tagging* polimorfik.
+- **Peran dalam modul:** Berfungsi sebagai *Single Source of Truth* untuk standarisasi nomenklatur dan pengelompokan data di seluruh sistem.
+- **Nilai bisnis:** Mengeliminasi redundansi struktur data kategori, meningkatkan konsistensi pelaporan, dan memungkinkan navigasi konten yang lebih kaya.
 
 ---
 
 ## 2. User Stories
 
-| ID        | Peran (Role) | Tujuan (Goal)                             | Manfaat (Benefit)                                        |
-| :-------- | :----------- | :---------------------------------------- | :------------------------------------------------------- |
-| US-TAX-01 | Admin        | Membuat Taxonomy baru (misal: "Skill")    | Mempersiapkan sistem untuk fitur baru (Profil Karyawan). |
-| US-TAX-02 | Admin        | Menambah Term pada Taxonomy               | Menyediakan opsi pilihan bagi pengguna.                  |
-| US-TAX-03 | Sistem       | Attach Term "Javascript" ke Karyawan A    | Klasifikasi skill tanpa mengubah tabel Employee.         |
-| US-TAX-04 | Pengguna     | Memfilter Produk berdasarkan "Elektronik" | Menemukan item yang relevan dengan cepat.                |
+| ID        | Peran (Role) | Tujuan (Goal)                                                       | Manfaat (Benefit)                                                                                         |
+| :-------- | :----------- | :------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------- |
+| US-TAX-01 | Admin        | Membuat definisi Taksonomi baru (misal: "Skill", "Kategori Produk") | Mempersiapkan struktur klasifikasi yang relevan untuk kebutuhan fitur baru tanpa mengubah skema database. |
+| US-TAX-02 | Admin        | Menambah *Terms* baru ke dalam Taksonomi yang sudah ada             | Memperkaya opsi klasifikasi yang tersedia bagi pengguna akhir.                                            |
+| US-TAX-03 | Sistem       | Melampirkan *Term* ke entitas bisnis secara polimorfik              | Mengklasifikasikan data (misal: memberikan skill ke karyawan) tanpa membuat tabel relasi khusus.          |
+| US-TAX-04 | Pengguna     | Melakukan filter data berdasarkan *Term* spesifik                   | Menemukan item yang relevan dengan cepat melalui navigasi berbasis aspek (*faceted search*).              |
 
 ---
 
@@ -67,7 +67,40 @@ sequenceDiagram
 - **Term:** Nilai (misal `electronics`, `fashion`).
 - **EntityTerm:** Pivot table.
 
-*(Lihat ERD lengkap di Module Overview jika diperlukan)*
+```mermaid
+erDiagram
+    Taxonomies {
+        int id PK
+        string name
+        string slug UK
+        string description
+        boolean is_hierarchical
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Terms {
+        int id PK
+        int taxonomy_id FK
+        int parent_id FK
+        string name
+        string slug UK
+        string description
+        int order
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    EntityTerms {
+        int term_id FK
+        string entity_type
+        int entity_id
+        timestamp created_at
+    }
+
+    Taxonomies ||--o{ Terms : "contains"
+    Terms }o--o{ EntityTerms : "assigned to"
+```
 
 ---
 

@@ -14,20 +14,20 @@
 
 ## 1. Feature Overview
 
-- **Deskripsi singkat fitur:** Layanan upload, penyimpanan (multi-provider), dan metadata file.
-- **Peran dalam modul:** Fitur inti Media Management.
-- **Nilai bisnis:** Sentralisasi penyimpanan aset dan efisiensi storage.
+- **Deskripsi singkat fitur:** Menyediakan layanan manajemen aset digital terpusat yang mencakup pengunggahan (*upload*), penyimpanan multi-provider, transformasi media, dan manajemen metadata.
+- **Peran dalam modul:** Bertindak sebagai *unified storage interface* yang mengabstraksi kompleksitas driver penyimpanan fisik.
+- **Nilai bisnis:** Mengoptimalkan biaya penyimpanan melalui strategi kompresi/retensi dan memastikan ketersediaan aset tinggi (*high availability*).
 
 ---
 
 ## 2. User Stories
 
-| ID        | Peran (Role) | Tujuan (Goal)                        | Manfaat (Benefit)                    |
-| :-------- | :----------- | :----------------------------------- | :----------------------------------- |
-| US-MED-01 | User         | Mengupload foto profil avatar        | Identitas visual di aplikasi.        |
-| US-MED-02 | Admin        | Mengupload gambar produk             | Memperjelas katalog bagi pembeli.    |
-| US-MED-03 | Sistem       | Generate thumbnail otomatis          | Mempercepat loading halaman listing. |
-| US-MED-04 | User         | Melampirkan bukti transfer (dokumen) | Verifikasi pembayaran manual.        |
+| ID        | Peran (Role) | Tujuan (Goal)                                                              | Manfaat (Benefit)                                                                             |
+| :-------- | :----------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
+| US-MED-01 | User         | Mengunggah foto profil (*avatar*) untuk personalisasi akun                 | Membangun identitas visual pengguna di dalam ekosistem aplikasi.                              |
+| US-MED-02 | Admin        | Mengelola galeri gambar produk untuk katalog penjualan                     | Meningkatkan konversi penjualan melalui representasi visual produk yang berkualitas tinggi.   |
+| US-MED-03 | Sistem       | Melakukan *resizing* dan pembuatan *thumbnail* secara otomatis saat upload | Meningkatkan kinerja muat halaman (*load time*) dengan menyajikan ukuran gambar yang optimal. |
+| US-MED-04 | User         | Melampirkan dokumen pendukung (PDF/Doc) pada transaksi                     | Memungkinkan verifikasi manual dan audit trail kepatuhan transaksi.                           |
 
 ---
 
@@ -68,7 +68,32 @@ sequenceDiagram
 - **Media:** Metadata file (Filename, Size, URL, Disk).
 - **MediaAttachment:** Tabel pivot polimorfik (Entity Type, Entity ID).
 
-*(Lihat ERD lengkap di Module Overview jika diperlukan)*
+```mermaid
+erDiagram
+    Media {
+        int id PK
+        string disk "s3, local"
+        string directory
+        string filename UK
+        string extension
+        string mime_type
+        string aggregate_type "image, document, video"
+        int size
+        text metadata "json"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    MediaAttachments {
+        int media_id FK
+        string entity_type
+        int entity_id
+        string tag "avatar, gallery, document"
+        timestamp attached_at
+    }
+
+    Media ||--o{ MediaAttachments : "attached to"
+```
 
 ---
 

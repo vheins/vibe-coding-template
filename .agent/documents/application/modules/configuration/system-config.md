@@ -14,20 +14,20 @@
 
 ## 1. Feature Overview
 
-- **Deskripsi singkat fitur:** Manajemen Key-Value pair statis dan dinamis dengan dukungan caching.
-- **Peran dalam modul:** Inti dari fleksibilitas operasional aplikasi.
-- **Nilai bisnis:** Memungkinkan perubahan perilaku sistem tanpa deployment dan mendukung A/B Testing via Feature Flags.
+- **Deskripsi singkat fitur:** Menyediakan layanan manajemen konfigurasi terpusat yang mendukung penyimpanan Key-Value statis dan dinamis dengan strategi *caching* berlapis.
+- **Peran dalam modul:** Bertindak sebagai *dynamic control plane* yang memungkinkan perubahan perilaku aplikasi secara *runtime* tanpa perlu *redeployment*.
+- **Nilai bisnis:** Meningkatkan *business agility* melalui kapabilitas *feature toggling* (A/B testing) dan *live configuration updates* yang aman.
 
 ---
 
 ## 2. User Stories
 
-| ID        | Peran (Role)  | Tujuan (Goal)                         | Manfaat (Benefit)                                          |
-| :-------- | :------------ | :------------------------------------ | :--------------------------------------------------------- |
-| US-CFG-01 | Admin         | Mengaktifkan "Maintenance Mode"       | Mencegah akses user saat perbaikan database.               |
-| US-CFG-02 | Product Owner | Menyalakan fitur baru untuk 50% user  | A/B testing fitur baru.                                    |
-| US-CFG-03 | Frontend App  | Mengambil list support contact number | Contact center bisa diubah tanpa update aplikasi di store. |
-| US-CFG-04 | System        | Cache konfigurasi di memory           | Mengurangi load database pada high traffic.                |
+| ID        | Peran (Role)  | Tujuan (Goal)                                                                      | Manfaat (Benefit)                                                                                           |
+| :-------- | :------------ | :--------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------- |
+| US-CFG-01 | Admin         | Mengaktifkan "Maintenance Mode" secara global melalui dashboard admin              | Membatasi akses pengguna selama jendela pemeliharaan kritis untuk mencegah korupsi data.                    |
+| US-CFG-02 | Product Owner | Mengelola peluncuran fitur baru secara bertahap (*canary release*) ke 50% pengguna | Meminimalkan risiko dampak negatif peluncuran fitur baru melalui validasi pasar yang terkontrol.            |
+| US-CFG-03 | Frontend App  | Mengambil daftar kontak bantuan terbaru secara dinamis saat aplikasi dibuka        | Memastikan pengguna selalu mendapatkan informasi layanan pelanggan yang akurat tanpa perlu update aplikasi. |
+| US-CFG-04 | System        | Menyimpan konfigurasi aktif di memori (*cache*) untuk akses latensi rendah         | Mengurangi beban I/O database secara signifikan pada kondisi *high traffic*.                                |
 
 ---
 
@@ -66,7 +66,31 @@ sequenceDiagram
 
 - **Configuration:** Key (Unique), Value, Type (String/Bool/JSON/Number), IsPublic, Group.
 
-*(Lihat ERD lengkap di Module Overview jika ada)*
+```mermaid
+erDiagram
+    Configurations {
+        int id PK
+        string key UK
+        text value
+        string type "string, boolean, number, json"
+        string group
+        boolean is_public
+        boolean is_system
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ConfigurationAudits {
+        int id PK
+        int config_id FK
+        string actor_id
+        text old_value
+        text new_value
+        timestamp changed_at
+    }
+
+    Configurations ||--o{ ConfigurationAudits : "tracks changes"
+```
 
 ---
 

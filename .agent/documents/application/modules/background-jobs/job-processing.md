@@ -14,19 +14,19 @@
 
 ## 1. Feature Overview
 
-- **Deskripsi singkat fitur:** Mekanisme queue (Redis) dan cron scheduling.
-- **Peran dalam modul:** Engine utama modul.
-- **Nilai bisnis:** Skalabilitas dan Keandalan proses berat.
+- **Deskripsi singkat fitur:** Menyediakan infrastruktur pemrosesan tugas asinkron (*background processing*) yang skalabel dan penjadwalan tugas (*task scheduling*) berbasis waktu.
+- **Peran dalam modul:** Bertindak sebagai *central execution engine* untuk operasi *long-running* dan *deferred* guna menjaga responsivitas aplikasi utama.
+- **Nilai bisnis:** Menjamin reliabilitas eksekusi proses berat, meningkatkan *throughput* sistem, dan memungkinkan skalabilitas horizontal pada layer pemrosesan.
 
 ---
 
 ## 2. User Stories
 
-| ID | Role | Goal | Benefit                                                      |
-| :-------- | :----------- | :---------------------------------- | :--------------------------------------------------------------------- |
-| US-JOB-01 | Sistem       | Menjalankan report bulanan otomatis | Report tersedia tepat waktu tanpa intervensi manual.                   |
-| US-JOB-02 | Developer    | Inspect fail jobs di dashboard      | Memudahkan debugging root cause kegagalan proses background.           |
-| US-JOB-03 | User         | Request export data besar           | Tidak perlu menunggu loading browser, notifikasi dikirim saat selesai. |
+| ID        | Role      | Goal                                                                                    | Benefit                                                                                                      |
+| :-------- | :-------- | :-------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
+| US-JOB-01 | Sistem    | Menjalankan proses agregasi laporan bulanan secara otomatis pada jadwal yang ditentukan | Memastikan ketersediaan data analitik tepat waktu tanpa intervensi manual, mengurangi risiko *human error*.  |
+| US-JOB-02 | Developer | Memantau status eksekusi *job* gagal dan melakukan inspeksi *payload* melalui dashboard | Mempercepat *mean-time-to-resolution* (MTTR) untuk insiden di layer pemrosesan background.                   |
+| US-JOB-03 | User      | Melakukan permintaan ekspor data volume besar secara asinkron                           | Meningkatkan *user experience* dengan menghindari *blocking* pada UI, memberikan notifikasi saat hasil siap. |
 
 ---
 
@@ -58,7 +58,28 @@ Utilizes Cron Expressions (e.g., `0 0 * * *`) for periodic execution with Distri
 - **Job Log:** Mencatat riwayat eksekusi (ID, Status, Result, Error).
 - **Redis Keys:** Disimpan sebagai Hash/List di Redis.
 
-*(Lihat ERD lengkap di Module Overview jika diperlukan)*
+```mermaid
+erDiagram
+    Jobs {
+        string id PK
+        string queue_name
+        json payload
+        int attempts
+        string status "waiting, active, completed, failed"
+        timestamp created_at
+        timestamp processed_at
+    }
+
+    JobLogs {
+        int id PK
+        string job_id FK
+        string content
+        string level
+        timestamp logged_at
+    }
+
+    Jobs ||--o{ JobLogs : "generates"
+```
 
 ---
 

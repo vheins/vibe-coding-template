@@ -14,21 +14,19 @@
 
 ## 1. Feature Overview
 
-- **Deskripsi singkat fitur:** Menangani Login, Register, Forgot Password, dan Token Management.
-- **Peran dalam modul:** Gerbang utama keamanan sistem.
-- **Nilai bisnis:** Mencegah akses tidak sah (Security) dan memberikan pengalaman login yang aman (UX).
+- **Deskripsi singkat fitur:** Menyediakan layanan otentikasi komprehensif yang mencakup registrasi akun, verifikasi identitas (Login), pemulihan akses (*Account Recovery*), dan manajemen sesi berbasis token.
+- **Peran dalam modul:** Berfungsi sebagai gerbang pertahanan utama (*primary defense gateway*) yang memvalidasi setiap subjek yang mencoba mengakses sumber daya sistem.
+- **Nilai bisnis:** Melindungi aset digital perusahaan dari akses tidak sah serta memberikan pengalaman pengguna yang aman dan *seamless* melalui standar keamanan modern.
 
 ---
 
 ## 2. User Stories
 
-| ID    | Peran (Role) | Tujuan (Goal)              | Manfaat (Benefit)                         |
-| :---- | :----------- | :------------------------- | :---------------------------------------- |
-| US-01 | Guest        | Mendaftar akun baru        | Dapat mengakses fitur sistem              |
-| US-02 | Guest        | Melakukan login            | Mendapatkan akses ke akun pribadi         |
-| US-03 | Guest        | Mereset password yang lupa | Memulihkan akses ke akun                  |
-| US-07 | User         | Melakukan logout           | Mengamankan akun saat selesai menggunakan |
-| US-08 | User         | Refresh Token              | Memperpanjang sesi tanpa login ulang      |
+| US-01 | Guest | Mendaftarkan identitas digital baru (Registrasi) | Mendapatkan kredensial akses yang sah untuk memanfaatkan fitur platform. |
+| US-02 | Guest | Melakukan verifikasi kredensial (Login) untuk mendapatkan akses sesi | Mengakses data pribadi dan fitur terlindungi sesuai hak akses. |
+| US-03 | Guest | Menginisiasi prosedur pemulihan akun saat kehilangan kredensial | Memulihkan akses ke akun tanpa harus menghubungi layanan pelanggan manual. |
+| US-07 | User | Mengakhiri sesi aktif secara aman (Logout) | Mencegah penyalahgunaan sesi oleh pihak ketiga setelah selesai penggunaan. |
+| US-08 | User | Memperbarui otorisasi sesi (*Refresh Token*) tanpa intervensi manual | Menjaga kontinuitas pengalaman pengguna (*UX*) tanpa mengurangi postur keamanan. |
 
 ---
 
@@ -66,7 +64,36 @@ sequenceDiagram
 - **Users:** Menyimpan Email dan Password Hash.
 - **Tokens:** Menyimpan Refresh Token dan Reset Token.
 
-*(Lihat ERD lengkap di Module Overview jika diperlukan)*
+```mermaid
+erDiagram
+    Users {
+        int id PK
+        string email UK
+        string password_hash
+        timestamp email_verified_at
+        string status
+    }
+
+    PersonalAccessTokens {
+        int id PK
+        string tokenable_type
+        int tokenable_id FK
+        string name
+        string token UK
+        json abilities
+        timestamp last_used_at
+        timestamp expires_at
+    }
+
+    PasswordResetTokens {
+        string email UK
+        string token
+        timestamp created_at
+    }
+
+    Users ||--o{ PersonalAccessTokens : "owns"
+    Users ||--o{ PasswordResetTokens : "requests"
+```
 
 ---
 

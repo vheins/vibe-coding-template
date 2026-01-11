@@ -14,19 +14,17 @@
 
 ## 1. Feature Overview
 
-- **Deskripsi singkat fitur:** Manajemen Roles, Permissions, dan Assignment.
-- **Peran dalam modul:** Definisi Hak Akses.
-- **Nilai bisnis:** Granular Access Control dan Fleksibilitas wewenang.
+- **Deskripsi singkat fitur:** Menyediakan kontrol akses berbasis peran (*Role-Based Access Control* - RBAC) yang memungkinkan definisi peran dan penetapan izin secara granular.
+- **Peran dalam modul:** Bertindak sebagai *Authorization Policy Engine* yang menentukan "siapa boleh melakukan apa" dalam sistem.
+- **Nilai bisnis:** Meminimalkan risiko *privilege escalation* dan menyederhanakan administrasi akses pengguna yang kompleks.
 
 ---
 
 ## 2. User Stories
 
-| ID    | Peran (Role) | Tujuan (Goal)                 | Manfaat (Benefit)                                   |
-| :---- | :----------- | :---------------------------- | :-------------------------------------------------- |
-| US-04 | Admin        | Membuat Role baru             | Mengelompokkan hak akses pengguna                   |
-| US-05 | Admin        | Menetapkan Permission ke Role | Mengatur apa yang bisa dilakukan oleh Role tertentu |
-| US-11 | Admin        | Assign Role ke User           | Memberikan wewenang kepada user                     |
+| US-04 | Admin | Mendefinisikan peran sistem baru (Role Definition) | Mengelompokkan set izin yang standar untuk fungsionalitas kerja tertentu. |
+| US-05 | Admin | Mengkonfigurasi *permissions* untuk peran tertentu | Mengontrol secara granular tindakan apa saja yang diizinkan untuk setiap peran. |
+| US-11 | Admin | Menetapkan peran ke pengguna (*Role Assignment*) | Memberikan otoritas kerja kepada pengguna sesuai dengan tanggung jawab jabatannya. |
 
 ---
 
@@ -55,7 +53,38 @@ sequenceDiagram
 
 - **Roles, Permissions, RolePermissions, UserRoles.**
 
----
+```mermaid
+erDiagram
+    Roles {
+        int id PK
+        string name UK
+        string guard_name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Permissions {
+        int id PK
+        string name UK
+        string guard_name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    RoleHasPermissions {
+        int permission_id FK
+        int role_id FK
+    }
+
+    ModelHasRoles {
+        int role_id FK
+        string model_type
+        int model_id
+    }
+
+    Roles }o--o{ Permissions : "RoleHasPermissions"
+    Roles }o--o{ ModelHasRoles : "Assigned to Users"
+```
 
 ## 5. Compliance & Audit
 
