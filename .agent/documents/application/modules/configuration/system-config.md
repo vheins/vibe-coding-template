@@ -146,8 +146,22 @@ erDiagram
 
 ## 6. Implementation Tasks
 
-| ID     | Platform | Status | Deskripsi                             |
-| :----- | :------- | :----- | :------------------------------------ |
-| CFG-01 | Backend  | Todo   | Create Configuration Table & CRUD API |
-| CFG-02 | Backend  | Todo   | Implement Caching Layer (Redis)       |
-| CFG-03 | Frontend | Todo   | Create Admin Config Management Page   |
+### 6.1 Backend
+
+| Task ID   | Component  | Status | Description                                                  |
+| :-------- | :--------- | :----- | :----------------------------------------------------------- |
+| CFG-BE-01 | Migration  | Todo   | Create `configurations` and `configuration_audits` tables.   |
+| CFG-BE-02 | Model      | Todo   | Setup `Configuration` model (Casts, Auditable).              |
+| CFG-BE-03 | Service    | Todo   | Implement `ConfigService` with Redis Caching (Read-through). |
+| CFG-BE-04 | Controller | Todo   | Implement `ConfigController` (CRUD Admin & Public Fetch).    |
+| CFG-BE-05 | Routes     | Todo   | Register API routes.                                         |
+| CFG-BE-06 | Tests      | Todo   | Create Unit Test (Cache Logic) and Feature Test.             |
+
+### 6.2 Frontend
+
+| Task ID   | Component   | Status | Description                                         |
+| :-------- | :---------- | :----- | :-------------------------------------------------- |
+| CFG-FE-01 | API Service | Todo   | Create `ConfigService` wrapper.                     |
+| CFG-FE-02 | State       | Todo   | Setup Global Config Store (Pinia) to fetch on boot. |
+| CFG-FE-03 | Page        | Todo   | Create Admin `ConfigManager` page.                  |
+| CFG-FE-04 | Component   | Todo   | Create `ConfigEditor` form with type validation.    |

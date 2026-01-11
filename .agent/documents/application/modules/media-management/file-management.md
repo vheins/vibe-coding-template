@@ -149,9 +149,22 @@ erDiagram
 
 ## 6. Implementation Tasks
 
-| ID        | Platform | Status | Deskripsi                                       |
-| :-------- | :------- | :----- | :---------------------------------------------- |
-| MED-BE-01 | Backend  | Todo   | Setup Storage Driver (Flysystem/Multer)         |
-| MED-BE-02 | Backend  | Todo   | API Upload File & Validation                    |
-| MED-BE-03 | Backend  | Todo   | Database Schema Migration (Media & Attachments) |
-| MED-FE-01 | Frontend | Todo   | Komponen Upload (Drag & Drop, Progress Bar)     |
+### 6.1 Backend
+
+| Task ID   | Component      | Status | Description                                          |
+| :-------- | :------------- | :----- | :--------------------------------------------------- |
+| MED-BE-01 | Infrastructure | Todo   | Setup Flysystem (S3/Local) & Multer/Formidable.      |
+| MED-BE-02 | Migration      | Todo   | Create `media` and `media_attachments` tables.       |
+| MED-BE-03 | Model          | Todo   | Setup `Media` model with accessors (URL).            |
+| MED-BE-04 | Service        | Todo   | Implement `MediaService` (Upload, Optimize, Delete). |
+| MED-BE-05 | Controller     | Todo   | Implement `MediaController` (Upload Endpoint).       |
+| MED-BE-06 | Routes         | Todo   | Register API routes.                                 |
+| MED-BE-07 | Tests          | Todo   | Create Upload & Storage Tests.                       |
+
+### 6.2 Frontend
+
+| Task ID   | Component | Status | Description                                    |
+| :-------- | :-------- | :----- | :--------------------------------------------- |
+| MED-FE-01 | Component | Todo   | Create `FileUploader` (Drag & Drop, Progress). |
+| MED-FE-02 | Component | Todo   | Create `ImageGallery` selector.                |
+| MED-FE-03 | Service   | Todo   | Create `MediaService` api wrapper.             |

@@ -121,8 +121,22 @@ erDiagram
 
 ## 6. Implementation Tasks
 
-| ID        | Platform | Status | Deskripsi                                          |
-| :-------- | :------- | :----- | :------------------------------------------------- |
-| JOB-BE-01 | Backend  | Todo   | Setup Infrastruktur Queue (Redis/Bull)             |
-| JOB-BE-02 | Backend  | Todo   | Implementasi Base Worker Class                     |
-| JOB-BE-03 | Backend  | Todo   | Setup Dashboard UI untuk Queue (misal: Bull Board) |
+### 6.1 Backend
+
+| Task ID   | Component      | Status | Description                                     |
+| :-------- | :------------- | :----- | :---------------------------------------------- |
+| JOB-BE-01 | Infrastructure | Todo   | Setup Queue Driver (Redis/Bull) & Config.       |
+| JOB-BE-02 | Service        | Todo   | Implement `JobService` (Dispatch logic).        |
+| JOB-BE-03 | Worker         | Todo   | Implement Base Worker Class & Error Handling.   |
+| JOB-BE-04 | Worker         | Todo   | Create `MonthlyReportJob` (Scheduled).          |
+| JOB-BE-05 | Worker         | Todo   | Create `DataExportJob` (Long running).          |
+| JOB-BE-06 | Dashboard      | Todo   | Setup Bull Board (Authentication middleware).   |
+| JOB-BE-07 | Routes         | Todo   | Register API logs inspection routes (Optional). |
+| JOB-BE-08 | Tests          | Todo   | Create job processing tests.                    |
+
+### 6.2 Frontend
+
+| Task ID   | Component    | Status | Description                                        |
+| :-------- | :----------- | :----- | :------------------------------------------------- |
+| JOB-FE-01 | Monitoring   | Todo   | Integrate Bull Board into Admin Panel iframe/link. |
+| JOB-FE-02 | Notification | Todo   | Handle "Export Ready" notification.                |

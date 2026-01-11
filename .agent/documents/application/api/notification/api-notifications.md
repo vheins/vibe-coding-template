@@ -76,6 +76,12 @@ Authorization: Bearer <token>
 
 #### Request
 
+**Headers:**
+```http
+Content-Type: application/vnd.api+json
+Authorization: Bearer <token>
+```
+
 **Query Parameters:**
 - `page[number]`: Page number.
 - `page[size]`: Items per page.
@@ -122,6 +128,12 @@ Authorization: Bearer <token>
 - **Access Control:** Authenticated (User Owner).
 
 #### Request
+
+**Headers:**
+```http
+Content-Type: application/vnd.api+json
+Authorization: Bearer <token>
+```
 
 **Body:**
 ```json

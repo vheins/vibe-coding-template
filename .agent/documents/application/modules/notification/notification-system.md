@@ -115,6 +115,8 @@ sequenceDiagram
 
 ## 4. Data Model
 
+> Diagram Entity Relationship untuk Notification System.
+
 - **Notification:** Log pesan (Type, Channel, Status).
 - **Template:** Blueprint pesan (`Hello {{name}}`).
 - **UserPreference:** Opt-in/out settings.
@@ -159,10 +161,25 @@ erDiagram
 
 ## 6. Implementation Tasks
 
-| ID        | Platform | Status | Deskripsi                                       |
-| :-------- | :------- | :----- | :---------------------------------------------- |
-| NOT-BE-01 | Backend  | Todo   | Setup Notification Service & Queue (Redis/Bull) |
-| NOT-BE-02 | Backend  | Todo   | Implement Provider Adapters (Email, Push)       |
-| NOT-BE-03 | Backend  | Todo   | Implement API `POST /send` & `GET /list`        |
-| NOT-FE-01 | Frontend | Todo   | Implement Notification Bell & Badge             |
-| NOT-FE-02 | Frontend | Todo   | Implement Notification List Page                |
+### 6.1 Backend
+
+| Task ID   | Component  | Status | Description                                                                  |
+| :-------- | :--------- | :----- | :--------------------------------------------------------------------------- |
+| NOT-BE-01 | Migration  | Todo   | Create `notifications` table (UUID, polymorphic) & `notification_templates`. |
+| NOT-BE-02 | Seeder     | Todo   | Seed default templates (OTP, Welcome Email).                                 |
+| NOT-BE-03 | Model      | Todo   | Setup `Notification` model with cast & relationships.                        |
+| NOT-BE-04 | Service    | Todo   | Implement `NotificationService` (Channel Strategy Pattern).                  |
+| NOT-BE-05 | Queue      | Todo   | Setup `SendNotificationJob` with retry logic.                                |
+| NOT-BE-06 | Controller | Todo   | Implement `NotificationController` (Send, List, Mark Read).                  |
+| NOT-BE-07 | Routes     | Todo   | Register API routes.                                                         |
+| NOT-BE-08 | Tests      | Todo   | Create Feature Test (Mocking Providers).                                     |
+
+### 6.2 Frontend
+
+| Task ID   | Component   | Status | Description                                            |
+| :-------- | :---------- | :----- | :----------------------------------------------------- |
+| NOT-FE-01 | State       | Todo   | Setup Notification Store (Pinia) & WebSocket listener. |
+| NOT-FE-02 | API Service | Todo   | Create `NotificationService` (Axios wrapper).          |
+| NOT-FE-03 | Component   | Todo   | Create `NotificationBell` with badge count.            |
+| NOT-FE-04 | Component   | Todo   | Create `NotificationList` dropdown/page.               |
+| NOT-FE-05 | Integration | Todo   | Connect Bell & List to Realtime Store.                 |
