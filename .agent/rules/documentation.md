@@ -46,10 +46,15 @@ All modules must follow this structure:
     - **Frontend**: State, API Service, Components, Pages, Integration.
 - **Traceability**: Task IDs must follow `[MOD]-BE-[XX]` and `[MOD]-FE-[XX]`.
 
-## 5. Templates
+## 5. Task Management
+- **Source of Truth**: The Feature Documentation (`implementation tasks` table) is the source of truth.
+- **Sync**: When implementing, you MUST update `.agent/tasks/implementation-tasks.md` to match the granular tasks in the Feature Doc.
+- **Progress**: You MUST mark tasks as `Done` in `.agent/tasks/implementation-tasks.md` immediately after completion.
+
+## 6. Templates
 ALWAYS use the templates located in `.agent/documents/templates/` as your base. Do not invent new formats.
 
-## 6. Workflows
+## 7. Workflows
 - To create new docs: Use the logic from `workflows/create-documentation.md`.
 - To update docs: Use the logic from `workflows/update-documentation.md`.
 

@@ -13,26 +13,68 @@ Dokumen ini berisi gabungan seluruh tugas implementasi dari modul-modul sistem. 
 - [API Spec](../documents/application/api/iam-security/api-authentication.md)
 - [Testing](../documents/application/testing/iam-security/test-authentication.md)
 
-| ID Tugas | Platform | Status | Deskripsi                                                         |
-| :------- | :------- | :----- | :---------------------------------------------------------------- |
-| IAM-01   | Backend  | Todo   | Setup database schema (Users, Roles, Permissions).                |
-| IAM-02   | Backend  | Todo   | Implement JSON:API compliant Authentication endpoints.            |
-| IAM-03   | Frontend | Todo   | Implement Login, Register, Forgot Password Pages.                 |
-| IAM-04   | Backend  | Todo   | Implement JSON:API compliant User Management endpoints.           |
-| IAM-05   | Frontend | Todo   | Implement User Management Dashboard (List, Create, Edit, Delete). |
-| IAM-06   | Backend  | Todo   | Implement JSON:API compliant Role & Permission endpoints.         |
-| IAM-07   | Frontend | Todo   | Implement Role & Permission Management UI.                        |
+### Backend
+
+| ID Tugas  | Component  | Status | Deskripsi                                                       |
+| :-------- | :--------- | :----- | :-------------------------------------------------------------- |
+| IAM-BE-01 | Migration  | Todo   | Create `users` table with standard timestamps & soft deletes.   |
+| IAM-BE-02 | Seeder     | Todo   | Create `UserSeeder` for Admin & Public role.                    |
+| IAM-BE-03 | Model      | Todo   | Setup `User` model arguments (fillable, cast, relations).       |
+| IAM-BE-04 | Repository | Todo   | Implement `UserRepository` (Interface & Implementation).        |
+| IAM-BE-05 | Service    | Todo   | Implement `UserService` (Business Logic for Suspend/Activate).  |
+| IAM-BE-06 | Controller | Todo   | Implement `UserController` (Resource Controller) with JSON:API. |
+| IAM-BE-07 | Routes     | Todo   | Register routes in `api.php`.                                   |
+| IAM-BE-08 | Tests      | Todo   | Create Feature Test (Positive/Negative/Permission).             |
+
+### Frontend
+
+| ID Tugas  | Component   | Status | Deskripsi                                              |
+| :-------- | :---------- | :----- | :----------------------------------------------------- |
+| IAM-FE-01 | State       | Todo   | Setup Pinia Store / Context for User.                  |
+| IAM-FE-02 | API Service | Todo   | Create `UserService` (Axios wrapper).                  |
+| IAM-FE-03 | Component   | Todo   | Create `UserListTable` component.                      |
+| IAM-FE-04 | Component   | Todo   | Create `UserForm` component (Add/Edit).                |
+| IAM-FE-05 | Page        | Todo   | Implement `UserIndex`, `UserCreate`, `UserEdit` pages. |
+| IAM-FE-06 | Integration | Todo   | Connect UI to API & Handle errors.                     |
+
+---
+
+## Modul: Taxonomy (`taxonomy`)
+
+**Deskripsi:** Modul Taxonomy menyediakan sistem klasifikasi terpusat.
+
+**Dokumentasi:**
+- [Overview](../documents/application/modules/taxonomy/overview.md)
+- [API Spec](../documents/application/api/taxonomy/api-taxonomy.md)
+- [Testing](../documents/application/testing/taxonomy/test-taxonomy.md)
+
+### Backend
+
+| ID Tugas  | Component  | Status | Deskripsi                                               |
+| :-------- | :--------- | :----- | :------------------------------------------------------ |
+| TAX-BE-01 | Migration  | Todo   | Create `taxonomies` and `terms` tables with indices.    |
+| TAX-BE-02 | Migration  | Todo   | Create `entity_terms` polymorphic pivot table.          |
+| TAX-BE-03 | Model      | Todo   | Setup `Taxonomy` & `Term` models with relations.        |
+| TAX-BE-04 | Service    | Todo   | Implement `TaxonomyService` (CRUD & Attachment Logic).  |
+| TAX-BE-05 | Controller | Todo   | Implement `TaxonomyController` with JSON:API standards. |
+| TAX-BE-06 | Routes     | Todo   | Register API routes.                                    |
+| TAX-BE-07 | Tests      | Todo   | Create Unit & Feature tests for Taxonomy ops.           |
+
+### Frontend
+
+| ID Tugas  | Component   | Status | Deskripsi                                 |
+| :-------- | :---------- | :----- | :---------------------------------------- |
+| TAX-FE-01 | State       | Todo   | Setup Taxonomy Store (Pinia/Context).     |
+| TAX-FE-02 | API         | Todo   | Create `TaxonomyService` wrapper.         |
+| TAX-FE-03 | Component   | Todo   | Create `TaxonomyManager` UI for Admin.    |
+| TAX-FE-04 | Component   | Todo   | Create reusable `TagInput` component.     |
+| TAX-FE-05 | Integration | Todo   | Integrate `TagInput` into existing forms. |
 
 ---
 
 ## Modul: Background Jobs (`background-jobs`)
 
-**Deskripsi:** Modul Background Jobs bertanggung jawab untuk menangani pemrosesan tugas asinkron, penjadwalan (scheduled tasks), dan pengelolaan antrian (queue management).
-
-**Dokumentasi:**
-- [Overview](../documents/application/modules/background-jobs/overview.md)
-- [API Spec](../documents/application/api/background-jobs/api-background-jobs.md)
-- [Testing](../documents/application/testing/background-jobs/test-background-jobs.md)
+**Status:** *Pending Granularization*
 
 | ID Tugas  | Platform | Status | Deskripsi                                          |
 | :-------- | :------- | :----- | :------------------------------------------------- |
@@ -42,33 +84,9 @@ Dokumen ini berisi gabungan seluruh tugas implementasi dari modul-modul sistem. 
 
 ---
 
-## Modul: Taxonomy (`taxonomy`)
-
-**Deskripsi:** Modul Taxonomy menyediakan sistem klasifikasi terpusat, dapat digunakan kembali, dan agnostik entitas untuk aplikasi (Kategori, Tag, Label, Skill).
-
-**Dokumentasi:**
-- [Overview](../documents/application/modules/taxonomy/overview.md)
-- [API Spec](../documents/application/api/taxonomy/api-taxonomy.md)
-- [Testing](../documents/application/testing/taxonomy/test-taxonomy.md)
-
-| ID Tugas  | Platform | Status | Deskripsi                                                      |
-| :-------- | :------- | :----- | :------------------------------------------------------------- |
-| TAX-BE-01 | Backend  | Todo   | Buat API CRUD Taxonomy & Terms                                 |
-| TAX-BE-02 | Backend  | Todo   | Implementasi Logika Pelampiran Polimorfik                      |
-| TAX-BE-03 | Backend  | Todo   | Optimasi Query (hindari N+1 saat mengambil entitas dengan tag) |
-| TAX-FE-01 | Frontend | Todo   | Buat Manajer Taxonomy (UI Admin)                               |
-| TAX-FE-02 | Frontend | Todo   | Buat Komponen "Tag Input" yang dapat digunakan kembali         |
-
----
-
 ## Modul: Media Management (`media-management`)
 
-**Deskripsi:** Modul Media Management menyediakan layanan terpusat untuk menangani pengunggahan, penyimpanan, dan pengambilan aset digital (File, Gambar, Dokumen).
-
-**Dokumentasi:**
-- [Overview](../documents/application/modules/media-management/overview.md)
-- [API Spec](../documents/application/api/media-management/api-media-management.md)
-- [Testing](../documents/application/testing/media-management/test-media-management.md)
+**Status:** *Pending Granularization*
 
 | ID Tugas  | Platform | Status | Deskripsi                                       |
 | :-------- | :------- | :----- | :---------------------------------------------- |
@@ -81,12 +99,7 @@ Dokumen ini berisi gabungan seluruh tugas implementasi dari modul-modul sistem. 
 
 ## Modul: Configuration (`configuration`)
 
-**Deskripsi:** Modul Configuration menyediakan mekanisme terpusat untuk mengelola pengaturan sistem, feature flags, dan parameter aplikasi secara dinamis.
-
-**Dokumentasi:**
-- [Overview](../documents/application/modules/configuration/overview.md)
-- [API Spec](../documents/application/api/configuration/api-configurations.md)
-- [Testing](../documents/application/testing/configuration/overview.md)
+**Status:** *Pending Granularization*
 
 | ID Tugas  | Platform | Status | Deskripsi                                     |
 | :-------- | :------- | :----- | :-------------------------------------------- |
@@ -100,12 +113,7 @@ Dokumen ini berisi gabungan seluruh tugas implementasi dari modul-modul sistem. 
 
 ## Modul: Notification (`notification`)
 
-**Deskripsi:** Modul Notification mengelola dan mengirimkan pesan kepada pengguna melalui berbagai saluran (Email, Push, SMS, In-App) dengan pengelolaan template terpusat.
-
-**Dokumentasi:**
-- [Overview](../.agent/documents/application/modules/notification/overview.md)
-- [API Spec](../.agent/documents/application/api/notification/api-notifications.md)
-- [Testing](../.agent/documents/application/testing/notification/overview.md)
+**Status:** *Pending Standardization*
 
 | ID Tugas  | Platform | Status | Deskripsi                                       |
 | :-------- | :------- | :----- | :---------------------------------------------- |

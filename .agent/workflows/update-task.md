@@ -4,31 +4,18 @@ description: Memperbarui status tugas dalam daftar tugas implementasi
 
 Ikuti langkah-langkah berikut untuk memperbarui status tugas di `.agent/tasks/implementation-tasks.md`:
 
-1.  **Identifikasi Tugas**:
-    *   Jalankan perintah: `cat .agent/tasks/implementation-tasks.md`
-    *   Cari **ID Tugas** yang relevan (misal: `IAM-01`).
+1.  **Cek Dokumentasi Fitur**:
+    *   Buka file `.agent/documents/application/modules/<module>/<feature>.md`.
+    *   Cek tabel "Implementation Tasks" di bagian bawah.
+    *   Pastikan status di file ini sudah diupdate (Todo -> Done).
 
-2.  **Tambahkan Tugas Baru (Jika Belum Ada)**:
-    *   Jika ID Tugas tidak ditemukan tapi ada di dokumentasi modul (Overview/Implementation Tasks):
-    *   Identifikasi tabel modul yang tepat (misal: `## Modul: Notification`).
-    *   Tambahkan baris baru dengan format:
-        `| <ID-BARU> | <Platform> | Todo | <Deskripsi dari Overview> |`
-    *   Contoh: `| NOT-BE-99 | Backend | Todo | Implementasi fitur baru X |`
+2.  **Sinkronisasi ke Task Board**:
+    *   Salin baris tugas yang sudah Done dari dokumentasi fitur.
+    *   Update status yang sesuai di `.agent/tasks/implementation-tasks.md`.
+    *   Pastikan ID Tugas cocok (misal: `[MOD]-BE-01`).
 
-3.  **Perbarui Status**:
-    *   Gunakan tool `replace_file_content` untuk mengubah kolom **Status**.
-    *   Ubah dari `Todo` menjadi `In Progress` saat memulai.
-    *   Ubah dari `In Progress` menjadi `Done` saat selesai dan diverifikasi.
-    *   Contoh perubahan baris:
-        *   *Sebelum*: `| IAM-01 | Backend | Todo | ...`
-        *   *Sesudah*: `| IAM-01 | Backend | Done | ...`
-
-4.  **Tambahkan Catatan (Opsional)**:
-    *   Jika ada detail penting (misal: PR Link, kendala), tambahkan di kolom Deskripsi atau buat catatan kaki di bawah tabel modul terkait.
-
-5.  **Verifikasi & Commit**:
-    *   Pastikan format tabel markdown tidak rusak.
-    *   Jalankan: `git add .agent/tasks/implementation-tasks.md && git commit -m "docs(tasks): update <TASK-ID> status / add new task"`
+3.  **Verifikasi & Commit**:
+    *   Jalankan: `git add .agent/tasks/implementation-tasks.md && git commit -m "docs(tasks): sync task status from feature docs"`
 
 // turbo
 6.  **Cek Status Git**:
