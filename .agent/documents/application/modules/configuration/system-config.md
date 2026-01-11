@@ -30,48 +30,48 @@
 
 **Acceptance Criteria:**
 
-* Switch On/Off tersedia di Admin Panel
-* Semua request API (kecuali whitelist IP) mengembalikan 503 Service Unavailable
-* Halaman maintenance informatif ditampilkan ke user
-* Perubahan status dicatat di audit log
+* Switch On/Off available in Admin Panel
+* API returns 503 (except whitelist)
+* Informatif maintenance page
+* Audit log recorded
 
 ### US-CFG-02 — Feature Flag (Canary/A-B Testing)
 
 **Sebagai** Product Owner
-**Saya ingin** menyalakan fitur baru hanya untuk sebagian user
-**Sehingga** saya dapat memvalidasi fitur sebelum rilis global
+**Saya ingin** enable feature flag (Canary)
+**Sehingga** validasi fitur baru sebelum rilis global
 
 **Acceptance Criteria:**
 
-* Konfigurasi rollout percentage (misal: 50%)
-* Konfigurasi whitelist user ID spesifik
-* Fitur otomatis aktif/nonaktif sesuai logic flag di runtime
-* Tidak perlu redeploy untuk mengubah toggle
+* Config rollout percentage (e.g. 50%)
+* Whitelist User ID
+* Toggle runtime tanpa redeploy
+* Otomatis aktif/nonaktif sesuai logic
 
 ### US-CFG-03 — Dynamic Contact Info
 
 **Sebagai** Frontend App
-**Saya ingin** mengambil daftar kontak bantuan terbaru dari server
+**Saya ingin** fetch config contacts dynamic
 **Sehingga** informasi layanan pelanggan selalu akurat
 
 **Acceptance Criteria:**
 
-* API endpoint mengembalikan JSON konfigurasi kontak
-* Data di-cache di sisi client untuk performa
-* Perubahan di server terefleksi di client tanpa update aplikasi
+* API return JSON contact info
+* Client-side caching
+* Real-time update reflection
 
 ### US-CFG-04 — Configuration Caching
 
 **Sebagai** Sistem
-**Saya ingin** menyimpan konfigurasi aktif di memori (cache)
-**Sehingga** beban database berkurang saat trafik tinggi
+**Saya ingin** caching configuration
+**Sehingga** kurangi beban DB saat high traffic
 
 **Acceptance Criteria:**
 
-* Read-through caching strategy (Redis)
-* Cache invalidation otomatis saat config di-update di DB
-* TTL (Time To Live) yang wajar sebagai fallback
-* Response time API config < 50ms
+* Read-through caching (Redis)
+* Auto-invalidation on Update
+* TTL fallback wajar
+* Latency < 50ms
 
 ---
 

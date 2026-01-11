@@ -21,7 +21,7 @@ All modules must follow this structure:
 ## 3. Content Guidelines
 
 ### Feature Documentation
-- **User Stories**: MUST use the table format with `ID`, `As a`, `I want to`, `So that`, `Acceptance Criteria`, and `Priority`.
+- **User Stories**: - **User Stories**: MUST use the standard format (Heading with ID, "As a", "I want to", "So that" block, and Acceptance Criteria list).
 - **Detail**: "So that" (Goal/Benefit) is mandatory to understand the *Why*.
 - **Data Model**: MUST include a Mermaid ERD for relationships.
 

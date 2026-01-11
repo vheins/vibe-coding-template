@@ -12,6 +12,13 @@
 
 #### Request (Multipart/Form-Data)
 
+**Headers:**
+```http
+Authorization: Bearer <token>
+Accept: application/vnd.api+json
+```
+
+**Body:**
 - `file`: (Binary File)
 - `folder`: (String, optional) Folder tujuan, misal `avatars`.
 
@@ -43,6 +50,13 @@
 - **Content-Type:** `application/json`
 
 #### Request Body
+
+**Headers:**
+```http
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Authorization: Bearer <token>
+```
 
 ```json
 {

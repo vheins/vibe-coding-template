@@ -20,46 +20,44 @@
 
 ---
 
-## 2. User Stories
-
 ### US-JOB-01 — Menjalankan Report Bulanan Otomatis
 
 **Sebagai** Sistem
-**Saya ingin** menjalankan proses agregasi laporan bulanan secara otomatis
+**Saya ingin** menjalankan report bulanan otomatis
 **Sehingga** data tersedia tepat waktu tanpa intervensi manual
 
 **Acceptance Criteria:**
 
-* Job berjalan sesuai jadwal cron yang ditentukan (misal: tanggal 1 jam 00:00)
-* Retry otomatis jika terjadi kegagalan transient
-* Notifikasi dikirim ke admin jika job gagal total setelah max retries
-* Data agregasi tersimpan valid di database report
+* Job berjalan sesuai cron (tgl 1, 00:00)
+* Retry otomatis jika transient error
+* Notifikasi admin jika failed status
+* Data tersimpan di DB Report
 
-### US-JOB-02 — Inspect Fail Jobs
+### US-JOB-02 — Inspect Failed Jobs
 
 **Sebagai** Developer
-**Saya ingin** memantau status eksekusi job yang gagal di dashboard
-**Sehingga** saya dapat melakukan debugging dan perbaikan root cause
+**Saya ingin** inspect failed jobs
+**Sehingga** debugging root cause lebih mudah
 
 **Acceptance Criteria:**
 
-* Dashboard menampilkan list job yang masuk Dead Letter Queue (DLQ)
-* Payload dan Stack Trace error dapat dilihat detail
-* Opsi untuk me-retry job secara manual dari dashboard
-* Filtering berdasarkan tipe job dan waktu kejadian
+* Dashboard menampilkan list DLQ
+* Payload & Stack trace terlihat
+* Button retry manual berfungsi
+* Filter by type & time
 
 ### US-JOB-03 — Request Export Data Besar
 
 **Sebagai** User
-**Saya ingin** melakukan permintaan ekspor data volume besar secara asinkron
-**Sehingga** saya tidak perlu menunggu loading browser yang lama
+**Saya ingin** request export data besar
+**Sehingga** browser tidak hanging menunggu proses
 
 **Acceptance Criteria:**
 
-* User menerima notifikasi sukses/gagal via email/in-app
-* UI tidak blocking saat proses berjalan di background
-* Link download valid untuk durasi tertentu (misal: 24 jam)
-* Format file sesuai permintaan (PDF/Excel)
+* Notifikasi sukses/gagal dikirim via email
+* UI non-blocking
+* Link download valid 24 jam
+* Format file sesuai (PDF/Excel)
 
 ---
 
@@ -88,8 +86,7 @@ Utilizes Cron Expressions (e.g., `0 0 * * *`) for periodic execution with Distri
 
 ## 4. Data Model
 
-- **Job Log:** Mencatat riwayat eksekusi (ID, Status, Result, Error).
-- **Redis Keys:** Disimpan sebagai Hash/List di Redis.
+> Diagram Entity Relationship untuk Job Processing.
 
 ```mermaid
 erDiagram
@@ -107,7 +104,7 @@ erDiagram
         int id PK
         string job_id FK
         string content
-        string level
+        string level "info, error, debug"
         timestamp logged_at
     }
 

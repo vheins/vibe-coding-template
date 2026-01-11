@@ -33,30 +33,30 @@
 
 ---
 
-## 3. Skenario Pengujian (Backend / API)
+## 3. Test Scenarios (Backend / API)
 
-### 3.1 Kasus Positif (Happy Paths)
+### 3.1 Positive Cases (Happy Paths)
 
-| ID          | Kasus Uji (Test Case)   | Kondisi Awal        | Data Input               | Hasil yang Diharapkan     | Prioritas |
-| :---------- | :---------------------- | :------------------ | :----------------------- | :------------------------ | :-------- |
-| MED-POS-001 | **Upload Gambar Valid** | User Login          | File: `img.jpg` (1MB)    | 201 Created, URL returned | High      |
-| MED-POS-002 | **Upload Dokumen PDF**  | User Login          | File: `doc.pdf` (2MB)    | 201 Created, URL returned | High      |
-| MED-POS-003 | **Attach ke Product**   | Media & Product ada | Map MediaID -> ProductID | 200 OK, Relation Created  | High      |
+| ID          | Test Case               | Pre-condition       | Input Data               | Expected Result           | Priority |
+| :---------- | :---------------------- | :------------------ | :----------------------- | :------------------------ | :------- |
+| MED-POS-001 | **Upload Gambar Valid** | User Login          | File: `img.jpg` (1MB)    | 201 Created, URL returned | High     |
+| MED-POS-002 | **Upload Dokumen PDF**  | User Login          | File: `doc.pdf` (2MB)    | 201 Created, URL returned | High     |
+| MED-POS-003 | **Attach ke Product**   | Media & Product ada | Map MediaID -> ProductID | 200 OK, Relation Created  | High     |
 
-### 3.2 Kasus Negatif (Validation Rules)
+### 3.2 Negative Cases (Validation Rules)
 
-| ID          | Kasus Uji (Test Case)         | Kondisi Awal     | Data Input               | Hasil yang Diharapkan    | Prioritas |
-| :---------- | :---------------------------- | :--------------- | :----------------------- | :----------------------- | :-------- |
-| MED-NEG-001 | **Upload File Terlalu Besar** | Max size 5MB     | File: `video.mp4` (50MB) | 413 Payload Too Large    | High      |
-| MED-NEG-002 | **Upload Tipe Terlarang**     | Allowed: Img/PDF | File: `virus.exe`        | 422 Unprocessable Entity | High      |
-| MED-NEG-003 | **Attach ke Entitas Gaib**    | -                | EntityID: `uuid-random`  | 404 Not Found            | Medium    |
+| ID          | Test Case                     | Pre-condition    | Input Data               | Expected Result          | Priority |
+| :---------- | :---------------------------- | :--------------- | :----------------------- | :----------------------- | :------- |
+| MED-NEG-001 | **Upload File Terlalu Besar** | Max size 5MB     | File: `video.mp4` (50MB) | 413 Payload Too Large    | High     |
+| MED-NEG-002 | **Upload Tipe Terlarang**     | Allowed: Img/PDF | File: `virus.exe`        | 422 Unprocessable Entity | High     |
+| MED-NEG-003 | **Attach ke Entitas Gaib**    | -                | EntityID: `uuid-random`  | 404 Not Found            | Medium   |
 
 ### 3.3 Monkey Tests (Chaos & Stability)
 
-| ID          | Kasus Uji (Test Case)     | Pendekatan                        | Data Input      | Hasil yang Diharapkan          | Prioritas |
-| :---------- | :------------------------ | :-------------------------------- | :-------------- | :----------------------------- | :-------- |
-| MED-MNK-001 | **Partial Upload**        | Putuskan koneksi saat upload 50%  | Stream terputus | Server clean up temp file      | Low       |
-| MED-MNK-002 | **Bomba File (Zip Bomb)** | Upload file kompresi rasio tinggi | Zip Bomb        | Anti-virus / Size limit reject | Critical  |
+| ID          | Test Case                 | Approach                          | Input Data      | Expected Result                | Priority |
+| :---------- | :------------------------ | :-------------------------------- | :-------------- | :----------------------------- | :------- |
+| MED-MNK-001 | **Partial Upload**        | Putuskan koneksi saat upload 50%  | Stream terputus | Server clean up temp file      | Low      |
+| MED-MNK-002 | **Bomba File (Zip Bomb)** | Upload file kompresi rasio tinggi | Zip Bomb        | Anti-virus / Size limit reject | Critical |
 
 ---
 

@@ -25,55 +25,53 @@
 ### US-MED-01 — Upload Avatar Pengguna
 
 **Sebagai** User
-**Saya ingin** mengunggah foto profil (*avatar*)
-**Sehingga** akun saya lebih personal dan mudah dikenali
+**Saya ingin** Upload Avatar Pengguna
+**Sehingga** Akun lebih personal dan dikenali
 
 **Acceptance Criteria:**
 
-* Format yang didukung: JPG, PNG, WEBP
-* Maksimal ukuran file: 2MB
-* Gambar otomatis di-crop menjadi rasio 1:1
-* Validasi magic bytes untuk mencegah upload script berbahaya
+* Format: JPG, PNG, WEBP
+* Max size: 2MB
+* Auto-crop rasio 1:1
+* Magic bytes validation
 
 ### US-MED-02 — Kelola Galeri Produk
 
 **Sebagai** Admin
-**Saya ingin** mengelola galeri gambar produk
-**Sehingga** katalog penjualan terlihat menarik
+**Saya ingin** Kelola Galeri Produk
+**Sehingga** Katalog penjualan terlihat menarik
 
 **Acceptance Criteria:**
 
-* Admin dapat upload multiple images sekaligus
-* Fitur reorder (drag & drop) urutan gambar
-* Set gambar utama (featured image)
-* Hapus gambar yang usang
+* Multi-upload support
+* Drag & Drop reorder
+* Set Featured Image
+* Delete obsolete images
 
 ### US-MED-03 — Auto Resize & Thumbnail
 
 **Sebagai** Sistem
-**Saya ingin** membuat thumbnail otomatis saat upload
-**Sehingga** loading halaman lebih cepat dengan ukuran gambar optimal
+**Saya ingin** Auto Resize & Thumbnail
+**Sehingga** Loading page lebih cepat
 
 **Acceptance Criteria:**
 
-* Generate varian ukuran: original, medium (800px), thumb (200px)
-* Kompresi otomatis tanpa mengurangi kualitas visual secara signifikan
-* Nama file output distandarisasi dan unik
+* Varian: Original, Medium (800px), Thumb (200px)
+* Auto-compression
+* Standardized naming convention
 
 ### US-MED-04 — Lampiran Dokumen Transaksi
 
 **Sebagai** User
-**Saya ingin** melampirkan dokumen pendukung (PDF) pada transaksi
-**Sehingga** administrasi transaksi valid dan audit-able
+**Saya ingin** Lampiran Dokumen Transaksi
+**Sehingga** Administrasi transaksi valid
 
 **Acceptance Criteria:**
 
-* Format yang didukung: PDF, DOCX
-* Preview dokumen tersedia di browser
-* Link download secure (signed URL)
-* Scan antivirus berjalan saat upload
-
----
+* Format: PDF, DOCX
+* Browser Preview
+* Secure Signed URL download
+* Antivirus scan on upload
 
 ## 3. Business Flow & Rules
 
@@ -108,6 +106,8 @@ sequenceDiagram
 ---
 
 ## 4. Data Model
+
+> Diagram Entity Relationship untuk Media Management.
 
 - **Media:** Metadata file (Filename, Size, URL, Disk).
 - **MediaAttachment:** Tabel pivot polimorfik (Entity Type, Entity ID).

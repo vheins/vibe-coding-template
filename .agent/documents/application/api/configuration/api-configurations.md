@@ -23,6 +23,12 @@
 
 #### Request
 
+**Headers:**
+```http
+Accept: application/vnd.api+json
+Authorization: Bearer <token>
+```
+
 **Query Parameters:**
 - `page[number]`: Page number.
 - `page[size]`: Items per page.
@@ -92,6 +98,13 @@
 - **Access Control:** Authenticated (Role: Super Admin).
 
 #### Request
+
+**Headers:**
+```http
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Authorization: Bearer <token>
+```
 
 **Body:**
 ```json
