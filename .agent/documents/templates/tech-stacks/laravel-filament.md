@@ -1,29 +1,27 @@
-# Tech Stack: Laravel Filament (TALL Stack)
+# Tech Stack: Laravel Filament (ERP Monolith)
 
 ## 1. Core Stack
 - **Framework**: Laravel 12.x
 - **Admin Panel**: Filament 4.x
-- **Frontend**: Livewire 4.x + Alpine.js
-- **Styling**: Tailwind CSS (Filament Theme)
+- **Frontend**: Livewire 4.x
+- **Architecture**: Standard Monolith (ERP Optimized)
+- **Permissions**: `spatie/laravel-permission` + `bezhansalleh/filament-shield`
 - **Database**: PostgreSQL / MySQL 8.0+
 
-## 2. Coding Rules
-- **Resources**: Use `php artisan make:filament-resource` for CRUD.
-- **Forms**: Use `Form::schema([])` inside Resources. Avoid raw Blade for forms unless necessary.
-- **Tables**: Use `Table::columns([])` for lists.
-- **Actions**: Use Filament Actions for buttons/operations (Create, Edit, Delete, Custom).
-- **Type Hinting**: Strict typing for all Livewire components and Filament methods.
-
-## 3. Architecture
+## 2. Architectural Guidelines
 - **Structure**:
-  - `/app/Filament/Resources`: Main CRUD Logic.
-  - `/app/Filament/Pages`: Custom Dashboard Pages.
-  - `/app/Filament/Widgets`: Dashboard Charts/Stats.
-  - `/app/Livewire`: Custom dynamic components.
-  - `/app/Models`: Eloquent Models (standard).
-- **Policies**: Strict Policy-based authorization for all Resources.
+  - `/app/Filament`: All Admin Logic (Resources, Pages, Widgets, Clusters).
+  - `/app/Models`: Eloquent Models.
+  - `/app/Providers`: App Service Providers (FilamentPanelProvider).
+  - `/app/Policies`: Authorization Policies (Strict).
+- **Pattern**: Resource-driven development. Logic resides in Resources and Actions.
+
+## 3. Coding Rules
+- **Themes**: Custom theme at `resources/css/filament/dashboard/theme.css`.
+- **Optimization**: Use `php artisan filament:optimize` in production.
+- **Strict Mode**: `Model::shouldBeStrict()` in local environment.
 
 ## 4. Testing
-- **Framework**: Pest PHP.
-- **Plugins**: `filament-test` helpers.
-- **Strategy**: Test Livewire components and Resource permissions.
+- **Feature**: Test Filament Resources (`$this->get(UserResource::getUrl('index'))->assertSuccessful()`).
+- **Unit**: Test complex actions/jobs.
+
