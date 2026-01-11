@@ -1,28 +1,31 @@
-# Tech Stack: Laravel (Enterprise)
+# Tech Stack: Laravel (Modular Monolith)
 
 ## 1. Core Stack
 - **Framework**: Laravel 11.x
-- **Language**: PHP 8.2+
+- **Language**: PHP 8.4+
+- **Architecture**: Modular Monolith (Custom `modules/` directory)
 - **Database**: PostgreSQL / MySQL 8.0+
-- **API Standard**: JSON:API (Strict)
+- **API Standard**: JSON:API
 
 ## 2. Architectural Guidelines
-- **Pattern**: Service-Repository Pattern.
-  - *Controller*: Handle Request/Response only.
-  - *Service*: Business Logic (Transaction Management).
-  - *Repository*: Eloquent/DB Query abstraction.
-- **Models**: Use `Guarded` ($guarded = []) and Casts.
-- **DTO**: Use `DataTransferObject` (spatie/laravel-data) for complex inputs.
+- **Modules**:
+  - Located in `/modules/{ModuleName}`.
+  - Each module has its own `composer.json` (merged via `wikimedia/composer-merge-plugin`).
+  - Structure per module:
+    - `src/Http/Controllers`
+    - `src/Models`
+    - `src/Services` (Business Logic)
+    - `routes/api.php`
+- **Pattern**: Service-Repository or Service-Action.
+- **DTO**: Use `spatie/laravel-data` for strict typing.
 
 ## 3. Coding Standards
-- **Strict Types**: Always use `declare(strict_types=1);`.
-- **Type Hinting**: All method arguments and return types must be typed.
-- **Error Handling**: Throw custom Exceptions, catch in `ExceptionHandler`.
-- **Validation**: Use FormRequests for strict validation.
+- **Strict Types**: `declare(strict_types=1);` mandatory.
+- **Dependency Injection**: Constructor injection.
+- **Testing**: pestphp/pest (Feature tests per module).
 
-## 4. Testing Strategy
-- **Framework**: Pest PHP / PHPUnit.
-- **Strategy**: 
-  - *Feature Test*: Test API Endpoints (Happy & Sad paths).
-  - *Unit Test*: Test Complex Service Logic.
-- **Coverage**: Minimum 80%.
+## 4. Folder Structure (Root)
+- `/app`: Core infrastructure / Shared.
+- `/modules`: Feature modules (Auth, Finance, Inventory, etc).
+- `/check`: Custom scripts (e.g. `worker.queue.sh`).
+

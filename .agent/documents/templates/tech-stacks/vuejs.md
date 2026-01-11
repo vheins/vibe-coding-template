@@ -1,27 +1,25 @@
-# Tech Stack: Vue.js (Vite)
+# Tech Stack: Vue.js (FIMS Modular)
 
 ## 1. Core Stack
-- **Build Tool**: Vite
+- **Build Tool**: Vite (Classic)
+- **Framework**: Vue 3.5+
 - **Language**: TypeScript
-- **Styling**: SCSS / Tailwind CSS
-- **State**: Pinia (Standard)
-- **Routing**: Vue Router 4
+- **State**: Pinia (Setup Store standard)
+- **Routing**: Vue Router 4.x
+- **UI**: UIkit, SweetAlert2, Tabler Icons
 
-## 2. Coding Rules
-- **Syntax**: Script Setup (`<script setup lang="ts">`) is mandatory.
-- **Reactivity**: Prefer `ref` over `reactive` for consistency.
-- **Composables**: Extract logic into `useFeature` functions.
-- **Props**: Use `defineProps` with interface defaults.
-- **Store Syntax**: Use Setup Stores (`function`) exclusively.
+## 2. Architectural Guidelines
+- **Modular Aliases**:
+  - `#/`: Mapped to `/modules/` (Backend + Frontend co-located or strictly frontend modules).
+  - `~/`: Mapped to `/resources/`.
+- **Global Components**: Located in `/resources/js/components`.
+- **Entry Point**: `resources/js/app.js`.
 
-## 3. Architecture
-- **Structure**:
-  - `/src/components`: Shared components.
-  - `/src/views`: Page views.
-  - `/src/stores`: Pinia definitions.
-  - `/src/composables`: Logic reuse.
-  - `/src/services`: API wrappers.
+## 3. Coding Rules
+- **Pinia**: Use Setup Stores (`defineStore('id', () => { ... })`).
+- **Composables**: Extracted to `resources/js/composables` or module-level `composables`.
+- **API**: Use `axios` or `fetch` wrapper.
 
 ## 4. Testing
-- **Unit**: Vitest + Vue Test Utils.
-- **E2E**: Cypress.
+- **E2E**: Cypress or Playwright.
+

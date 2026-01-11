@@ -1,27 +1,28 @@
-# Tech Stack: Nuxt.js (Vue 3)
+# Tech Stack: Nuxt.js (FIMS Modular)
 
 ## 1. Core Stack
-- **Framework**: Nuxt 3.x
+- **Framework**: Nuxt 3.10+
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS / UnoCSS
-- **State**: Pinia (Standard)
-- **HTTP**: `$fetch` / `useFetch` (Native)
+- **State**: Pinia (Setup Store Standard)
+- **Architecture**: Modular (Nuxt Layers / Local Modules)
 
-## 2. Coding Rules
-- **Composables**: Use auto-imported composables for logic reuse.
-- **Server Routes**: Use `/server/api` for backend logic.
-- **Type Safety**: Strictly typed props and emits using `defineProps<T>()`.
-- **Pages**: Use `definePageMeta` for middleware and layout config.
-- **Store Syntax**: Use Setup Stores (`function`) exclusively.
+## 2. Architectural Guidelines
+- **Modules**:
+  - Located in `/modules/{ModuleName}`.
+  - Each module is a "Mini Nuxt App" (Layer) or contains `pages`, `components`, `composables`.
+  - Registered in `nuxt.config.ts`.
+- **Aliases**:
+  - `#/`: Mapped to `/modules/`.
+  - `~/`: Mapped to `/`.
 
-## 3. Architecture
-- **Structure**:
-  - `/components`: Atomic components (Auto-imported).
-  - `/composables`: Shared logic (Auto-imported).
-  - `/pages`: File-system routing.
-  - `/server`: API routes (Nitro).
-  - `/stores`: Pinia stores.
+## 3. Coding Rules
+- **Data Fetching**: Use `useFetch` with typed responses.
+- **State**: Pinia Stores inside modules (`modules/Auth/stores/useAuth.ts`).
+- **Middleware**: Module-specific middleware in `modules/{ModuleName}/middleware`.
 
-## 4. Testing
-- **Unit**: Vitest + @nuxt/test-utils.
-- **E2E**: Playwright.
+## 4. Folder Structure
+- `/modules`: Feature modules.
+- `/server`: Global API routes.
+- `/layouts`: App-wide layouts.
+- `/components`: App-wide / UI Kit components.
+
