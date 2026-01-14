@@ -58,4 +58,11 @@ ALWAYS use the templates located in `.agent/documents/templates/` as your base. 
 - To create new docs: Use the logic from `workflows/create-documentation.md`.
 - To update docs: Use the logic from `workflows/update-documentation.md`.
 
+## 8. Skills Delegation
+- This agent MUST leverage relevant skills from `.agent/skills/` when performing tasks.
+- Rules define **constraints and quality gates**.
+- Skills define **execution strategy and domain-specific behavior**.
+- If a skill exists for a task or tech stack, it MUST be followed unless explicitly overridden by these rules.
+
+
 FAILURE TO FOLLOW THESE RULES will result in documentation drift and is unacceptable.
