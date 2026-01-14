@@ -2,67 +2,31 @@
 trigger: always_on
 ---
 
-# Documentation Standards & Rules
+# Documentation & Implementation Rules
 
-You are the guardian of this project's documentation. Adhere to these rules strictly when creating or updating any technical documentation.
+You are the guardian of this project's quality. Adhere to these constraints strictly.
 
 ## 1. Core Principles
-- **No Gap Policy**: Every User Story must have an API Endpoint. Every API Endpoint must have a Test Scenario.
-- **Synchronization**: If you update the Logic/Business Rule, you MUST update the API and Testing docs. Use the "Change One, Check All" principle.
-- **Research First**: Never guess. Research the codebase or industry best practices before writing "Overview" or "Features".
+- **No Gap Policy**: Every User Story must have an API Endpoint and a Test Scenario.
+- **Traceability**: Task IDs must follow `[MOD]-BE-[XX]` and `[MOD]-FE-[XX]`.
+- **Synchronization**: Use the "Change One, Check All" principle across Module, API, and Testing docs.
+- **Source of Truth**: The Feature Documentation (`implementation tasks` table) is the source of truth for `.agent/tasks/implementation-tasks.md`.
 
 ## 2. Structure Standards
-All modules must follow this structure:
-- `.agent/documents/application/modules/<module>/overview.md` (Landing Page)
-- `.agent/documents/application/modules/<module>/<feature>.md` (Detailed Logic - Optional/Complex)
-- `.agent/documents/application/api/<module>/api-<module>.md` (Technical Contract)
-- `.agent/documents/application/testing/<module>/test-<module>.md` (Verification Plan)
+- **Modules**: `.agent/documents/application/modules/<module>/[overview|feature].md`
+- **API**: `.agent/documents/application/api/<module>/api-<module>.md` (JSON:API mandatory)
+- **Testing**: `.agent/documents/application/testing/<module>/test-<module>.md`
 
-## 3. Content Guidelines
+## 3. Skills Delegation (CRITICAL)
+Detailed execution strategy and formats are managed via skills. You MUST leverage them:
+- **Expert Documentation**: Use for User Story formats, JSON:API standards, and ERD requirements.
+- **QA Design & Execution**: Use for designing/running Positive, Negative, Monkey, and Security tests.
+- **Feature Implementation**: Use for the TDD-based coding workflow.
+- **Tech Stacks**: Use for architecture-specific patterns (Laravel, Vue, etc.).
 
-### Feature Documentation
-- **User Stories**: - **User Stories**: MUST use the standard format (Heading with ID, "As a", "I want to", "So that" block, and Acceptance Criteria list).
-- **Detail**: "So that" (Goal/Benefit) is mandatory to understand the *Why*.
-- **Data Model**: MUST include a Mermaid ERD for relationships.
-
-### API Documentation
-- **Standard**: **JSON:API** (https://jsonapi.org) is mandatory.
-- **Content**:
-    - URL must use kebab-case.
-    - Explicit `Request` and `Response` JSON bodies.
-    - Include `4xx` and `5xx` error examples.
-
-### Testing Documentation
-- **Coverage**:
-    - **Positive**: Happy paths.
-    - **Negative**: Validation errors, edge cases.
-    - **Monkey**: Chaos/Fuzzing tests (e.g., random inputs, ID enumeration).
-    - **Security**: IDOR, XSS, Permission checks.
-- **Priority**: Mark every case as `High`, `Medium`, or `Low`.
-
-## 4. Implementation Tasks
-- **Granularity**: Do NOT write single line tasks like "Implement Authentication". Break it down into:
-    - **Backend**: Migration, Seeder, Model, Repository, Service, Controller, Route, Tests.
-    - **Frontend**: State, API Service, Components, Pages, Integration.
-- **Traceability**: Task IDs must follow `[MOD]-BE-[XX]` and `[MOD]-FE-[XX]`.
-
-## 5. Task Management
-- **Source of Truth**: The Feature Documentation (`implementation tasks` table) is the source of truth.
-- **Sync**: When implementing, you MUST update `.agent/tasks/implementation-tasks.md` to match the granular tasks in the Feature Doc.
-- **Progress**: You MUST mark tasks as `Done` in `.agent/tasks/implementation-tasks.md` immediately after completion.
-
-## 6. Templates
-ALWAYS use the templates located in `.agent/documents/templates/` as your base. Do not invent new formats.
-
-## 7. Workflows
-- To create new docs: Use the logic from `workflows/create-documentation.md`.
-- To update docs: Use the logic from `workflows/update-documentation.md`.
-
-## 8. Skills Delegation
-- This agent MUST leverage relevant skills from `.agent/skills/` when performing tasks.
-- Rules define **constraints and quality gates**.
-- Skills define **execution strategy and domain-specific behavior**.
-- If a skill exists for a task or tech stack, it MUST be followed unless explicitly overridden by these rules.
-
+## 4. Operational Rules
+- **Templates**: Always use base templates in `.agent/documents/templates/`.
+- **Research First**: Never guess business logic; search the codebase or documentation.
+- **Update Tasks**: Mark tasks as `Done` in `implementation-tasks.md` immediately upon completion.
 
 FAILURE TO FOLLOW THESE RULES will result in documentation drift and is unacceptable.
