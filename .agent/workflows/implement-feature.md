@@ -2,6 +2,11 @@
 description: Workflow standar untuk mengimplementasikan kode dari Task, Feature, atau Module.
 ---
 
+> [!TIP]
+> **Skills Delegation**:
+> - Gunakan skill `feature-implementation` untuk metodologi TDD dan sinkronisasi dokumentasi.
+> - Gunakan skill `tech-stacks` untuk memastikan standar arsitektur (Laravel, Vue, dll) dipatuhi.
+
 1.  **Identifikasi Scope**:
     *   Tentukan target: **Single Task** (e.g., `IAM-BE-01`) atau **Feature/Module** (e.g., `User Management`).
     *   Jika **Feature/Module**, ambil daftar tugas terkait dari `.agent/tasks/implementation-tasks.md` dan kerjakan berurutan (Backend First -> Frontend).

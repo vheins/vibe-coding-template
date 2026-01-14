@@ -4,6 +4,9 @@ description: create documentation
 
 Workflow ini digunakan untuk membuat set dokumentasi lengkap (Overview, Feature, API, Testing) untuk modul baru atau yang sudah ada. Workflow ini cerdas dan akan melakukan riset terlebih dahulu sebelum menulis.
 
+> [!TIP]
+> **Skills Delegation**: Gunakan skill `expert-documentation` untuk panduan detail standar penulisan (JSON:API, Mermaid ERD, No-Gap Policy).
+
 # Langkah 1: Analisis & Riset
 1. **Identifikasi Modul**:
    - Tentukan nama modul dari input user (misal: `user-management`, `payment`, `inventory`).
